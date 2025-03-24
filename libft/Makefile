@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+         #
+#    By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 05:59:42 by rbardet-          #+#    #+#              #
-#    Updated: 2025/03/20 03:35:32 by rbardet-         ###   ########.fr        #
+#    Updated: 2025/03/24 20:56:13 by hdelacou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,17 +24,21 @@ SOURCES = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 	ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c \
 	sort_str_tab.c print_tab.c is_space.c tablen.c ft_tabdup.c sort_alpha_tab.c ft_strndup.c \
 
+OBJECTS_DIR = obj
 OBJECTS = $(SOURCES:.c=.o)
+OBJECTS_WITH_PATH = $(addprefix $(OBJECTS_DIR)/, $(OBJECTS))
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 all: $(NAME)
-$(NAME): $(OBJECTS)
-	ar -rsc ${NAME} ${OBJECTS}
-%.o: %.c
-	$(CC) -c $(CFLAGS) $?
+$(NAME): $(OBJECTS_WITH_PATH)
+	ar -rsc ${NAME} ${OBJECTS_WITH_PATH}
+$(OBJECTS_DIR)/%.o: %.c
+	mkdir -p $(OBJECTS_DIR)
+	$(CC) -c $(CFLAGS) $< -o $@
 clean:
-	rm -f $(OBJECTS)
+	rm -rf $(OBJECTS_DIR)
 fclean: clean
 	rm -f $(NAME)
 re: fclean all
 .PHONY: all clean fclean re
+
