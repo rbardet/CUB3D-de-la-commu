@@ -3,59 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 21:20:11 by hdelacou          #+#    #+#             */
-/*   Updated: 2025/03/24 21:20:30 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/24 22:38:41 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	init_player(t_cub *cub)
-{
-	int i, j;
-	for (i = 0; cub->map[i]; i++)
-	{
-		for (j = 0; cub->map[i][j]; j++)
-		{
-			if (ft_strchr("NSEW", cub->map[i][j]))
-			{
-				cub->player.x = j + 0.5;
-				cub->player.y = i + 0.5;
-				if (cub->map[i][j] == 'N')
-				{
-					cub->player.dir_x = 0;
-					cub->player.dir_y = -1;
-					cub->player.plane_x = 0.66;
-					cub->player.plane_y = 0;
-				}
-				else if (cub->map[i][j] == 'S')
-				{
-					cub->player.dir_x = 0;
-					cub->player.dir_y = 1;
-					cub->player.plane_x = -0.66;
-					cub->player.plane_y = 0;
-				}
-				else if (cub->map[i][j] == 'E')
-				{
-					cub->player.dir_x = 1;
-					cub->player.dir_y = 0;
-					cub->player.plane_x = 0;
-					cub->player.plane_y = 0.66;
-				}
-				else if (cub->map[i][j] == 'W')
-				{
-					cub->player.dir_x = -1;
-					cub->player.dir_y = 0;
-					cub->player.plane_x = 0;
-					cub->player.plane_y = -0.66;
-				}
-				return ;
-			}
-		}
-	}
-}
 
 int	handle_keypress(int key, t_cub *cub)
 {

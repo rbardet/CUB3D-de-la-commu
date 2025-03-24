@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:50:07 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/24 22:32:06 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/24 22:49:15 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,13 @@ void	print_struct(t_cub *cub)
 	printf("blue ceilling : %d\n", cub->ceil.blue);
 	printf("ceilling value :\n");
 	printf("\033[48;2;%d;%d;%dm              \033[0m\n", cub->ceil.red, cub->ceil.green, cub->ceil.blue);
-	printf("player x : %f\n", cub->player.pos_x);
-	printf("player y : %f\n", cub->player.pos_y);
-	printf("player spawn : %d\n", cub->spawn);
+	printf("player x : %d\n", cub->player.pos_x);
+	printf("player y : %d\n", cub->player.pos_y);
+	printf("dir x : %f\n", cub->player.dir_x);
+	printf("dir y : %f\n", cub->player.dir_y);
+	printf("plane x : %f\n", cub->player.plane_x);
+	printf("plane y : %f\n", cub->player.plane_y);
+	printf("player spawn : %c\n", cub->spawn_view);
 	printab(cub->map);
 	exit (0);
 }

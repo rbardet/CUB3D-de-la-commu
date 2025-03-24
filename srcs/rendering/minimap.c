@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:10:20 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/24 21:34:12 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/24 22:43:32 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	render_minimap(t_cub *cub)
 		j = 0;
 		while (cub->map[i][j])
 		{
-			mlx_pixel_put(cub->init_ptr, cub->win_ptr, cub->win_width - j, cub->win_height - i, 31);
+			mlx_pixel_put(cub->init_ptr, cub->win_ptr, cub->win_width - i, cub->win_height - j, 0xFF0000);
 			j++;
 		}
 		i++;
@@ -31,13 +31,13 @@ void	render_minimap(t_cub *cub)
 	return ;
 }
 
-void	minimap(t_cub *cub)
+int	minimap(t_cub *cub)
 {
 	if (!cub || !cub->init_ptr || !cub->win_ptr)
 	{
 		ft_putstr_fd("Error in minimap\n", 2);
-		return ;
+		return(1);
 	}
 	render_minimap(cub);
-	return ;
+	return(0);
 }

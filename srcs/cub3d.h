@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/24 22:29:58 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/24 22:42:28 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_player	init_player_struct(t_cub *cub);
 // render
 void		open_window(t_cub *cub);
 int			handle_keypress(int key, t_cub *cub);
-void		minimap(t_cub *cub);
+int			minimap(t_cub *cub);
 void		render_minimap(t_cub *cub);
 
 // render
