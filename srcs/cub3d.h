@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/24 21:04:51 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/24 22:29:58 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ typedef struct s_rgb
 
 typedef struct s_player
 {
-	float	pos_x;
-	float	pos_y;
+	int		pos_x;
+	int		pos_y;
 	float	dir_x;
 	float	dir_y;
 	float	plane_x;
@@ -61,7 +61,7 @@ typedef struct s_cub
 	void		*do_xpm;
 	void		*init_ptr;
 	void		*win_ptr;
-	char		spawn;
+	char		spawn_view;
 	t_rgb		floor;
 	t_rgb		ceil;
 	t_player	player;
@@ -86,25 +86,13 @@ char		**loop_copy(int fd, int nb_line);
 char		**copy_map(char *argv);
 t_bool		is_cub(char *map);
 t_cub		*parse_struct(char *map);
+t_player	init_player_struct(t_cub *cub);
 
 // render
 void		open_window(t_cub *cub);
 int			handle_keypress(int key, t_cub *cub);
-
-int			skip_space(char *line, int i);
-t_rgb		get_rgb(char **rgb_tmp);
-void		get_xpm(t_cub *cub);
-t_cub		*fill_struct(t_cub *cub);
-void		flood_fill(int x, int y, char **map, int *ret);
-t_bool		is_one_player(char **map, int i);
-t_bool		is_valid_map(t_cub *cub);
-t_bool		close_or_not(char **map, int x, int y);
-t_bool		is_close_map(char **map, int i, t_cub *cub);
-int			count_line(char *argv);
-char		**loop_copy(int fd, int nb_line);
-char		**copy_map(char *argv);
-t_bool		is_cub(char *map);
-t_cub		*parse_struct(char *map);
+void		minimap(t_cub *cub);
+void		render_minimap(t_cub *cub);
 
 // render
 

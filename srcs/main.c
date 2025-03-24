@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:50:07 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/24 21:08:09 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/24 22:20:06 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	print_struct(t_cub *cub)
 	printf("red ceilling : %d\n", cub->ceil.red);
 	printf("green ceilling : %d\n", cub->ceil.green);
 	printf("blue ceilling : %d\n", cub->ceil.blue);
-	printf("player x : %f\n", cub->player.pos_x);
-	printf("player y : %f\n", cub->player.pos_y);
-	printf("player spawn : %d\n", cub->spawn);
+	printf("player x : %d\n", cub->player.pos_x);
+	printf("player y : %d\n", cub->player.pos_y);
+	printf("player spawn : %c\n", cub->spawn_view);
 	printab(cub->map);
 	exit (0);
 }

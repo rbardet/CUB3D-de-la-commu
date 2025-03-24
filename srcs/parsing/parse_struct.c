@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/24 13:07:33 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/24 22:30:02 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,36 @@ t_cub	*fill_struct(t_cub *cub)
 	return (free_tab(map), cub);
 }
 
+// init the player viewpoint at the start of the rendering
+t_player	init_player_struct(t_cub *cub)
+{
+	t_player	player;
+
+	if (cub->spawn_view == 'N')
+	{
+		player.dir_x = 0;
+		player.dir_y = 1;
+	}
+	else if (cub->spawn_view == 'S')
+	{
+		player.dir_x = 0;
+		player.dir_y = -1;
+	}
+	else if (cub->spawn_view == 'W')
+	{
+		player.dir_x = 1;
+		player.dir_y = 0;
+	}
+	else if (cub->spawn_view == 'E')
+	{
+		player.dir_x = -1;
+		player.dir_y = 0;
+	}
+	player.plane_x = 0;
+	player.plane_y = 0;
+	return (player);
+}
+
 // parse_struct will put in the main struct t_cub *cub all the data needed
 // for the render (path to the xpm, rgb for the floor and ceilling and a
 // char ** for the map)
@@ -131,5 +161,6 @@ t_cub	*parse_struct(char *argv)
 	cub = fill_struct(cub);
 	if (!cub)
 		return (NULL);
+	cub->player = init_player_struct(cub);
 	return (cub);
 }

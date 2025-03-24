@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:30:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/24 21:07:08 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/24 21:45:57 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_bool	is_close_map(char **map, int i, t_cub *cub)
 			break ;
 		y++;
 	}
-	cub->spawn = copy[y][x];
+	cub->spawn_view = copy[y][x];
 	cub->player.pos_x = x;
 	cub->player.pos_y = y;
 	return (close_or_not(copy, x, y));
