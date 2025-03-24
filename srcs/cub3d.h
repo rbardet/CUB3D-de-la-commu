@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/24 20:47:04 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/24 21:04:51 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,32 @@ typedef struct s_rgb
 	int		blue;
 }			t_rgb;
 
+typedef struct s_player
+{
+	float	pos_x;
+	float	pos_y;
+	float	dir_x;
+	float	dir_y;
+	float	plane_x;
+	float	plane_y;
+}			t_player;
+
 typedef struct s_cub
 {
-	int		win_height;
-	int		win_width;
-	void	*no_xpm;
-	void	*so_xpm;
-	void	*we_xpm;
-	void	*ea_xpm;
-	void	*do_xpm;
-	void	*init_ptr;
-	void	*win_ptr;
-	t_rgb	floor;
-	t_rgb	ceil;
-	int		x;
-	int		y;
-	char	**map;
+	int			win_height;
+	int			win_width;
+	void		*no_xpm;
+	void		*so_xpm;
+	void		*we_xpm;
+	void		*ea_xpm;
+	void		*do_xpm;
+	void		*init_ptr;
+	void		*win_ptr;
+	char		spawn;
+	t_rgb		floor;
+	t_rgb		ceil;
+	t_player	player;
+	char		**map;
 }			t_cub;
 
 // avoid leak
