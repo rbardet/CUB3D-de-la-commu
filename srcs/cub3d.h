@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: throbert <throbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/24 22:42:28 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/24 23:06:59 by throbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <math.h>
 
 #define WIN_HEIGHT 1200
 #define WIN_WIDTH 900
@@ -32,6 +33,9 @@
 typedef int	t_bool;
 #define TRUE 1
 #define FALSE 0
+
+#define FOV_ANGLE 66
+#define PLANE_FACTOR tan((FOV_ANGLE * M_PI / 180) / 2)
 
 typedef struct s_rgb
 {

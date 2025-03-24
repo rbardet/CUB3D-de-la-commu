@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: throbert <throbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/24 22:30:02 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/24 23:06:25 by throbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ t_player	init_player_struct(t_cub *cub)
 		player.dir_x = -1;
 		player.dir_y = 0;
 	}
-	player.plane_x = 0;
-	player.plane_y = 0;
+	player.plane_x = PLANE_FACTOR * (-player.dir_y);
+	player.plane_y = PLANE_FACTOR * (player.dir_x);
 	return (player);
 }
 
