@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_valid_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:30:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/24 20:25:12 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/24 20:43:53 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_bool	is_close_map(char **map, int i, t_cub *cub)
 	int		y;
 
 	y = 0;
+	x = 0;
 	copy = copy_tab(map + i);
 	if (!copy)
 		return (FALSE);
