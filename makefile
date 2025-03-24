@@ -6,7 +6,7 @@
 #    By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/21 22:28:21 by rbardet-          #+#    #+#              #
-#    Updated: 2025/03/20 04:59:32 by rbardet-         ###   ########.fr        #
+#    Updated: 2025/03/24 20:15:04 by rbardet-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,14 @@ NAME = cub3d
 
 SRC_DIR = src
 PARSE_DIR = $(SRC_DIR)/parsing
+RENDER_DIR = $(SRC_DIR)/rendering
 
 SOURCES = $(SRC_DIR)/main.c \
-		$(SRC_DIR)/window.c \
 		$(PARSE_DIR)/copy_map.c \
 		$(PARSE_DIR)/parse_struct.c \
 		$(PARSE_DIR)/is_valid_map.c \
+		$(RENDER_DIR)/minimap.c \
+		$(RENDER_DIR)/window.c \
 
 INCLUDE = -I sources -I minilibx-linux -I LIBFT_V2
 

@@ -6,11 +6,11 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:48:34 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/20 09:27:26 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/24 20:17:14 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 // function used to free the main struct of the project
 int	free_struct(t_cub *cub)
