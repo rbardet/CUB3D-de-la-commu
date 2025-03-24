@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:50:07 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/24 22:20:06 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/24 22:32:06 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,16 @@ void	print_struct(t_cub *cub)
 	printf("red floor : %d\n", cub->floor.red);
 	printf("green floor : %d\n", cub->floor.green);
 	printf("blue floor : %d\n", cub->floor.blue);
+	printf("floor value :\n");
+	printf("\033[48;2;%d;%d;%dm              \033[0m\n", cub->floor.red, cub->floor.green, cub->floor.blue);
 	printf("red ceilling : %d\n", cub->ceil.red);
 	printf("green ceilling : %d\n", cub->ceil.green);
 	printf("blue ceilling : %d\n", cub->ceil.blue);
-	printf("player x : %d\n", cub->player.pos_x);
-	printf("player y : %d\n", cub->player.pos_y);
-	printf("player spawn : %c\n", cub->spawn_view);
+	printf("ceilling value :\n");
+	printf("\033[48;2;%d;%d;%dm              \033[0m\n", cub->ceil.red, cub->ceil.green, cub->ceil.blue);
+	printf("player x : %f\n", cub->player.pos_x);
+	printf("player y : %f\n", cub->player.pos_y);
+	printf("player spawn : %d\n", cub->spawn);
 	printab(cub->map);
 	exit (0);
 }
