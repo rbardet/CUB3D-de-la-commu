@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/20 08:55:27 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/24 20:19:13 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_cub
 	void		*win_ptr;
 	t_rgb		floor;
 	t_rgb		ceil;
+	int			x;
+	int			y;
 	char		**map;
 }				t_cub;
 
@@ -71,7 +73,7 @@ void	flood_fill(int x, int y, char **map, int *ret);
 t_bool	is_one_player(char **map, int i);
 t_bool	is_valid_map(t_cub *cub);
 t_bool	close_or_not(char **map, int x, int y);
-t_bool	is_close_map(char **map, int i);
+t_bool	is_close_map(char **map, int i, t_cub *cub);
 int		count_line(char *argv);
 char	**loop_copy(int fd, int nb_line);
 char	**copy_map(char *argv);

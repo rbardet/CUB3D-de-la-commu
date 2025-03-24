@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:30:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/20 08:52:10 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/24 20:22:03 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_bool	is_valid_map(t_cub *cub)
 	if (ft_strncmp(cub->map[i], "F ", 2)
 		|| ft_strncmp(cub->map[i + 1], "C ", 2))
 		return (FALSE);
-	if (!is_one_player(cub->map, i + 2) || !is_close_map(cub->map, i + 2))
+	if (!is_one_player(cub->map, i + 2) || !is_close_map(cub->map, i + 2, cub))
 		return (FALSE);
 	return (TRUE);
 }
@@ -66,7 +66,7 @@ t_bool	close_or_not(char **map, int x, int y)
 }
 
 // find the player pos and send the map inside a flood_fill
-t_bool	is_close_map(char **map, int i)
+t_bool	is_close_map(char **map, int i, t_cub *cub)
 {
 	char	**copy;
 	int		x;
@@ -90,6 +90,8 @@ t_bool	is_close_map(char **map, int i)
 			break ;
 		y++;
 	}
+	cub->x = x;
+	cub->y = y;
 	return (close_or_not(copy, x, y));
 }
 
