@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/25 21:03:43 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:34:51 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef int		t_bool;
 #define TRUE 1
 #define FALSE 0
 
-#define FOV_ANGLE 66
+#define FOV_ANGLE 120
 #define PLANE_FACTOR tan((FOV_ANGLE * M_PI / 180) / 2)
 
 typedef struct s_rgb
@@ -122,7 +122,7 @@ int				handle_keypress(int key, t_cub *cub);
 int				minimap(t_cub *cub);
 void			render_minimap(t_cub *cub);
 t_img			*init_image(t_cub *cub);
-int				raycast(t_cub *cub);
+void			raycast(t_cub *cub);
 
 // debug
 
