@@ -2,6 +2,9 @@
 use strict;
 use warnings;
 
+# Configuration
+my $corridor_thickness = 4;  # 1 = couloirs étroits, 3 = couloirs larges
+
 my @textures = (
     "NO      ./graphic/NO.xpm",
     "SO      ./graphic/SO.xpm",
@@ -16,9 +19,10 @@ my $width = 20 + int(rand(181));
 my $height = 20 + int(rand(181));
 
 my @map;
+# Initialiser avec des espaces
 for my $y (0..$height-1) {
     for my $x (0..$width-1) {
-        $map[$y][$x] = '1';
+        $map[$y][$x] = ' ';
     }
 }
 
@@ -33,22 +37,39 @@ sub dig_room {
 
 sub dig_corridor {
     my ($x1, $y1, $x2, $y2) = @_;
+
+    # Élargir les couloirs selon la variable $corridor_thickness
+    my $offset = int($corridor_thickness / 2);
+
     if ($x1 < $x2) {
         for my $x ($x1..$x2) {
-            $map[$y1][$x] = '0' if $x > 0 && $x < $width-1;
+            for my $dy (-$offset..$offset) {
+                my $ny = $y1 + $dy;
+                $map[$ny][$x] = '0' if $x > 0 && $x < $width-1 && $ny > 0 && $ny < $height-1;
+            }
         }
     } else {
         for my $x ($x2..$x1) {
-            $map[$y1][$x] = '0' if $x > 0 && $x < $width-1;
+            for my $dy (-$offset..$offset) {
+                my $ny = $y1 + $dy;
+                $map[$ny][$x] = '0' if $x > 0 && $x < $width-1 && $ny > 0 && $ny < $height-1;
+            }
         }
     }
+
     if ($y1 < $y2) {
         for my $y ($y1..$y2) {
-            $map[$y][$x2] = '0' if $y > 0 && $y < $height-1;
+            for my $dx (-$offset..$offset) {
+                my $nx = $x2 + $dx;
+                $map[$y][$nx] = '0' if $nx > 0 && $nx < $width-1 && $y > 0 && $y < $height-1;
+            }
         }
     } else {
         for my $y ($y2..$y1) {
-            $map[$y][$x2] = '0' if $y > 0 && $y < $height-1;
+            for my $dx (-$offset..$offset) {
+                my $nx = $x2 + $dx;
+                $map[$y][$nx] = '0' if $nx > 0 && $nx < $width-1 && $y > 0 && $y < $height-1;
+            }
         }
     }
 }
@@ -71,10 +92,30 @@ my @directions = ('N', 'W', 'E', 'S');
 $map[$rooms[0]{y}][$rooms[0]{x}] = $directions[int(rand(@directions))];
 $map[$rooms[-1]{y}][$rooms[-1]{x}] = 'D';
 
-for (1..30) {
-    my $x = 1 + int(rand($width-2));
-    my $y = 1 + int(rand($height-2));
-    $map[$y][$x] = '1' if $map[$y][$x] eq '0';
+# Ajouter seulement les murs nécessaires
+for my $y (1..$height-2) {
+    for my $x (1..$width-2) {
+        if ($map[$y][$x] eq '0') {
+            $map[$y-1][$x] = '1' if $map[$y-1][$x] eq ' ';
+            $map[$y+1][$x] = '1' if $map[$y+1][$x] eq ' ';
+            $map[$y][$x-1] = '1' if $map[$y][$x-1] eq ' ';
+            $map[$y][$x+1] = '1' if $map[$y][$x+1] eq ' ';
+        }
+    }
+}
+
+# Nettoyer les '1' isolés qui ne bordent aucun '0'
+for my $y (1..$height-2) {
+    for my $x (1..$width-2) {
+        if ($map[$y][$x] eq '1') {
+            my $has_adjacent_zero = 0;
+            $has_adjacent_zero ||= ($map[$y-1][$x] eq '0');
+            $has_adjacent_zero ||= ($map[$y+1][$x] eq '0');
+            $has_adjacent_zero ||= ($map[$y][$x-1] eq '0');
+            $has_adjacent_zero ||= ($map[$y][$x+1] eq '0');
+            $map[$y][$x] = ' ' unless $has_adjacent_zero;
+        }
+    }
 }
 
 print "NO      ./graphic/NO.xpm\n";
