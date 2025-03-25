@@ -6,7 +6,7 @@
 /*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:50:07 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/25 16:06:49 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:25:25 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	main(int argc, char **argv)
 	cub = parse_struct(argv[1]);
 	if (!cub)
 		exit (127);
+	print_struct(cub);
 	open_window(cub);
 	return (0);
 }

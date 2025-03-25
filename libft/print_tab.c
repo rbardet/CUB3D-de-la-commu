@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: throbert <throbert@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 08:07:23 by throbert          #+#    #+#             */
-/*   Updated: 2025/03/09 01:19:09 by throbert         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:25:53 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	printab(char **tab)
 	{
 		printf("[%d] : ", i);
 		printf("%s", tab[i]);
-		printf("\n");
 		i++;
 	}
 }
