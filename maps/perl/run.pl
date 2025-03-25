@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+#for i in {1..20}; do perl run.pl > "$i.cub"; done
 use strict;
 use warnings;
 
