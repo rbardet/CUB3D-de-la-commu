@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/25 19:43:11 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/25 21:03:43 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_player
 
 typedef struct s_img
 {
-	void	*ptr; // Pointeur vers l'image MiniLibX
 	char	*addr; // Adresse mémoire de l'image
 	int		bpp; // Bits par pixel
 	int		line_length; // Longueur d'une ligne en octets
@@ -87,7 +86,8 @@ typedef struct s_cub
 	void		*init_ptr;
 	void		*win_ptr;
 	char		spawn_view;
-	t_img		*img;
+	void		*img_ptr;
+	t_img		img;
 	t_rgb		floor;
 	t_rgb		ceil;
 	t_player	player;
