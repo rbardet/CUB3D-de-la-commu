@@ -6,90 +6,92 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 21:19:38 by hdelacou          #+#    #+#             */
-/*   Updated: 2025/03/25 17:31:54 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:33:20 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	raycast(t_cub *cub)
+t_img	*init_image(t_cub *cub)
 {
-	int		x;
-	double	camera_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	int		map_x;
-	int		map_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-		double perp_wall_dist;
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
-	int		color;
+	t_img	*img;
 
-	for (x = 0; x < WIN_WIDTH; x++)
+	img = malloc(sizeof(t_img));
+	img->ptr = mlx_new_image(cub->init_ptr, cub->win_width, cub->win_height);
+	if (!img->ptr)
 	{
-		camera_x = 2 * x / (double)WIN_WIDTH - 1;
-		ray_dir_x = cub->player.dir_x + cub->player.plane_x * camera_x;
-		ray_dir_y = cub->player.dir_y + cub->player.plane_y * camera_x;
-		map_x = (int)cub->player.x;
-		map_y = (int)cub->player.y;
-		double side_dist_x, side_dist_y;
-		delta_dist_x = fabs(1 / ray_dir_x);
-		delta_dist_y = fabs(1 / ray_dir_y);
-		int step_x, step_y, hit = 0, side;
-		if (ray_dir_x < 0)
-		{
-			step_x = -1;
-			side_dist_x = (cub->player.x - map_x) * delta_dist_x;
-		}
+		printf("Erreur : Impossible de créer l'image MiniLibX\n");
+		exit(1);
+	}
+	img->addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->line_length, &img->endian);
+	return (img);
+}
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color, t_cub *cub)
+{
+	int	pixel;
+
+	if (x >= 0 && x < cub->win_width && y >= 0 && y < cub->win_height)
+	{
+		pixel = (y * img->line_length) + (x * (img->bpp / 8));
+		*(int *)(img->addr + pixel) = color;
+	}
+}
+
+int raycast(t_cub *cub)
+{
+	for (int x = 0; x < cub->win_width; x++)
+	{
+		double cameraX = 2 * x / (double)cub->win_width - 1;
+		double rayDirX = cub->player.dir_x + cub->player.plane_x * cameraX;
+		double rayDirY = cub->player.dir_y + cub->player.plane_y * cameraX;
+		int mapX = (int)cub->player.pos_x;
+		int mapY = (int)cub->player.pos_y;
+		double sideDistX, sideDistY;
+		double deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
+		double deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
+		double perpWallDist;
+		int stepX = (rayDirX < 0) ? -1 : 1;
+		int stepY = (rayDirY < 0) ? -1 : 1;
+		if (rayDirX < 0)
+			sideDistX = (cub->player.pos_x - mapX) * deltaDistX;
 		else
-		{
-			step_x = 1;
-			side_dist_x = (map_x + 1.0 - cub->player.x) * delta_dist_x;
-		}
-		if (ray_dir_y < 0)
-		{
-			step_y = -1;
-			side_dist_y = (cub->player.y - map_y) * delta_dist_y;
-		}
+			sideDistX = (mapX + 1.0 - cub->player.pos_x) * deltaDistX;
+		if (rayDirY < 0)
+			sideDistY = (cub->player.pos_y - mapY) * deltaDistY;
 		else
-		{
-			step_y = 1;
-			side_dist_y = (map_y + 1.0 - cub->player.y) * delta_dist_y;
-		}
+			sideDistY = (mapY + 1.0 - cub->player.pos_y) * deltaDistY;
+
+		int hit = 0, side;
 		while (hit == 0)
 		{
-			if (side_dist_x < side_dist_y)
+			if (sideDistX < sideDistY)
 			{
-				side_dist_x += delta_dist_x;
-				map_x += step_x;
+				sideDistX += deltaDistX;
+				mapX += stepX;
 				side = 0;
 			}
 			else
 			{
-				side_dist_y += delta_dist_y;
-				map_y += step_y;
+				sideDistY += deltaDistY;
+				mapY += stepY;
 				side = 1;
 			}
-			if (cub->map[map_y][map_x] == '1')
-				hit = 1;
+			if (cub->map[mapY][mapX] > 0) hit = 1;
 		}
-		if (side == 0)
-			perp_wall_dist = (map_x - cub->player.x + (1 - step_x) / 2)
-				/ ray_dir_x;
-		else
-			perp_wall_dist = (map_y - cub->player.y + (1 - step_y) / 2)
-				/ ray_dir_y;
-		line_height = (int)(WIN_HEIGHT / perp_wall_dist);
-		draw_start = -line_height / 2 + WIN_HEIGHT / 2;
-		draw_end = line_height / 2 + WIN_HEIGHT / 2;
-		if (draw_start < 0)
-			draw_start = 0;
-		if (draw_end >= WIN_HEIGHT)
-			draw_end = WIN_HEIGHT - 1;
-		color = (side == 1) ? 0xAAAAAA : 0xFFFFFF;
-		draw_vertical_line(cub, x, draw_start, draw_end, color);
+		perpWallDist = (side == 0) ? (sideDistX - deltaDistX) : (sideDistY - deltaDistY);
+		int lineHeight = (int)(cub->win_height / perpWallDist);
+		int drawStart = -lineHeight / 2 + cub->win_height / 2;
+		if (drawStart < 0) drawStart = 0;
+		int drawEnd = lineHeight / 2 + cub->win_height / 2;
+		if (drawEnd >= cub->win_height) drawEnd = cub->win_height - 1;
+		int color = (side == 1) ? 0xAAAAAA : 0xFFFFFF;
+		for (int y = drawStart; y <= drawEnd; y++)
+			my_mlx_pixel_put(cub->img, x, y, color, cub);
 	}
+	// Ajout de l'affichage de l'image
+	mlx_put_image_to_window(cub->init_ptr, cub->win_ptr, cub->img->ptr, 0, 0);
+
+	return (0);
 }
+
