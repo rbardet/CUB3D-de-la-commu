@@ -18,6 +18,7 @@ SRCS        = parsing/copy_map.c \
               parsing/parse_struct.c \
               rendering/minimap.c \
               rendering/window.c \
+              raycasting/raycast.c \
               main.c
 
 SRCS       := $(addprefix $(SRCS_DIR)/, $(SRCS))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/25 16:04:51 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:16:56 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#define WIN_HEIGHT 1450
-#define WIN_WIDTH 1080
+#define WIN_HEIGHT 1200
+#define WIN_WIDTH 900
 
 #define Tile (WIN_HEIGHT / 120) % WIN_WIDTH
 
@@ -56,6 +56,15 @@ typedef struct s_player
 	float		plane_y;
 }				t_player;
 
+typedef struct s_img
+{
+	void	*ptr; // Pointeur vers l'image MiniLibX
+	char	*addr; // Adresse mémoire de l'image
+	int		bpp; // Bits par pixel
+	int		line_length; // Longueur d'une ligne en octets
+	int		endian;
+}				t_img;
+
 typedef struct s_cub
 {
 	int			win_height;
@@ -68,6 +77,7 @@ typedef struct s_cub
 	void		*init_ptr;
 	void		*win_ptr;
 	char		spawn_view;
+	t_img		*img;
 	t_rgb		floor;
 	t_rgb		ceil;
 	t_player	player;
@@ -95,15 +105,13 @@ t_cub			*parse_struct(char *map);
 t_player		init_player_struct(t_cub *cub);
 
 // render
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color, t_cub *cub);
 void			open_window(t_cub *cub);
 int				handle_keypress(int key, t_cub *cub);
 int				minimap(t_cub *cub);
 void			render_minimap(t_cub *cub);
-
-// render
-
-void			open_window(t_cub *cub);
-int				handle_keypress(int key, t_cub *cub);
+t_img			*init_image(t_cub *cub);
+int				raycast(t_cub *cub);
 
 // debug
 
