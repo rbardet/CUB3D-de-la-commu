@@ -4,7 +4,7 @@
 
 NAME        = cub3d
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -O3
+CFLAGS      = -Wall -Wextra -Werror -g
 SRCS_DIR    = srcs
 OBJS_DIR    = obj
 MLX_DIR     = minilibx

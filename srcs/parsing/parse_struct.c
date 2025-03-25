@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/25 17:38:11 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/25 19:44:21 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,18 @@ void	get_xpm(t_cub *cub)
 	cub->win_width = WIN_WIDTH;
 	cub->win_ptr = NULL;
 	i = skip_space(cub->map[0], 3);
-	printf("%s\n", cub->map[0] + i);
 	cub->no_xpm = mlx_xpm_file_to_image(cub->init_ptr, "./graphic/NO.xpm",
 			&g_width, &g_height);
 	i = skip_space(cub->map[1], 3);
-	printf("%s\n", cub->map[1] + i);
 	cub->so_xpm = mlx_xpm_file_to_image(cub->init_ptr, "./graphic/SO.xpm",
 			&g_width, &g_height);
 	i = skip_space(cub->map[2], 3);
-	printf("%s\n", cub->map[2] + i);
 	cub->we_xpm = mlx_xpm_file_to_image(cub->init_ptr, "./graphic/SO.xpm",
 			&g_width, &g_height);
 	i = skip_space(cub->map[3], 3);
-	printf("%s\n", cub->map[3] + i);
 	cub->ea_xpm = mlx_xpm_file_to_image(cub->init_ptr, "./graphic/SO.xpm",
 			&g_width, &g_height);
 	i = skip_space(cub->map[4], 3);
-	printf("%s\n", cub->map[4] + i);
 	cub->do_xpm = mlx_xpm_file_to_image(cub->init_ptr, "./graphic/SO.xpm",
 			&g_width, &g_height);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:50:07 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/25 17:41:24 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/25 19:45:50 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	print_struct(t_cub *cub)
 	printf("  Direction: (%f, %f)\n", cub->player.dir_x, cub->player.dir_y);
 	printf("  Plane: (%f, %f)\n", cub->player.plane_x, cub->player.plane_y);
 	printf("  Spawn View: %c\n", cub->spawn_view);
+	printf("map height %d\n : ", cub->player.map_height);
+	printf("map width %d\n : ", cub->player.map_width);
 	printab(cub->map);
 	exit(0);
 }
@@ -57,6 +59,27 @@ t_bool	is_cub(char *argv)
 	}
 }
 
+// find the longest line of the map for the raycasting
+int	find_max_len(char **map)
+{
+	int	i;
+	int	len;
+	int	tmp_len;
+
+	len = 0;
+	i = 0;
+	if (!map)
+		return (-1);
+	while (map[i])
+	{
+		tmp_len = ft_strlen(map[i]);
+		if (tmp_len > len)
+			len = tmp_len;
+		i++;
+	}
+	return (len);
+}
+
 int	main(int argc, char **argv)
 {
 	t_cub	*cub;
@@ -70,8 +93,15 @@ int	main(int argc, char **argv)
 		return (127);
 	cub = parse_struct(argv[1]);
 	if (!cub)
-		exit (127);
-	print_struct(cub);
+		return (127);
+	cub->player.map_height = tab_size(cub->map);
+	cub->player.map_width = find_max_len(cub->map);
+	if (cub->player.map_width == -1 || cub->player.map_height == -1)
+	{
+		free_struct(cub);
+		ft_putstr_fd("Error while calculating map size\n", 2);
+		return (127);
+	}
 	open_window(cub);
 	return (0);
 }

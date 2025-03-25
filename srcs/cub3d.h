@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/25 17:16:56 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/25 19:43:11 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct s_player
 {
 	int			pos_x;
 	int			pos_y;
+	int			map_width;
+	int			map_height;
 	float		dir_x;
 	float		dir_y;
 	float		plane_x;
@@ -64,6 +66,14 @@ typedef struct s_img
 	int		line_length; // Longueur d'une ligne en octets
 	int		endian;
 }				t_img;
+
+typedef struct s_texture
+{
+	t_img	img;
+	int		width;
+	int		height;
+}	t_texture;
+
 
 typedef struct s_cub
 {
@@ -88,6 +98,7 @@ typedef struct s_cub
 int				free_struct(t_cub *cub);
 
 // parsing
+int				find_max_len(char **map);
 int				skip_space(char *line, int i);
 t_rgb			get_rgb(char **rgb_tmp);
 void			get_xpm(t_cub *cub);
