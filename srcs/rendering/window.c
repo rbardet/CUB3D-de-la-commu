@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:48:34 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 22:55:06 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/26 22:59:03 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 // function used to free the main struct of the project
 int	free_struct(t_cub *cub)
 {
+	if (cub->no_xpm)
+		mlx_destroy_image(cub->init_ptr, cub->no_xpm);
+	if (cub->ea_xpm)
+		mlx_destroy_image(cub->init_ptr, cub->ea_xpm);
+	if (cub->so_xpm)
+		mlx_destroy_image(cub->init_ptr, cub->so_xpm);
+	if (cub->we_xpm)
+		mlx_destroy_image(cub->init_ptr, cub->we_xpm);
+	if (cub->do_xpm)
+		mlx_destroy_image(cub->init_ptr, cub->do_xpm);
 	if (cub->init_ptr && cub->win_ptr)
 		mlx_destroy_window(cub->init_ptr, cub->win_ptr);
 	if (cub->init_ptr)
