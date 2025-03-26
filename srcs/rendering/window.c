@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:48:34 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 23:04:51 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/26 23:07:48 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ int	handle_keypress(int key, t_cub *cub)
 {
 	if (key == XK_Escape)
 		free_struct(cub);
-	else if (key == XK_W)
+	else if (key == XK_w)
 		move_forward(cub);
-	else if (key == XK_S)
+	else if (key == XK_s)
 		move_backward(cub);
-	else if (key == XK_A)
+	else if (key == XK_a)
 		move_left(cub);
-	else if (key == XK_D)
+	else if (key == XK_d)
 		move_right(cub);
 	else if (key == XK_Left)
 		rotate_left(cub);
