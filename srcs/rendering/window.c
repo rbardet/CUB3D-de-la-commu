@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:48:34 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 22:59:03 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/26 23:04:51 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,22 @@ int	free_struct(t_cub *cub)
 		free_tab(cub->map);
 	if (cub)
 		free(cub);
-	exit (0);
+	exit(0);
 }
 
 // check the keypressed to see wich action need to be done
-int handle_keypress(int key, t_cub *cub)
+int	handle_keypress(int key, t_cub *cub)
 {
 	if (key == XK_Escape)
 		free_struct(cub);
-	else if (key == XK_Up)
+	else if (key == XK_W)
 		move_forward(cub);
-	else if (key == XK_Down)
+	else if (key == XK_S)
 		move_backward(cub);
+	else if (key == XK_A)
+		move_left(cub);
+	else if (key == XK_D)
+		move_right(cub);
 	else if (key == XK_Left)
 		rotate_left(cub);
 	else if (key == XK_Right)

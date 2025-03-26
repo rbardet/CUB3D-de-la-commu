@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 22:53:32 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/26 23:00:32 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void			render_minimap(t_cub *cub);
 void			raycast(t_cub *cub);
 void			move_forward(t_cub *cub);
 void			move_backward(t_cub *cub);
+void			move_left(t_cub *cub);
+void			move_right(t_cub *cub);
 void			rotate_right(t_cub *cub);
 void			rotate_left(t_cub *cub);
 
