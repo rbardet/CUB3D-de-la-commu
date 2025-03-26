@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:48:34 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 17:58:18 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/26 20:17:37 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	open_window(t_cub *cub)
 		free(cub->init_ptr);
 		return ;
 	}
+	raycast(cub);
 	mlx_hook(cub->win_ptr, KeyPress, KeyPressMask, &handle_keypress, cub);
 	mlx_hook(cub->win_ptr, 17, 0, free_struct, cub);
-	// mlx_loop_hook(cub->init_ptr, minimap, cub);
 	mlx_loop(cub->init_ptr);
 	return ;
 }

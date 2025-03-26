@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 17:58:09 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/26 20:25:45 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ typedef struct s_player
 	int			pos_y;
 	int			map_width;
 	int			map_height;
-	float		dir_x;
-	float		dir_y;
-	float		plane_x;
-	float		plane_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
 }				t_player;
 
 typedef struct s_cub
@@ -71,7 +71,6 @@ typedef struct s_cub
 	void		*init_ptr;
 	void		*win_ptr;
 	char		spawn_view;
-	void		*img_ptr;
 	t_rgb		floor;
 	t_rgb		ceil;
 	t_player	player;
@@ -104,6 +103,7 @@ void			open_window(t_cub *cub);
 int				handle_keypress(int key, t_cub *cub);
 int				minimap(t_cub *cub);
 void			render_minimap(t_cub *cub);
+void			raycast(t_cub *cub);
 
 // debug
 

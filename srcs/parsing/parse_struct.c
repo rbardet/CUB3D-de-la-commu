@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 17:53:25 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/26 20:41:42 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ t_player	init_player_struct(t_cub *cub)
 		player.dir_x = 1;
 		player.dir_y = 0;
 	}
-	player.plane_x = PLANE_FACTOR * (-player.dir_x);
-	player.plane_y = PLANE_FACTOR * (player.dir_y);
+	player.plane_x = PLANE_FACTOR * player.dir_y;
+	player.plane_y = -PLANE_FACTOR * player.dir_x;
 	return (player);
 }
 
