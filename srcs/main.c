@@ -6,46 +6,16 @@
 /*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:50:07 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 20:58:52 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/26 23:59:03 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// debug function to show all the data inside the main struct *cub
-void	print_struct(t_cub *cub)
-{
-	printf("Textures:\n");
-	printf("  North: %p\n", cub->no_xpm);
-	printf("  South: %p\n", cub->so_xpm);
-	printf("  West: %p\n", cub->we_xpm);
-	printf("  East: %p\n", cub->ea_xpm);
-	printf("  Door: %p\n", cub->do_xpm);
-	printf("\nFloor (RGB):\n");
-	printf("  Red: %d\n", cub->floor.red);
-	printf("  Green: %d\n", cub->floor.green);
-	printf("  Blue: %d\n", cub->floor.blue);
-	printf("  Value: \033[48;2;%d;%d;%dm       \033[0m\n",
-		cub->floor.red, cub->floor.green, cub->floor.blue);
-	printf("\nCeiling (RGB):\n");
-	printf("  Red: %d\n", cub->ceil.red);
-	printf("  Green: %d\n", cub->ceil.green);
-	printf("  Blue: %d\n", cub->ceil.blue);
-	printf("  Value: \033[48;2;%d;%d;%dm       \033[0m\n",
-		cub->ceil.red, cub->ceil.green, cub->ceil.blue);
-	printf("\nPlayer:\n");
-	printf("  Position: (%d, %d)\n", cub->player.pos_x, cub->player.pos_y);
-	printf("  Direction: (%f, %f)\n", cub->player.dir_x, cub->player.dir_y);
-	printf("  Plane: (%f, %f)\n", cub->player.plane_x, cub->player.plane_y);
-	printf("  Spawn View: %c\n", cub->spawn_view);
-	printf("map height : %d\n", cub->player.map_height);
-	printf("map width : %d\n", cub->player.map_width);
-	printab(cub->map);
-}
-
-// a boolean function that take the name of the map and move its cursor to
-// the 4 last character to see if the map is a .cub file
-// return TRUE if it is else return FALSE
+/**
+ * @brief Check if the given string is a .cub file.
+ * @return TRUE if .cub, FALSE if not with an error message.
+ */
 t_bool	is_cub(char *argv)
 {
 	argv += ft_strlen(argv) - 4;
@@ -58,7 +28,11 @@ t_bool	is_cub(char *argv)
 	}
 }
 
-// find the longest line of the map for the raycasting
+/**
+ * @brief Get the max string length in a 2D array.
+ * @param map 2D string array
+ * @return Max string length or -1 if NULL.
+ */
 int	find_max_len(char **map)
 {
 	int	i;
@@ -79,6 +53,15 @@ int	find_max_len(char **map)
 	return (len);
 }
 
+/**
+ * @brief Entry point of the program.
+ * The program takes one argument, a path to a .cub file.
+ * The program parse the .cub file and make a raycasting of the map.
+ * The program then launch a window with the raycasting of the map.
+ * @param argc The number of argument passed to the program.
+ * @param argv The argument passed to the program.
+ * @return 0 if the program succeed, 127 if there is an error.
+ */
 int	main(int argc, char **argv)
 {
 	t_cub	*cub;

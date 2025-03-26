@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 23:34:46 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/27 00:04:02 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,23 @@ void			rotate_right(t_cub *cub);
 void			rotate_left(t_cub *cub);
 
 // debug
+
+//UTILS
+
+//debug
+void	print_xpm_status(void *xpm, char *name);
+char	*get_direction_name(char c);
+void	print_window_info(t_cub *cub);
+void	print_textures_info(t_cub *cub);
+void	print_colors_info(t_cub *cub);
+void	print_player_info(t_cub *cub);
+
+//debug 2
+void	print_player_info(t_cub *cub);
+void	print_map_info(t_cub *cub);
+void	print_struct(t_cub *cub);
+
+
+
 
 void			print_struct(t_cub *cub);

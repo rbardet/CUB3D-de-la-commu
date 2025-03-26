@@ -6,7 +6,7 @@
 /*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:10:20 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 21:51:45 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/26 23:51:00 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,6 @@ void	render_minimap(t_cub *cub)
 			{
 				draw_square(cub, j * TILE, i * TILE, 0x00FF00);
 				draw_square(cub, j * TILE, i * TILE - 15, 0xF0FFF0);
-				cub->player.pos_y = i;
-				cub->player.pos_x = j;
-				printf("MINIMAP :\nplayer pos: (%d, %d)\n", cub->player.pos_x, cub->player.pos_y);
-				printf("spawn view: %c\n", cub->spawn_view);
-				printf("i: %d, j: %d\n", i, j);
 			}
 			j++;
 		}
