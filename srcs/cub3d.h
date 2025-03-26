@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 22:06:34 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/26 22:15:22 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef int		t_bool;
 #define FALSE 0
 
 #define M_PI 3.14159265358979323846
-#define FOV_ANGLE 122
+#define FOV_ANGLE 90
 #define PLANE_FACTOR (tan((FOV_ANGLE * M_PI / 180) / 2))
 
 typedef struct s_rgb

@@ -53,11 +53,11 @@ void	raycast(t_cub *cub)
 	int		map_y;
 	double	delta_dist_x;
 	double	delta_dist_y;
-		double side_dist_x;
-		double side_dist_y;
-		int step_x;
-		int step_y;
-		int side;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		step_x;
+	int		step_y;
+	int		side;
 	double	perp_wall_dist;
 	int		line_height;
 	int		draw_start;
