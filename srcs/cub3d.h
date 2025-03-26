@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 21:35:15 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/26 22:06:34 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char			**loop_copy(int fd, int nb_line);
 char			**copy_map(char *argv);
 t_bool			is_cub(char *map);
 t_cub			*parse_struct(char *map);
-t_player		init_player_struct(t_cub *cub);
+t_player		init_player_struct(t_cub *cub, t_player player);
 
 // render
 void			open_window(t_cub *cub);

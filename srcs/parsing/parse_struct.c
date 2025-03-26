@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 21:39:44 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/26 22:07:40 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,8 @@ t_cub	*fill_struct(t_cub *cub)
 }
 
 // init the player viewpoint at the start of the rendering
-t_player	init_player_struct(t_cub *cub)
+t_player	init_player_struct(t_cub *cub, t_player player)
 {
-	t_player	player;
-
 	if (cub->spawn_view == 'N')
 	{
 		player.dir_x = 0;
@@ -161,6 +159,6 @@ t_cub	*parse_struct(char *argv)
 	cub = fill_struct(cub);
 	if (!cub)
 		return (NULL);
-	cub->player = init_player_struct(cub);
+	cub->player = init_player_struct(cub, cub->player);
 	return (cub);
 }
