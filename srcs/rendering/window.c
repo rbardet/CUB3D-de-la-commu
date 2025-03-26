@@ -6,7 +6,7 @@
 /*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:48:34 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 21:15:47 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/26 21:50:09 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ void	open_window(t_cub *cub)
 		free(cub->init_ptr);
 		return ;
 	}
+	render_minimap(cub);
 	raycast(cub);
 	mlx_hook(cub->win_ptr, KeyPress, KeyPressMask, &handle_keypress, cub);
-	mlx_hook(cub->win_ptr, 17, 0, free_struct, cub);
+	mlx_hook(cub->win_ptr, 17, 0, (int (*)())free_struct, cub);
+	//mlx_hook(cub->win_ptr, 12, 0, (int (*)())render_minimap, cub);
 	mlx_loop(cub->init_ptr);
 	return ;
 }

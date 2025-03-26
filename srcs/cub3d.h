@@ -6,7 +6,7 @@
 /*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 21:16:07 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/26 21:35:15 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 #define WIN_HEIGHT 800
 #define WIN_WIDTH 1600
 
-#define Tile (WIN_HEIGHT / 120) % WIN_WIDTH
+#define TILE 20
 
 #define GRAPH_HEIGHT 64
 #define GRAPH_WIDTH 64
@@ -37,8 +37,8 @@ typedef int		t_bool;
 #define FALSE 0
 
 #define M_PI 3.14159265358979323846
-#define FOV_ANGLE 66
-#define PLANE_FACTOR tan((FOV_ANGLE * M_PI / 180) / 2)
+#define FOV_ANGLE 122
+#define PLANE_FACTOR (tan((FOV_ANGLE * M_PI / 180) / 2))
 
 typedef struct s_rgb
 {
