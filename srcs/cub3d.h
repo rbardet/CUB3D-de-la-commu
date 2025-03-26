@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/25 22:34:51 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:58:09 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef int		t_bool;
 #define TRUE 1
 #define FALSE 0
 
-#define FOV_ANGLE 120
+#define M_PI 3.14159265358979323846
+#define FOV_ANGLE 66
 #define PLANE_FACTOR tan((FOV_ANGLE * M_PI / 180) / 2)
 
 typedef struct s_rgb
@@ -58,22 +59,6 @@ typedef struct s_player
 	float		plane_y;
 }				t_player;
 
-typedef struct s_img
-{
-	char	*addr; // Adresse mémoire de l'image
-	int		bpp; // Bits par pixel
-	int		line_length; // Longueur d'une ligne en octets
-	int		endian;
-}				t_img;
-
-typedef struct s_texture
-{
-	t_img	img;
-	int		width;
-	int		height;
-}	t_texture;
-
-
 typedef struct s_cub
 {
 	int			win_height;
@@ -87,7 +72,6 @@ typedef struct s_cub
 	void		*win_ptr;
 	char		spawn_view;
 	void		*img_ptr;
-	t_img		img;
 	t_rgb		floor;
 	t_rgb		ceil;
 	t_player	player;
@@ -116,13 +100,10 @@ t_cub			*parse_struct(char *map);
 t_player		init_player_struct(t_cub *cub);
 
 // render
-void			my_mlx_pixel_put(t_img *img, int x, int y, int color, t_cub *cub);
 void			open_window(t_cub *cub);
 int				handle_keypress(int key, t_cub *cub);
 int				minimap(t_cub *cub);
 void			render_minimap(t_cub *cub);
-t_img			*init_image(t_cub *cub);
-void			raycast(t_cub *cub);
 
 // debug
 

@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:30:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/25 11:49:25 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/25 23:20:02 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_bool	is_valid_map(t_cub *cub)
 // add 1 to the error count
 void	flood_fill(int x, int y, char **map, int *ret)
 {
-	if ((size_t)x > ft_strlen(map[y]) || x < 0 || y < 0 || map[y][x] == '\n' || map[y][x] == '\0')
+	if (y < 0 || (size_t)x > ft_strlen(map[y]) || x < 0 || map[y][x] == '\n' || map[y][x] == '\0')
 	{
 		(*ret)++;
 		return ;
