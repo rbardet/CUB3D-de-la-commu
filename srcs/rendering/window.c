@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:48:34 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 20:17:37 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/26 21:15:47 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	handle_keypress(int key, t_cub *cub)
 // open the a window with the size defined in the Header
 void	open_window(t_cub *cub)
 {
-	cub->win_ptr = mlx_new_window(cub->init_ptr, cub->win_height,
-			cub->win_width, "cub3d");
+	cub->win_ptr = mlx_new_window(cub->init_ptr, cub->win_width,
+			cub->win_height, "cub3d");
 	if (!cub->win_ptr)
 	{
 		ft_putstr_fd("Error\nCouldn't create the windowd\n", 2);

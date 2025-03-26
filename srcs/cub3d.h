@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 20:25:45 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/26 21:16:07 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#define WIN_HEIGHT 1200
-#define WIN_WIDTH 900
+#define WIN_HEIGHT 800
+#define WIN_WIDTH 1600
 
 #define Tile (WIN_HEIGHT / 120) % WIN_WIDTH
 

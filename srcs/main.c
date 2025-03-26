@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:50:07 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 20:17:47 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/26 20:58:52 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	print_struct(t_cub *cub)
 	printf("map height : %d\n", cub->player.map_height);
 	printf("map width : %d\n", cub->player.map_width);
 	printab(cub->map);
-	exit(0);
 }
 
 // a boolean function that take the name of the map and move its cursor to
@@ -102,6 +101,7 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Error while calculating map size\n", 2);
 		return (127);
 	}
+	print_struct(cub);
 	open_window(cub);
 	return (0);
 }
