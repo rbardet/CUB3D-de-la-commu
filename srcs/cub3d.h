@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 22:15:22 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/26 22:53:32 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+
+#define MOVE_SPEED 0.1
+#define ROT_SPEED 0.05
 
 #define WIN_HEIGHT 800
 #define WIN_WIDTH 1600
@@ -104,6 +107,10 @@ int				handle_keypress(int key, t_cub *cub);
 int				minimap(t_cub *cub);
 void			render_minimap(t_cub *cub);
 void			raycast(t_cub *cub);
+void			move_forward(t_cub *cub);
+void			move_backward(t_cub *cub);
+void			rotate_right(t_cub *cub);
+void			rotate_left(t_cub *cub);
 
 // debug
 
