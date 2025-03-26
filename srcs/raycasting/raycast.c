@@ -27,20 +27,22 @@ void	perform_dda(t_cub *cub, int *map_x, int *map_y, double *side_dist_x,
 	hit = 0;
 	while (hit == 0)
 	{
-		if (*side_dist_x < *side_dist_y)
-		{
-			*side_dist_x += delta_dist_x;
-			*map_x += step_x;
-			*side = 0;
-		}
-		else
-		{
-			*side_dist_y += delta_dist_y;
-			*map_y += step_y;
-			*side = 1;
-		}
-		if (cub->map[*map_y][*map_x] == '1')
-			hit = 1;
+	if (*map_x < 0 || *map_x >= cub->player.map_width || *map_y < 0 || *map_y >= cub->player.map_height)
+		break;
+	if (*side_dist_x < *side_dist_y)
+	{
+		*side_dist_x += delta_dist_x;
+		*map_x += step_x;
+		*side = 0;
+	}
+	else
+	{
+		*side_dist_y += delta_dist_y;
+		*map_y += step_y;
+		*side = 1;
+	}
+	if (cub->map[*map_y][*map_x] == '1')
+		hit = 1;
 	}
 }
 
@@ -70,8 +72,8 @@ void	raycast(t_cub *cub)
 		camera_x = 2 * x / (double)WIN_WIDTH - 1;
 		ray_dir_x = cub->player.dir_x + cub->player.plane_x * camera_x;
 		ray_dir_y = cub->player.dir_y + cub->player.plane_y * camera_x;
-		map_x = 11;
-		map_y = 10;
+		map_x = (int)cub->player.pos_x;
+		map_y = (int)cub->player.pos_y;
 		delta_dist_x = (ray_dir_x == 0) ? 1e30 : fabs(1 / ray_dir_x);
 		delta_dist_y = (ray_dir_y == 0) ? 1e30 : fabs(1 / ray_dir_y);
 		if (ray_dir_x < 0)

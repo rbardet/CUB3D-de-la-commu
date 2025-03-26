@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 22:07:40 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/26 23:42:23 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,28 +107,24 @@ t_cub	*fill_struct(t_cub *cub)
 // init the player viewpoint at the start of the rendering
 t_player	init_player_struct(t_cub *cub, t_player player)
 {
-	if (cub->spawn_view == 'N')
-	{
-		player.dir_x = 0;
-		player.dir_y = 1;
-	}
-	else if (cub->spawn_view == 'S')
-	{
+	if (cub->spawn_view == 'N') {
 		player.dir_x = 0;
 		player.dir_y = -1;
 	}
-	else if (cub->spawn_view == 'W')
-	{
+	else if (cub->spawn_view == 'S') {
+		player.dir_x = 0;
+		player.dir_y = 1;
+	}
+	else if (cub->spawn_view == 'W') {
 		player.dir_x = -1;
 		player.dir_y = 0;
 	}
-	else if (cub->spawn_view == 'E')
-	{
+	else if (cub->spawn_view == 'E') {
 		player.dir_x = 1;
 		player.dir_y = 0;
 	}
-	player.plane_x = PLANE_FACTOR * player.dir_y;
-	player.plane_y = -PLANE_FACTOR * player.dir_x;
+	player.plane_x = player.dir_y * PLANE_FACTOR;
+	player.plane_y = -player.dir_x * PLANE_FACTOR;
 	return (player);
 }
 
