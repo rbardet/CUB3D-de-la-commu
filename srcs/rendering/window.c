@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:48:34 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/27 12:44:12 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:57:55 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,8 @@ int	handle_keypress(int key, t_cub *cub)
 {
 	if (key == XK_Escape)
 		free_struct(cub);
-	else if (key == XK_w)
-		move_forward(cub);
-	else if (key == XK_s)
-		move_backward(cub);
-	else if (key == XK_a)
-		move_left(cub);
-	else if (key == XK_d)
-		move_right(cub);
+	else if (key == XK_w || key == XK_s || key == XK_a || key == XK_d)
+		move(cub, key);
 	else if (key == XK_Left)
 		rotate_left(cub);
 	else if (key == XK_Right)

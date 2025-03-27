@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:48:55 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/27 13:27:09 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:41:26 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	draw_floor_and_ceiling(t_cub *cub)
 	y = 0;
 	while (y < WIN_HEIGHT / 2)
 	{
-		int x = 0;
+		x = 0;
 		while (x < WIN_WIDTH)
 		{
 			mlx_pixel_put(cub->init_ptr, cub->win_ptr, x, y,
@@ -92,8 +92,8 @@ void	raycast(t_cub *cub)
 		cub->raycast.camera_x = 2 * x / (double)WIN_WIDTH - 1;
 		cub->raycast.ray_dir_x = cub->player.dir_x + cub->player.plane_x * cub->raycast.camera_x;
 		cub->raycast.ray_dir_y = cub->player.dir_y + cub->player.plane_y * cub->raycast.camera_x;
-		cub->raycast.map_x = cub->player.pos_x;
-		cub->raycast.map_y = cub->player.pos_y;
+		cub->raycast.map_x = (int)cub->player.pos_x;
+		cub->raycast.map_y = (int)cub->player.pos_y;
 
 		if (cub->raycast.ray_dir_x == 0)
 			cub->raycast.delta_dist_x = 1e30;

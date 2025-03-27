@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:30:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/27 13:27:00 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/27 15:19:41 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ t_bool	is_valid_map(t_cub *cub)
 // add 1 to the error count
 void	flood_fill(int x, int y, char **map, int *ret)
 {
-	if (y < 0 || (size_t)x > ft_strlen(map[y]) || x < 0 || map[y][x] == '\n' || map[y][x] == '\0')
+	if (y < 0 || (size_t)x > ft_strlen(map[y]) || x < 0
+		|| map[y][x] == '\n' || map[y][x] == '\0')
 	{
 		(*ret)++;
 		return ;
@@ -53,10 +54,13 @@ void	flood_fill(int x, int y, char **map, int *ret)
 }
 
 // if the map is close return FALSE else return TRUE
-t_bool	close_or_not(char **map, int x, int y)
+t_bool	close_or_not(char **map, int x, int y, t_cub *cub)
 {
 	int	ret;
 
+	cub->spawn_view = map[y][x];
+	cub->player.pos_x = (double)x;
+	cub->player.pos_y = (double)y;
 	ret = 0;
 	flood_fill(x, y, map, &ret);
 	free_tab(map);
@@ -91,10 +95,7 @@ t_bool	is_close_map(char **map, int i, t_cub *cub)
 			break ;
 		y++;
 	}
-	cub->spawn_view = copy[y][x];
-	cub->player.pos_x = x;
-	cub->player.pos_y = y;
-	return (close_or_not(copy, x, y));
+	return (close_or_not(copy, x, y, cub));
 }
 
 // check if there is only one player if no return FALSE else return TRUE

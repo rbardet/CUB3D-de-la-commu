@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/27 12:44:26 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/27 15:31:09 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef int		t_bool;
 
 #define M_PI 3.14159265358979323846
 #define FOV_ANGLE 90
-#define PLANE_FACTOR (tan((FOV_ANGLE * M_PI / 180) / 2))
 
 typedef struct s_rgb
 {
@@ -52,12 +51,13 @@ typedef struct s_rgb
 
 typedef struct s_player
 {
-	int			pos_x;
-	int			pos_y;
+	double		pos_x;
+	double		pos_y;
 	int			map_width;
 	int			map_height;
 	double		dir_x;
 	double		dir_y;
+	double		plane_factor;
 	double		plane_x;
 	double		plane_y;
 }				t_player;
@@ -114,7 +114,7 @@ t_cub			*fill_struct(t_cub *cub);
 void			flood_fill(int x, int y, char **map, int *ret);
 t_bool			is_one_player(char **map, int i);
 t_bool			is_valid_map(t_cub *cub);
-t_bool			close_or_not(char **map, int x, int y);
+t_bool			close_or_not(char **map, int x, int y, t_cub *cub);
 t_bool			is_close_map(char **map, int i, t_cub *cub);
 int				count_line(char *argv);
 char			**loop_copy(int fd, int nb_line);
@@ -129,10 +129,7 @@ int				handle_keypress(int key, t_cub *cub);
 int				minimap(t_cub *cub);
 void			render_minimap(t_cub *cub);
 void			raycast(t_cub *cub);
-void			move_forward(t_cub *cub);
-void			move_backward(t_cub *cub);
-void			move_left(t_cub *cub);
-void			move_right(t_cub *cub);
+void			move(t_cub *cub, int key);
 void			rotate_right(t_cub *cub);
 void			rotate_left(t_cub *cub);
 
@@ -141,19 +138,14 @@ void			rotate_left(t_cub *cub);
 //UTILS
 
 //debug
-void	print_xpm_status(void *xpm, char *name);
-char	*get_direction_name(char c);
-void	print_window_info(t_cub *cub);
-void	print_textures_info(t_cub *cub);
-void	print_colors_info(t_cub *cub);
-void	print_player_info(t_cub *cub);
+void			print_xpm_status(void *xpm, char *name);
+char			*get_direction_name(char c);
+void			print_window_info(t_cub *cub);
+void			print_textures_info(t_cub *cub);
+void			print_colors_info(t_cub *cub);
+void			print_player_info(t_cub *cub);
 
 //debug 2
-void	print_player_info(t_cub *cub);
-void	print_map_info(t_cub *cub);
-void	print_struct(t_cub *cub);
-
-
-
-
+void			print_player_info(t_cub *cub);
+void			print_map_info(t_cub *cub);
 void			print_struct(t_cub *cub);
