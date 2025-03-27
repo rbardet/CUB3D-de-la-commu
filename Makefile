@@ -14,15 +14,18 @@ MLX_LIB     = $(MLX_DIR)/libmlx.a
 LIBFT_LIB   = $(LIBFT_DIR)/libft.a
 
 SRCS        = parsing/copy_map.c \
-              parsing/is_valid_map.c \
-              parsing/parse_struct.c \
-              rendering/minimap.c \
-              rendering/window.c \
-              rendering/movement.c \
-              raycasting/raycast.c \
+			  parsing/is_valid_map.c \
+			  parsing/parse_struct.c \
+			  parsing/parse_utils.c \
+			  rendering/minimap.c \
+			  rendering/window.c \
+			  rendering/movement.c \
+			  raycasting/draw.c \
+			  raycasting/raycast.c \
+			  raycasting/calculate_ray.c \
 			  utils/debug.c \
 			  utils/debug2.c \
-              main.c
+			  main.c
 
 SRCS       := $(addprefix $(SRCS_DIR)/, $(SRCS))
 OBJS       := $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)

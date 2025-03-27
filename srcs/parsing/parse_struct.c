@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/27 15:31:37 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/27 21:26:36 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,29 +47,27 @@ t_rgb	get_rgb(char **rgb_tmp)
 void	get_xpm(t_cub *cub)
 {
 	int		i;
-	int		g_height;
-	int		g_width;
 
-	g_height = GRAPH_HEIGHT;
-	g_width = GRAPH_WIDTH;
+	cub->g_height = GRAPH_HEIGHT;
+	cub->g_width = GRAPH_WIDTH;
 	cub->win_height = WIN_HEIGHT;
 	cub->win_width = WIN_WIDTH;
 	cub->win_ptr = NULL;
 	i = skip_space(cub->map[0], 3);
 	cub->no_xpm = mlx_xpm_file_to_image(cub->init_ptr, "./graphic/NO.xpm",
-			&g_width, &g_height);
+			&cub->g_width, &cub->g_height);
 	i = skip_space(cub->map[1], 3);
 	cub->so_xpm = mlx_xpm_file_to_image(cub->init_ptr, "./graphic/SO.xpm",
-			&g_width, &g_height);
+			&cub->g_width, &cub->g_height);
 	i = skip_space(cub->map[2], 3);
 	cub->we_xpm = mlx_xpm_file_to_image(cub->init_ptr, "./graphic/WE.xpm",
-			&g_width, &g_height);
+			&cub->g_width, &cub->g_height);
 	i = skip_space(cub->map[3], 3);
 	cub->ea_xpm = mlx_xpm_file_to_image(cub->init_ptr, "./graphic/EA.xpm",
-			&g_width, &g_height);
+			&cub->g_width, &cub->g_height);
 	i = skip_space(cub->map[4], 3);
 	cub->do_xpm = mlx_xpm_file_to_image(cub->init_ptr, "./graphic/DO.xpm",
-			&g_width, &g_height);
+			&cub->g_width, &cub->g_height);
 }
 
 // fill the struct with all the data for the rendering
@@ -77,7 +75,6 @@ void	get_xpm(t_cub *cub)
 // and a copy of the map
 t_cub	*fill_struct(t_cub *cub)
 {
-	char	**map;
 	char	**rgb_tmp;
 
 	get_xpm(cub);
@@ -91,17 +88,20 @@ t_cub	*fill_struct(t_cub *cub)
 		return (free_tab(rgb_tmp), free_struct(cub), NULL);
 	cub->ceil = get_rgb(rgb_tmp);
 	free_tab(rgb_tmp);
-	map = copy_tab(cub->map + 7);
-	free_tab(cub->map);
-	cub->map = copy_tab(map);
+	cub->map = copy_and_check_map(cub);
+	if (!cub->map)
+	{
+		ft_putstr_fd("Error\nMap is not valid\n", 2);
+		return(free_struct(cub), NULL);
+	}
 	if (cub->floor.red == -1 || cub->floor.green == -1
 		|| cub->floor.blue == -1 || cub->ceil.red == -1
 		|| cub->ceil.green == -1 || cub->ceil.blue == -1)
 	{
 		ft_putstr_fd("Error\nOne rgb code is not valid\n", 2);
-		return (free_tab(map), free_struct(cub), NULL);
+		return (free_struct(cub), NULL);
 	}
-	return (free_tab(map), cub);
+	return (cub);
 }
 
 // init the player viewpoint at the start of the rendering

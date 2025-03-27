@@ -6,14 +6,26 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 22:51:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/27 15:32:29 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:52:49 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	move(t_cub *cub, int key)
+t_bool	check_collision(t_cub *cub, double x, double y)
 {
+	if (cub->map[(int)y][(int)x] == '1')
+		return (FALSE);
+	return (TRUE);
+}
+
+void	move_frontback(t_cub *cub, int key)
+{
+	double	tmp_x;
+	double	tmp_y;
+
+	tmp_x = cub->player.pos_x;
+	tmp_y = cub->player.pos_y;
 	if (key == XK_w)
 	{
 		cub->player.pos_x += cub->player.dir_x * MOVE_SPEED;
@@ -24,7 +36,23 @@ void	move(t_cub *cub, int key)
 		cub->player.pos_x -= cub->player.dir_x * MOVE_SPEED;
 		cub->player.pos_y -= cub->player.dir_y * MOVE_SPEED;
 	}
-	else if (key == XK_a)
+	if (!check_collision(cub, cub->player.pos_x, cub->player.pos_y))
+	{
+		cub->player.pos_x = tmp_x;
+		cub->player.pos_y = tmp_y;
+		return ;
+	}
+	raycast(cub);
+}
+
+void	move_side(t_cub *cub, int key)
+{
+	double	tmp_x;
+	double	tmp_y;
+
+	tmp_x = cub->player.pos_x;
+	tmp_y = cub->player.pos_y;
+	if (key == XK_a)
 	{
 		cub->player.pos_x += cub->player.dir_y * MOVE_SPEED;
 		cub->player.pos_y += cub->player.dir_x * MOVE_SPEED;
@@ -33,6 +61,12 @@ void	move(t_cub *cub, int key)
 	{
 		cub->player.pos_x -= cub->player.dir_y * MOVE_SPEED;
 		cub->player.pos_y -= cub->player.dir_x * MOVE_SPEED;
+	}
+	if (!check_collision(cub, cub->player.pos_x, cub->player.pos_y))
+	{
+		cub->player.pos_x = tmp_x;
+		cub->player.pos_y = tmp_y;
+		return ;
 	}
 	raycast(cub);
 }

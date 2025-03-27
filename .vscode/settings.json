@@ -36,6 +36,7 @@
 		"mutex": "c",
 		"queue": "c",
 		"random": "c",
-		"type_traits": "c"
+		"type_traits": "c",
+		"cub3d.h": "c"
 	}
 }

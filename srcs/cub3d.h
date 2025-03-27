@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/27 15:31:09 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/27 21:46:12 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#define MOVE_SPEED 0.5
+#define MOVE_SPEED 0.1
 #define ROT_SPEED 0.05
 
 #define WIN_HEIGHT 800
@@ -83,10 +83,21 @@ typedef struct s_ray
 	int		color;
 }				t_ray;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}			t_img;
+
 typedef struct s_cub
 {
 	int			win_height;
 	int			win_width;
+	int			g_height;
+	int			g_width;
 	void		*no_xpm;
 	void		*so_xpm;
 	void		*we_xpm;
@@ -94,18 +105,22 @@ typedef struct s_cub
 	void		*do_xpm;
 	void		*init_ptr;
 	void		*win_ptr;
+	void		*img_ptr;
 	char		spawn_view;
 	t_rgb		floor;
 	t_rgb		ceil;
 	t_player	player;
+	t_img		**img;
 	char		**map;
 	t_ray		raycast;
 }				t_cub;
 
 // avoid leak
+void			free_img(t_img **img);
 int				free_struct(t_cub *cub);
 
 // parsing
+char			**copy_and_check_map(t_cub *cub);
 int				find_max_len(char **map);
 int				skip_space(char *line, int i);
 t_rgb			get_rgb(char **rgb_tmp);
@@ -124,14 +139,26 @@ t_cub			*parse_struct(char *map);
 t_player		init_player_struct(t_cub *cub, t_player player);
 
 // render
+void			draw_wall(t_cub *cub, int x);
+void			load_texture(t_cub *cub);
 void			open_window(t_cub *cub);
 int				handle_keypress(int key, t_cub *cub);
 int				minimap(t_cub *cub);
 void			render_minimap(t_cub *cub);
+void			get_draw_size(t_cub *cub);
+void			ray_dist_x(t_cub *cub);
+void			ray_dist_y(t_cub *cub);
+void			init_ray(t_cub *cub, int x);
+void			calculate_wall_heigh(t_cub *cub);
 void			raycast(t_cub *cub);
-void			move(t_cub *cub, int key);
+t_bool			check_collision(t_cub *cub, double x, double y);
+void			move_frontback(t_cub *cub, int key);
+void			move_side(t_cub *cub, int key);
 void			rotate_right(t_cub *cub);
 void			rotate_left(t_cub *cub);
+void			draw_vertical_line(t_cub *cub, int x);
+void			draw_ceilling(t_cub *cub);
+void			draw_floor(t_cub *cub);
 
 // debug
 
