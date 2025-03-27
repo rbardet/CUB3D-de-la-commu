@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:10:20 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 23:51:00 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/27 11:57:01 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	render_minimap(t_cub *cub)
 				draw_square(cub, j * TILE, i * TILE, 0xFFDAB9);
 			else if (cub->map[i][j] == 'D')
 				draw_square(cub, j * TILE, i * TILE, 0x2BFAFA);
-			else if (cub->map[i][j] == cub->spawn_view)
+			else if (i == cub->player.pos_x && j == cub->player.pos_y)
 			{
 				draw_square(cub, j * TILE, i * TILE, 0x00FF00);
 				draw_square(cub, j * TILE, i * TILE - 15, 0xF0FFF0);

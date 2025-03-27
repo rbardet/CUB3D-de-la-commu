@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:48:34 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/27 00:07:23 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/27 12:44:12 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	open_window(t_cub *cub)
 	raycast(cub);
 	mlx_hook(cub->win_ptr, KeyPress, KeyPressMask, &handle_keypress, cub);
 	mlx_hook(cub->win_ptr, 17, 0, (int (*)())free_struct, cub);
-	mlx_hook(cub->win_ptr, 12, 0, (int (*)())render_minimap, cub);
 	mlx_loop(cub->init_ptr);
 	return ;
 }

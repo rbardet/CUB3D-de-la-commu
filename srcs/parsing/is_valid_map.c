@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_valid_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:30:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/26 21:02:15 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/27 13:27:00 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ t_bool	is_close_map(char **map, int i, t_cub *cub)
 		y++;
 	}
 	cub->spawn_view = copy[y][x];
-	cub->player.pos_x = y;
-	cub->player.pos_y = x;
+	cub->player.pos_x = x;
+	cub->player.pos_y = y;
 	return (close_or_not(copy, x, y));
 }
 
