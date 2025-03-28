@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 19:32:20 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 20:20:28 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 
 #define TILE 20
 
-#define GRAPH_HEIGHT 64
-#define GRAPH_WIDTH 64
+#define GRAPH_HEIGHT 1000
+#define GRAPH_WIDTH 1000
 
 typedef int		t_bool;
 #define TRUE 1
@@ -160,7 +160,8 @@ t_bool			move_left(t_cub *cub);
 t_bool			move_right(t_cub *cub);
 t_bool			rotate_right(t_cub *cub);
 t_bool			rotate_left(t_cub *cub);
-int32_t 		get_texture_color(mlx_texture_t *texture, int texX, int texY);
+int32_t			get_texture_color(mlx_texture_t *texture,
+					int texX, int texY);
 void			draw_ceilling(t_cub *cub);
 void			draw_floor(t_cub *cub);
 

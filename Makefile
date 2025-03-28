@@ -6,7 +6,7 @@
 #    By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/28 17:17:36 by rbardet-          #+#    #+#              #
-#    Updated: 2025/03/28 17:17:37 by rbardet-         ###   ########.fr        #
+#    Updated: 2025/03/28 20:23:12 by rbardet-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,18 +26,19 @@ SRC_DIR = srcs
 OBJ_DIR = obj
 
 SRCS = srcs/main.c \
-       srcs/parsing/copy_map.c \
-       srcs/parsing/is_valid_map.c \
-       srcs/parsing/parse_struct.c \
-       srcs/parsing/parse_utils.c \
-       srcs/rendering/minimap.c \
-       srcs/rendering/window.c \
-       srcs/rendering/movement.c \
-       srcs/raycasting/draw.c \
-       srcs/raycasting/raycast.c \
-       srcs/raycasting/calculate_ray.c \
-       srcs/utils/debug.c \
-       srcs/utils/debug2.c
+		srcs/parsing/copy_map.c \
+		srcs/parsing/is_valid_map.c \
+		srcs/parsing/parse_struct.c \
+		srcs/parsing/parse_utils.c \
+		srcs/rendering/minimap.c \
+		srcs/rendering/window.c \
+		srcs/rendering/movement.c \
+		srcs/rendering/rotate.c \
+		srcs/raycasting/draw.c \
+		srcs/raycasting/raycast.c \
+		srcs/raycasting/calculate_ray.c \
+		srcs/utils/debug.c \
+		srcs/utils/debug2.c
 
 # Transformer "srcs/fichier.c" en "obj/fichier.o"
 OBJS = $(SRCS:srcs/%.c=obj/%.o)

@@ -6,30 +6,30 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:48:55 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 20:09:23 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 20:20:49 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
 // get the color of the pixel inside the texture
-int32_t get_texture_color(mlx_texture_t *texture, int texX, int texY)
+int32_t	get_texture_color(mlx_texture_t *texture, int texX, int texY)
 {
-	uint8_t *pixels;
-	int pixel_index;
+	uint8_t	*pixels;
+	int		pixel_index;
 
 	if (!texture || !texture->pixels)
-		return 0;
+		return (0);
 	// Vérification des limites de la texture
 	if ((uint32_t)texX >= texture->width || (uint32_t)texY >= texture->height)
-		return 0;
+		return (0);
 	// Calcul de l'index correct (4 canaux par pixel : RGBA)
 	pixel_index = (texY * texture->width + texX) * 4;
 	pixels = texture->pixels;
-	return (pixels[pixel_index] << 24) |
-			(pixels[pixel_index + 1] << 16) |
-			(pixels[pixel_index + 2] << 8) |
-			pixels[pixel_index + 3];
+	return ((pixels[pixel_index] << 24)
+		| (pixels[pixel_index + 1] << 16)
+		| (pixels[pixel_index + 2] << 8)
+		| pixels[pixel_index + 3]);
 }
 
 // get the starting point of the drawing and the end point

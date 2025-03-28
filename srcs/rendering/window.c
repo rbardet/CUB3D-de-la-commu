@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:48:34 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 19:38:49 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 20:14:36 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ static void	handle_move(void *param)
  */
 void	open_window(t_cub *cub)
 {
-	cub->img_ptr = mlx_new_image(cub->init_ptr, cub->win_width, cub->win_height);
+	cub->img_ptr = mlx_new_image(cub->init_ptr,
+			cub->win_width, cub->win_height);
 	if (!cub->img_ptr)
 	{
 		free_struct(cub);
