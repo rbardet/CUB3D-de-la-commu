@@ -6,7 +6,7 @@
 #    By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/28 17:17:36 by rbardet-          #+#    #+#              #
-#    Updated: 2025/03/28 20:23:12 by rbardet-         ###   ########.fr        #
+#    Updated: 2025/03/28 21:23:08 by rbardet-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,6 @@ SRCS = srcs/main.c \
 		srcs/utils/debug.c \
 		srcs/utils/debug2.c
 
-# Transformer "srcs/fichier.c" en "obj/fichier.o"
 OBJS = $(SRCS:srcs/%.c=obj/%.o)
 
 GREEN = \033[0;32m
