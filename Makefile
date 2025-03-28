@@ -6,7 +6,7 @@
 #    By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/28 17:17:36 by rbardet-          #+#    #+#              #
-#    Updated: 2025/03/28 21:23:08 by rbardet-         ###   ########.fr        #
+#    Updated: 2025/03/28 23:55:41 by rbardet-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,10 @@ SRCS = srcs/main.c \
 		srcs/parsing/parse_utils.c \
 		srcs/rendering/minimap.c \
 		srcs/rendering/window.c \
-		srcs/rendering/movement.c \
-		srcs/rendering/rotate.c \
+		srcs/door/door.c \
+		srcs/movement/handle_movement.c \
+		srcs/movement/movement.c \
+		srcs/movement/rotate.c \
 		srcs/raycasting/draw.c \
 		srcs/raycasting/raycast.c \
 		srcs/raycasting/calculate_ray.c \

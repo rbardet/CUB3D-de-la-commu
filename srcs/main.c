@@ -6,11 +6,40 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:50:07 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/27 18:58:40 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 22:46:22 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/**
+ * @brief Free all mlx structs and exit the program.
+ * @param cub the t_cub struct containing the game state.
+ */
+void	free_struct(void *param)
+{
+	t_cub	*cub;
+
+	cub = (t_cub *)param;
+	if (cub->img_ptr)
+		mlx_delete_image(cub->init_ptr, cub->img_ptr);
+	if (cub->no_xpm)
+		mlx_delete_texture(cub->no_xpm);
+	if (cub->ea_xpm)
+		mlx_delete_texture(cub->ea_xpm);
+	if (cub->so_xpm)
+		mlx_delete_texture(cub->so_xpm);
+	if (cub->we_xpm)
+		mlx_delete_texture(cub->we_xpm);
+	if (cub->do_xpm)
+		mlx_delete_texture(cub->do_xpm);
+	if (cub->init_ptr)
+		mlx_terminate(cub->init_ptr);
+	if (cub->map)
+		free_tab(cub->map);
+	free(cub);
+	exit (0);
+}
 
 /**
  * @brief Check if the given string is a .cub file.

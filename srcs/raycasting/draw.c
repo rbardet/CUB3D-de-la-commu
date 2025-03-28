@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:08:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 21:27:34 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 22:43:29 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 // get the index of the texture that will be drawn on screen
 static mlx_texture_t	*get_wall_text(t_ray ray, t_cub *cub)
 {
-	if (ray.side == 1 && ray.ray_dir_y < 0)
+	if (cub->map[ray.map_y][ray.map_x] == 'D')
+		return (cub->do_xpm);
+	else if (ray.side == 1 && ray.ray_dir_y < 0)
 		return (cub->no_xpm);
 	else if (ray.side == 1 && ray.ray_dir_y > 0)
 		return (cub->so_xpm);

@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 22:51:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 20:15:18 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 22:45:00 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_bool	check_collision(t_cub *cub, double x, double y)
 {
-	if (cub->map[(int)y][(int)x] == '1')
+	if (cub->map[(int)y][(int)x] == '1' || cub->map[(int)y][(int)x] == 'D')
 		return (FALSE);
 	return (TRUE);
 }

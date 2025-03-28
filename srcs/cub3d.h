@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 20:24:14 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 23:55:28 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,22 @@ t_bool			is_cub(char *map);
 t_cub			*parse_struct(char *map);
 t_player		init_player_struct(t_cub *cub, t_player player);
 
+//movement
+void			handle_move(void *param);
+t_bool			is_valid_move(t_cub *cub);
+t_bool			move_front(t_cub *cub);
+t_bool			move_back(t_cub *cub);
+t_bool			move_left(t_cub *cub);
+t_bool			move_right(t_cub *cub);
+t_bool			rotate_right(t_cub *cub);
+
+//door
+t_bool			open_door(t_cub *cub);
+t_bool			is_next_to_door(t_cub *cub);
+void			handle_door(mlx_key_data_t key, void *param);
+
 // render
+t_ray			perform_dda(t_cub *cub, t_ray ray, t_bool is_open);
 void			draw_wall(t_cub *cub, int x, t_ray ray);
 void			open_window(t_cub *cub);
 int				minimap(t_cub *cub);
@@ -154,11 +169,6 @@ t_ray			ray_dist_y(t_cub *cub, t_ray ray);
 t_ray			init_ray(t_cub *cub, int x);
 void			raycast(t_cub *cub);
 t_bool			check_collision(t_cub *cub, double x, double y);
-t_bool			move_front(t_cub *cub);
-t_bool			move_back(t_cub *cub);
-t_bool			move_left(t_cub *cub);
-t_bool			move_right(t_cub *cub);
-t_bool			rotate_right(t_cub *cub);
 t_bool			rotate_left(t_cub *cub);
 int32_t			get_texture_color(mlx_texture_t *texture,
 					int texX, int texY);
