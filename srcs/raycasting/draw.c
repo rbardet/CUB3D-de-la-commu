@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:08:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 18:15:21 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 20:07:35 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,6 @@ void draw_wall(t_cub *cub, int x, t_ray ray)
 
 		// Calculer la couleur du pixel à partir de la texture
 		draw.color = get_texture_color(texture, draw.tex_x, draw.tex_y);
-
-		// Assombrir les murs Nord et Sud (en fonction de la direction)
-		if (ray.side == 1) // Si c'est un mur nord/sud (selon les calculs raycast)
-			draw.color = (draw.color >> 1) & 8355711;
-
 		// Dessiner le pixel
 		mlx_put_pixel(cub->img_ptr, x, y, draw.color);
 		y++;

@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 22:51:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 20:03:47 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 20:04:37 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_bool	move_front(t_cub *cub)
 		cub->player.pos_y = tmp_y;
 	else
 		move = TRUE;
-
 	return (move);
 }
 
