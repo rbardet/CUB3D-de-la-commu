@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:25:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/27 22:23:22 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 14:34:23 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ t_bool	check_base(char **tab)
 	return (TRUE);
 }
 
+// copy the playable part of the map and verify if its conform
+// to the subject
 char	**copy_and_check_map(t_cub *cub)
 {
 	char	**map;
 
-	cub->img = NULL;
 	map = copy_tab(cub->map + 7);
 	if (!map)
 		return (NULL);
@@ -56,4 +57,30 @@ char	**copy_and_check_map(t_cub *cub)
 	if (!check_base(map))
 		return (free_tab(map), NULL);
 	return (map);
+}
+
+// put all the pointer inside the struct at NULL
+t_cub	*init_struct(void)
+{
+	t_cub	*cub;
+
+	cub = malloc(sizeof(t_cub));
+	if (!cub)
+	{
+		ft_putstr_fd("Error\nFailed to init struct\n", 2);
+		return (NULL);
+	}
+	cub->g_height = GRAPH_HEIGHT;
+	cub->g_width = GRAPH_WIDTH;
+	cub->win_height = WIN_HEIGHT;
+	cub->win_width = WIN_WIDTH;
+	cub->no_xpm = NULL;
+	cub->so_xpm = NULL;
+	cub->we_xpm = NULL;
+	cub->ea_xpm = NULL;
+	cub->do_xpm = NULL;
+	cub->init_ptr = NULL;
+	cub->img_ptr = NULL;
+	cub->map = NULL;
+	return (cub);
 }

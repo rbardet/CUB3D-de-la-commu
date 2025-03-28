@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 22:51:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/27 16:52:49 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:11:33 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	move_frontback(t_cub *cub, int key)
 
 	tmp_x = cub->player.pos_x;
 	tmp_y = cub->player.pos_y;
-	if (key == XK_w)
+	if (key == MLX_KEY_W)
 	{
 		cub->player.pos_x += cub->player.dir_x * MOVE_SPEED;
 		cub->player.pos_y += cub->player.dir_y * MOVE_SPEED;
 	}
-	else if (key == XK_s)
+	else if (key == MLX_KEY_S)
 	{
 		cub->player.pos_x -= cub->player.dir_x * MOVE_SPEED;
 		cub->player.pos_y -= cub->player.dir_y * MOVE_SPEED;
@@ -52,12 +52,12 @@ void	move_side(t_cub *cub, int key)
 
 	tmp_x = cub->player.pos_x;
 	tmp_y = cub->player.pos_y;
-	if (key == XK_a)
+	if (key == MLX_KEY_A)
 	{
 		cub->player.pos_x += cub->player.dir_y * MOVE_SPEED;
 		cub->player.pos_y += cub->player.dir_x * MOVE_SPEED;
 	}
-	else if (key == XK_d)
+	else if (key == MLX_KEY_D)
 	{
 		cub->player.pos_x -= cub->player.dir_y * MOVE_SPEED;
 		cub->player.pos_y -= cub->player.dir_x * MOVE_SPEED;

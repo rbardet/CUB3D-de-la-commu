@@ -1,0 +1,3 @@
+--keep-debuginfo=yes
+--leak-check=full
+--suppressions=.mlx_suppressed

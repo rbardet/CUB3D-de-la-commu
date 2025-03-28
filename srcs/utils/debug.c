@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 23:55:36 by hdelacou          #+#    #+#             */
-/*   Updated: 2025/03/27 00:03:36 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/28 14:03:13 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	print_window_info(t_cub *cub)
 	printf("\n\033[1;34m[Window Info]\033[0m\n");
 	printf("Window Size: %dx%d\n", cub->win_width, cub->win_height);
 	printf("MLX Init Ptr: %p\n", cub->init_ptr);
-	printf("Window Ptr: %p\n", cub->win_ptr);
 }
 
 void	print_textures_info(t_cub *cub)

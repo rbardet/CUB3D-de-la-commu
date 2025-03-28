@@ -6,14 +6,14 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/27 21:46:12 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 14:57:43 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include "../libft/libft.h"
-#include "../minilibx/mlx.h"
+#include "../MLX42/include/MLX42/MLX42.h"
 #include <X11/X.h>
 #include <X11/keysym.h>
 #include <fcntl.h>
@@ -85,41 +85,36 @@ typedef struct s_ray
 
 typedef struct s_img
 {
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}			t_img;
+	mlx_texture_t *texture;
+	int bpp;
+	int line_len;
+} 				t_img;
 
 typedef struct s_cub
 {
-	int			win_height;
-	int			win_width;
-	int			g_height;
-	int			g_width;
-	void		*no_xpm;
-	void		*so_xpm;
-	void		*we_xpm;
-	void		*ea_xpm;
-	void		*do_xpm;
-	void		*init_ptr;
-	void		*win_ptr;
-	void		*img_ptr;
-	char		spawn_view;
-	t_rgb		floor;
-	t_rgb		ceil;
-	t_player	player;
-	t_img		**img;
-	char		**map;
-	t_ray		raycast;
+	int				win_height;
+	int				win_width;
+	int				g_height;
+	int				g_width;
+	mlx_texture_t	*no_xpm;
+	mlx_texture_t	*so_xpm;
+	mlx_texture_t	*we_xpm;
+	mlx_texture_t	*ea_xpm;
+	mlx_texture_t	*do_xpm;
+	mlx_t			*init_ptr;
+	mlx_image_t		*img_ptr;
+	char			spawn_view;
+	t_rgb			floor;
+	t_rgb			ceil;
+	t_player		player;
+	char			**map;
 }				t_cub;
 
 // avoid leak
-void			free_img(t_img **img);
-int				free_struct(t_cub *cub);
+void			free_struct(void *param);
 
 // parsing
+t_cub			*init_struct(void);
 char			**copy_and_check_map(t_cub *cub);
 int				find_max_len(char **map);
 int				skip_space(char *line, int i);
@@ -139,24 +134,20 @@ t_cub			*parse_struct(char *map);
 t_player		init_player_struct(t_cub *cub, t_player player);
 
 // render
-void			draw_wall(t_cub *cub, int x);
-void			load_texture(t_cub *cub);
+void			draw_wall(t_cub *cub, int x, t_ray ray);
 void			open_window(t_cub *cub);
-int				handle_keypress(int key, t_cub *cub);
 int				minimap(t_cub *cub);
 void			render_minimap(t_cub *cub);
-void			get_draw_size(t_cub *cub);
-void			ray_dist_x(t_cub *cub);
-void			ray_dist_y(t_cub *cub);
-void			init_ray(t_cub *cub, int x);
-void			calculate_wall_heigh(t_cub *cub);
+t_ray			ray_dist_x(t_cub *cub, t_ray ray);
+t_ray			ray_dist_y(t_cub *cub, t_ray ray);
+t_ray			init_ray(t_cub *cub, int x);
 void			raycast(t_cub *cub);
 t_bool			check_collision(t_cub *cub, double x, double y);
 void			move_frontback(t_cub *cub, int key);
 void			move_side(t_cub *cub, int key);
 void			rotate_right(t_cub *cub);
 void			rotate_left(t_cub *cub);
-void			draw_vertical_line(t_cub *cub, int x);
+void			draw_vertical_line(t_cub *cub, int x, t_ray ray);
 void			draw_ceilling(t_cub *cub);
 void			draw_floor(t_cub *cub);
 

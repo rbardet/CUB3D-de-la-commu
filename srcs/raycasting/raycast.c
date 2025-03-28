@@ -6,72 +6,84 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:48:55 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/27 22:29:23 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:34:45 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+// get the starting point of the drawing and the end point
+static t_ray	get_draw_size(t_ray ray)
+{
+	ray.draw_start = -ray.line_height / 2 + WIN_HEIGHT / 2;
+	if (ray.draw_start < 0)
+		ray.draw_start = 0;
+	ray.draw_end = ray.line_height / 2 + WIN_HEIGHT / 2;
+	if (ray.draw_end >= WIN_HEIGHT)
+		ray.draw_end = WIN_HEIGHT - 1;
+	return(ray);
+}
+
 // performm dda by advdancing  in both direction of the map
 // if a wall is hit , the dda stop and we have the distance of the ray
-void	perform_dda(t_cub *cub)
+static t_ray	perform_dda(t_cub *cub, t_ray ray)
 {
 	int	hit;
 
 	hit = 0;
 	while (hit == 0)
 	{
-		if (cub->raycast.map_x < 0
-			|| cub->raycast.map_x >= cub->player.map_width
-			|| cub->raycast.map_y < 0
-			|| cub->raycast.map_y >= cub->player.map_height)
+		if (ray.map_x < 0
+			|| ray.map_x >= cub->player.map_width || ray.map_y < 0
+			|| ray.map_y >= cub->player.map_height)
 			break ;
-		if (cub->raycast.side_dist_x < cub->raycast.side_dist_y)
+		if (ray.side_dist_x < ray.side_dist_y)
 		{
-			cub->raycast.side_dist_x += cub->raycast.delta_dist_x;
-			cub->raycast.map_x += cub->raycast.step_x;
-			cub->raycast.side = 0;
+			ray.side_dist_x += ray.delta_dist_x;
+			ray.map_x += ray.step_x;
+			ray.side = 0;
 		}
 		else
 		{
-			cub->raycast.side_dist_y += cub->raycast.delta_dist_y;
-			cub->raycast.map_y += cub->raycast.step_y;
-			cub->raycast.side = 1;
+			ray.side_dist_y += ray.delta_dist_y;
+			ray.map_y += ray.step_y;
+			ray.side = 1;
 		}
-		if (cub->map[cub->raycast.map_y][cub->raycast.map_x] == '1')
+		if (cub->map[ray.map_y][ray.map_x] == '1')
 			hit = 1;
 	}
+	return(ray);
 }
 
 // calculate the height of the wall that will be drawn
-void	calculate_wall_heigh(t_cub *cub)
+static t_ray	calculate_wall_heigh(t_ray ray)
 {
-	if (cub->raycast.side == 0 && cub->raycast.ray_dir_x != 0)
-		cub->raycast.perp_wall_dist = (cub->raycast.side_dist_x
-				- cub->raycast.delta_dist_x);
-	else if (cub->raycast.ray_dir_y != 0)
-		cub->raycast.perp_wall_dist = (cub->raycast.side_dist_y
-				- cub->raycast.delta_dist_y);
-	cub->raycast.line_height = (int)(WIN_HEIGHT / cub->raycast.perp_wall_dist);
+	if (ray.side == 0 && ray.ray_dir_x != 0)
+		ray.perp_wall_dist = (ray.side_dist_x - ray.delta_dist_x);
+	else if (ray.ray_dir_y != 0)
+		ray.perp_wall_dist = (ray.side_dist_y - ray.delta_dist_y);
+	ray.line_height = (int)(WIN_HEIGHT / ray.perp_wall_dist);
+	return(ray);
 }
 
 // raycasting algorithm go from 0 to WIN_WIDTH
 void	raycast(t_cub *cub)
 {
-	int	x;
+	int		x;
+	t_ray	ray;
 
 	draw_ceilling(cub);
 	draw_floor(cub);
 	x = 0;
-;	while (x < WIN_WIDTH)
+	while (x < WIN_WIDTH)
 	{
-		init_ray(cub, x);
-		ray_dist_x(cub);
-		ray_dist_y(cub);
-		perform_dda(cub);
-		calculate_wall_heigh(cub);
-		get_draw_size(cub);
-		draw_wall(cub, x);
+		ray = init_ray(cub, x);
+		ray = ray_dist_x(cub, ray);
+		ray = ray_dist_y(cub, ray);
+		ray = perform_dda(cub, ray);
+		ray = calculate_wall_heigh(ray);
+		ray = get_draw_size(ray);
+		draw_wall(cub, x, ray);
 		x++;
 	}
 }

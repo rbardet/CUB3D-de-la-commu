@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/27 21:26:36 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 14:34:56 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,16 @@ void	get_xpm(t_cub *cub)
 {
 	int		i;
 
-	cub->g_height = GRAPH_HEIGHT;
-	cub->g_width = GRAPH_WIDTH;
-	cub->win_height = WIN_HEIGHT;
-	cub->win_width = WIN_WIDTH;
-	cub->win_ptr = NULL;
 	i = skip_space(cub->map[0], 3);
-	cub->no_xpm = mlx_xpm_file_to_image(cub->init_ptr, "./graphic/NO.xpm",
-			&cub->g_width, &cub->g_height);
+	cub->no_xpm = mlx_load_png("./graphic/NO.png");
 	i = skip_space(cub->map[1], 3);
-	cub->so_xpm = mlx_xpm_file_to_image(cub->init_ptr, "./graphic/SO.xpm",
-			&cub->g_width, &cub->g_height);
+	cub->so_xpm = mlx_load_png("./graphic/SO.png");
 	i = skip_space(cub->map[2], 3);
-	cub->we_xpm = mlx_xpm_file_to_image(cub->init_ptr, "./graphic/WE.xpm",
-			&cub->g_width, &cub->g_height);
+	cub->we_xpm = mlx_load_png("./graphic/WE.png");
 	i = skip_space(cub->map[3], 3);
-	cub->ea_xpm = mlx_xpm_file_to_image(cub->init_ptr, "./graphic/EA.xpm",
-			&cub->g_width, &cub->g_height);
+	cub->ea_xpm = mlx_load_png("./graphic/EA.png");
 	i = skip_space(cub->map[4], 3);
-	cub->do_xpm = mlx_xpm_file_to_image(cub->init_ptr, "./graphic/DO.xpm",
-			&cub->g_width, &cub->g_height);
+	cub->do_xpm = mlx_load_png("./graphic/DO.png");
 }
 
 // fill the struct with all the data for the rendering
@@ -139,7 +129,7 @@ t_cub	*parse_struct(char *argv)
 {
 	t_cub	*cub;
 
-	cub = malloc(sizeof(t_cub));
+	cub = init_struct();
 	if (!cub)
 		return (NULL);
 	cub->map = copy_map(argv);
@@ -150,11 +140,11 @@ t_cub	*parse_struct(char *argv)
 		ft_putstr_fd("Error\nThe map is not valid\n", 2);
 		return (free_tab(cub->map), free(cub), NULL);
 	}
-	cub->init_ptr = mlx_init();
+	cub->init_ptr = mlx_init(cub->win_width, cub->win_height, "CUB3D", FALSE);
 	if (!cub->init_ptr)
 	{
-		ft_putstr_fd("Error\nCouldn't init the window pointer\n", 2);
-		return (NULL);
+		ft_putstr_fd("Error\nmlx_init failed\n", 2);
+		return (free_struct(cub), NULL);
 	}
 	cub = fill_struct(cub);
 	if (!cub)
