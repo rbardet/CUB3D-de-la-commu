@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 17:07:23 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:53:42 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ t_rgb	get_rgb(char **rgb_tmp)
 {
 	t_rgb	rgb;
 	int		i;
-	int		tmp;
+	int32_t	tmp;
 	char	*trim;
 
 	i = skip_space(rgb_tmp[0], 2);
-	tmp = ft_atoi(rgb_tmp[0] + i);
+	tmp = (int32_t)ft_atoi(rgb_tmp[0] + i);
 	trim = ft_strtrim(rgb_tmp[2], "\n");
 	if (tmp < 0 || tmp > 255 || !ft_isdigital(rgb_tmp[0] + i))
 		rgb.red = -1;
 	else
 		rgb.red = tmp;
-	tmp = ft_atoi(rgb_tmp[1]);
+	tmp = (int32_t)ft_atoi(rgb_tmp[1]);
 	if (tmp < 0 || tmp > 255 || !ft_isdigital(rgb_tmp[1]))
 		rgb.green = -1;
 	else
 		rgb.green = tmp;
-	tmp = ft_atoi(rgb_tmp[2]);
+	tmp = (int32_t)ft_atoi(rgb_tmp[2]);
 	if (tmp < 0 || tmp > 255 || !ft_isdigital(trim))
 		rgb.blue = -1;
 	else

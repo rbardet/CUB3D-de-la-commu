@@ -6,31 +6,35 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:48:55 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 16:02:53 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 18:21:59 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
 // get the color of the pixel inside the texture
-int	get_texture_color(t_img *texture, int texX, int texY)
+int32_t get_texture_color(mlx_texture_t *texture, int texX, int texY)
 {
-	int				pixel_id;
-	unsigned char	*pixel;
-	int				color;
+	uint32_t *pixels;
+	uint32_t color;
+	int pixel_id;
 
-	if (!texture || !texture->texture || !texture->texture->pixels)
-		return (0);
+	if (!texture || !texture->pixels)
+		return 0;
+
 	// Vérifier que les coordonnées sont dans les limites
-	if (texX < 0 || texX >= (int)texture->texture->width
-		|| texY < 0 || texY >= (int)texture->texture->height)
-		return (0);
+	if ((uint32_t)texX >= texture->width || (uint32_t)texY >= texture->height || texX < 0 || texY < 0)
+		return 0;
+
 	// Calculer l'indice du pixel dans le tableau des pixels
-	pixel_id = (texY * texture->texture->width + texX) * 4; // 4 octets par pixel (RGBA)
-	pixel = texture->texture->pixels + pixel_id;
-	// Récupérer la couleur en format RGB (ignorer alpha)
-	color = (pixel[0] << 16) | (pixel[1] << 8) | pixel[2];
-	return (color);
+	pixel_id = texY * texture->width + texX; // Pas besoin de multiplier par 4, puisque chaque pixel est un uint32_t
+	pixels = (uint32_t *)texture->pixels;    // Assurer que pixels est interprété comme un tableau d'entiers 32 bits
+
+	// Récupérer la couleur en format RGBA (directement dans un uint32_t)
+	color = pixels[pixel_id];
+
+	// Affichage pour déboguer (si nécessaire)
+	return color;
 }
 
 // get the starting point of the drawing and the end point

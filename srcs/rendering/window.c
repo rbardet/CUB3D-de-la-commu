@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:48:34 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 15:59:36 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 19:38:49 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,40 @@ void	free_struct(void *param)
  * Handles all the key press event.
  * @param key		The key that was pressed.
  * @param cub		The main struct of the project.
- * @return			Always 0.
+ * @return			return TRUE if a movement is detected
 */
-static void	handle_keypress(mlx_key_data_t keydata, void *param)
+static t_bool	is_valid_move(t_cub *cub)
+{
+	t_bool	move;
+
+	move = false;
+	if (mlx_is_key_down(cub->init_ptr, MLX_KEY_W))
+		move |= move_front(cub);
+	if (mlx_is_key_down(cub->init_ptr, MLX_KEY_S))
+		move |= move_back(cub);
+	if (mlx_is_key_down(cub->init_ptr, MLX_KEY_A))
+		move |= move_left(cub);
+	if (mlx_is_key_down(cub->init_ptr, MLX_KEY_D))
+		move |= move_right(cub);
+	if (mlx_is_key_down(cub->init_ptr, MLX_KEY_LEFT))
+		move |= rotate_left(cub);
+	if (mlx_is_key_down(cub->init_ptr, MLX_KEY_RIGHT))
+		move |= rotate_right(cub);
+	return (move);
+}
+
+static void	handle_move(void *param)
 {
 	t_cub	*cub;
+	bool	move;
 
+	move = false;
 	cub = (t_cub *)param;
-	if (keydata.key == MLX_KEY_ESCAPE)
+	if (mlx_is_key_down(cub->init_ptr, MLX_KEY_ESCAPE))
 		free_struct(cub);
-	else if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_S)
-		move_frontback(cub, keydata.key);
-	else if (keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_D)
-		move_side(cub, keydata.key);
-	else if (keydata.key == MLX_KEY_LEFT)
-		rotate_left(cub);
-	else if (keydata.key == MLX_KEY_RIGHT)
-		rotate_right(cub);
+	move |= is_valid_move(cub);
+	if (move)
+		raycast(cub);
 }
 
 /**
@@ -70,8 +87,7 @@ static void	handle_keypress(mlx_key_data_t keydata, void *param)
  */
 void	open_window(t_cub *cub)
 {
-	cub->img_ptr = mlx_new_image(cub->init_ptr,
-			cub->win_width, cub->win_height);
+	cub->img_ptr = mlx_new_image(cub->init_ptr, cub->win_width, cub->win_height);
 	if (!cub->img_ptr)
 	{
 		free_struct(cub);
@@ -79,7 +95,7 @@ void	open_window(t_cub *cub)
 	}
 	mlx_image_to_window(cub->init_ptr, cub->img_ptr, 0, 0);
 	raycast(cub);
-	mlx_key_hook(cub->init_ptr, handle_keypress, cub);
+	mlx_loop_hook(cub->init_ptr, handle_move, cub);
 	mlx_close_hook(cub->init_ptr, free_struct, cub);
 	mlx_loop(cub->init_ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 17:06:40 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 19:32:20 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ typedef int		t_bool;
 
 typedef struct s_rgb
 {
-	int			red;
-	int			green;
-	int			blue;
+	int32_t		red;
+	int32_t		green;
+	int32_t		blue;
 }				t_rgb;
 
 typedef struct s_draw
@@ -154,11 +154,13 @@ t_ray			ray_dist_y(t_cub *cub, t_ray ray);
 t_ray			init_ray(t_cub *cub, int x);
 void			raycast(t_cub *cub);
 t_bool			check_collision(t_cub *cub, double x, double y);
-void			move_frontback(t_cub *cub, int key);
-void			move_side(t_cub *cub, int key);
-void			rotate_right(t_cub *cub);
-void			rotate_left(t_cub *cub);
-int				get_texture_color(t_img *texture, int texX, int texY);
+t_bool			move_front(t_cub *cub);
+t_bool			move_back(t_cub *cub);
+t_bool			move_left(t_cub *cub);
+t_bool			move_right(t_cub *cub);
+t_bool			rotate_right(t_cub *cub);
+t_bool			rotate_left(t_cub *cub);
+int32_t 		get_texture_color(mlx_texture_t *texture, int texX, int texY);
 void			draw_ceilling(t_cub *cub);
 void			draw_floor(t_cub *cub);
 
