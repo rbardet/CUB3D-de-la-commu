@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 15:56:39 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:07:23 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	get_xpm(t_cub *cub)
 	cub->ea_xpm = mlx_load_png("./graphic/EA.png");
 	i = skip_space(cub->map[4], 3);
 	cub->do_xpm = mlx_load_png("./graphic/DO.png");
+	(void)i;
 }
 
 // fill the struct with all the data for the rendering

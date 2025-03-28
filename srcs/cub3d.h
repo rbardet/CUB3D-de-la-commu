@@ -6,13 +6,13 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 16:25:02 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:06:40 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "../libft/libft/libft.h"
+#include "../libft/libft.h"
 #include "../MLX42/include/MLX42/MLX42.h"
 #include <X11/X.h>
 #include <X11/keysym.h>
