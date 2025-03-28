@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:01:57 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 12:20:58 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 16:19:19 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ t_ray	ray_dist_y(t_cub *cub, t_ray ray)
 	else
 	{
 		ray.step_y = 1;
-		ray.side_dist_y = (ray.map_y + 1.0 - cub->player.pos_y) * ray.delta_dist_y;
+		ray.side_dist_y = (ray.map_y + 1.0 - cub->player.pos_y)
+			* ray.delta_dist_y;
 	}
-	return(ray);
+	return (ray);
 }
 
 // find the distance that the ray will travell in X
@@ -39,9 +40,10 @@ t_ray	ray_dist_x(t_cub *cub, t_ray ray)
 	else
 	{
 		ray.step_x = 1;
-		ray.side_dist_x = (ray.map_x + 1.0 - cub->player.pos_x) * ray.delta_dist_x;
+		ray.side_dist_x = (ray.map_x + 1.0 - cub->player.pos_x)
+			* ray.delta_dist_x;
 	}
-	return(ray);
+	return (ray);
 }
 
 // init the value for the calculation of the ray X

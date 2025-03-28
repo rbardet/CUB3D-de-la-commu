@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:25:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 14:34:23 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:56:47 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_bool	check_base(char **tab)
 	while (tab[++i])
 	{
 		j = 0;
-		while (tab[i][j])
+		while (tab[i][++j])
 		{
 			b = 0;
 			while (base[b] != '\0')
@@ -37,7 +37,6 @@ t_bool	check_base(char **tab)
 			}
 			if (base[b] == '\0')
 				return (FALSE);
-			j++;
 		}
 		i++;
 	}
@@ -55,7 +54,10 @@ char	**copy_and_check_map(t_cub *cub)
 		return (NULL);
 	free_tab(cub->map);
 	if (!check_base(map))
+	{
+		ft_putstr_fd("Error\nMap is not valid\n", 2);
 		return (free_tab(map), NULL);
+	}
 	return (map);
 }
 

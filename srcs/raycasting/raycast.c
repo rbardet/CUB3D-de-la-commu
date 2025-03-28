@@ -6,11 +6,32 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:48:55 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 13:34:45 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 16:02:53 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+// get the color of the pixel inside the texture
+int	get_texture_color(t_img *texture, int texX, int texY)
+{
+	int				pixel_id;
+	unsigned char	*pixel;
+	int				color;
+
+	if (!texture || !texture->texture || !texture->texture->pixels)
+		return (0);
+	// Vérifier que les coordonnées sont dans les limites
+	if (texX < 0 || texX >= (int)texture->texture->width
+		|| texY < 0 || texY >= (int)texture->texture->height)
+		return (0);
+	// Calculer l'indice du pixel dans le tableau des pixels
+	pixel_id = (texY * texture->texture->width + texX) * 4; // 4 octets par pixel (RGBA)
+	pixel = texture->texture->pixels + pixel_id;
+	// Récupérer la couleur en format RGB (ignorer alpha)
+	color = (pixel[0] << 16) | (pixel[1] << 8) | pixel[2];
+	return (color);
+}
 
 // get the starting point of the drawing and the end point
 static t_ray	get_draw_size(t_ray ray)
@@ -21,7 +42,7 @@ static t_ray	get_draw_size(t_ray ray)
 	ray.draw_end = ray.line_height / 2 + WIN_HEIGHT / 2;
 	if (ray.draw_end >= WIN_HEIGHT)
 		ray.draw_end = WIN_HEIGHT - 1;
-	return(ray);
+	return (ray);
 }
 
 // performm dda by advdancing  in both direction of the map
@@ -52,7 +73,7 @@ static t_ray	perform_dda(t_cub *cub, t_ray ray)
 		if (cub->map[ray.map_y][ray.map_x] == '1')
 			hit = 1;
 	}
-	return(ray);
+	return (ray);
 }
 
 // calculate the height of the wall that will be drawn
@@ -63,7 +84,7 @@ static t_ray	calculate_wall_heigh(t_ray ray)
 	else if (ray.ray_dir_y != 0)
 		ray.perp_wall_dist = (ray.side_dist_y - ray.delta_dist_y);
 	ray.line_height = (int)(WIN_HEIGHT / ray.perp_wall_dist);
-	return(ray);
+	return (ray);
 }
 
 // raycasting algorithm go from 0 to WIN_WIDTH

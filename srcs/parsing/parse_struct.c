@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 14:34:56 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:56:39 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,7 @@ t_cub	*fill_struct(t_cub *cub)
 	free_tab(rgb_tmp);
 	cub->map = copy_and_check_map(cub);
 	if (!cub->map)
-	{
-		ft_putstr_fd("Error\nMap is not valid\n", 2);
-		return(free_struct(cub), NULL);
-	}
+		return (free_struct(cub), NULL);
 	if (cub->floor.red == -1 || cub->floor.green == -1
 		|| cub->floor.blue == -1 || cub->ceil.red == -1
 		|| cub->ceil.green == -1 || cub->ceil.blue == -1)

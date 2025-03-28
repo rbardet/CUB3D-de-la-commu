@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:48:34 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 15:24:08 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:59:36 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
  */
 void	free_struct(void *param)
 {
-	t_cub *cub = (t_cub *)param;
+	t_cub	*cub;
+
+	cub = (t_cub *)param;
 	if (cub->img_ptr)
 		mlx_delete_image(cub->init_ptr, cub->img_ptr);
 	if (cub->no_xpm)
@@ -39,7 +41,6 @@ void	free_struct(void *param)
 	exit (0);
 }
 
-
 /**
  * Handles all the key press event.
  * @param key		The key that was pressed.
@@ -48,7 +49,9 @@ void	free_struct(void *param)
 */
 static void	handle_keypress(mlx_key_data_t keydata, void *param)
 {
-	t_cub *cub = (t_cub *)param;
+	t_cub	*cub;
+
+	cub = (t_cub *)param;
 	if (keydata.key == MLX_KEY_ESCAPE)
 		free_struct(cub);
 	else if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_S)
@@ -61,19 +64,18 @@ static void	handle_keypress(mlx_key_data_t keydata, void *param)
 		rotate_right(cub);
 }
 
-
 /**
  * @brief Open a window and start the mlx event loop.
  * @param cub the t_cub struct containing the game state.
  */
-void open_window(t_cub *cub)
+void	open_window(t_cub *cub)
 {
-	// Création de l'image avec MLX42
-	cub->img_ptr = mlx_new_image(cub->init_ptr, cub->win_width, cub->win_height);
+	cub->img_ptr = mlx_new_image(cub->init_ptr,
+			cub->win_width, cub->win_height);
 	if (!cub->img_ptr)
 	{
 		free_struct(cub);
-		return;
+		return ;
 	}
 	mlx_image_to_window(cub->init_ptr, cub->img_ptr, 0, 0);
 	raycast(cub);
@@ -81,4 +83,3 @@ void open_window(t_cub *cub)
 	mlx_close_hook(cub->init_ptr, free_struct, cub);
 	mlx_loop(cub->init_ptr);
 }
-

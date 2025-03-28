@@ -6,13 +6,13 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 14:57:43 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 16:25:02 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "../libft/libft.h"
+#include "../libft/libft/libft.h"
 #include "../MLX42/include/MLX42/MLX42.h"
 #include <X11/X.h>
 #include <X11/keysym.h>
@@ -48,6 +48,17 @@ typedef struct s_rgb
 	int			green;
 	int			blue;
 }				t_rgb;
+
+typedef struct s_draw
+{
+	int			tex_num;
+	double		wall_x;
+	int			tex_x;
+	int			tex_y;
+	double		step;
+	double		tex_pos;
+	int			color;
+}				t_draw;
 
 typedef struct s_player
 {
@@ -85,10 +96,10 @@ typedef struct s_ray
 
 typedef struct s_img
 {
-	mlx_texture_t *texture;
-	int bpp;
-	int line_len;
-} 				t_img;
+	mlx_texture_t	*texture;
+	int				bpp;
+	int				line_len;
+}				t_img;
 
 typedef struct s_cub
 {
@@ -147,7 +158,7 @@ void			move_frontback(t_cub *cub, int key);
 void			move_side(t_cub *cub, int key);
 void			rotate_right(t_cub *cub);
 void			rotate_left(t_cub *cub);
-void			draw_vertical_line(t_cub *cub, int x, t_ray ray);
+int				get_texture_color(t_img *texture, int texX, int texY);
 void			draw_ceilling(t_cub *cub);
 void			draw_floor(t_cub *cub);
 
