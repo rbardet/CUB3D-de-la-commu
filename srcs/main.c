@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: throbert <throbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:50:07 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/29 00:19:40 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/29 00:22:18 by throbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_bool	is_cub(char *argv)
 		return (TRUE);
 	else
 	{
-		ft_putstr_fd("Error\nThe map is not a .cub\n", 2);
+		ft_putstr_fd("Error\nThe map is not a .cub", 2);
 		return (FALSE);
 	}
 }
