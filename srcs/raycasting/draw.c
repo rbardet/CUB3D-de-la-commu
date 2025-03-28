@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:08:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 20:21:49 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/28 20:28:30 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void draw_wall(t_cub *cub, int x, t_ray ray)
 	while (y < ray.draw_end)
 	{
 		// Calculer la coordonnée Y de la texture
-		draw.tex_y = (int)draw.tex_pos & (texture->height - 1);
+		draw.tex_y = (int)draw.tex_pos % (texture->height);
 		draw.tex_pos += draw.step;
 		draw.color = get_texture_color(texture, draw.tex_x, draw.tex_y);
 		mlx_put_pixel(cub->img_ptr, x, y, draw.color);
