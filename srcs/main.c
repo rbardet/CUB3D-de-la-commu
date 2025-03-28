@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: throbert <throbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:50:07 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 22:46:22 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/29 00:19:00 by throbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	main(int argc, char **argv)
 	if (cub->player.map_width == -1 || cub->player.map_height == -1)
 	{
 		free_struct(cub);
-		ft_putstr_fd("Error while calculating map size\n", 2);
+		ft_putstr_fd("Error while calculating map size", 2);
 		return (127);
 	}
 	print_struct(cub);
