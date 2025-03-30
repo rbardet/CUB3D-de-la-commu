@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: throbert <throbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:50:07 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/30 19:20:40 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/29 00:22:18 by throbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	free_struct(void *param)
 	cub = (t_cub *)param;
 	if (cub->img_ptr)
 		mlx_delete_image(cub->init_ptr, cub->img_ptr);
+	if (cub->minimap)
+		mlx_delete_image(cub->init_ptr, cub->minimap);
 	if (cub->no_xpm)
 		mlx_delete_texture(cub->no_xpm);
 	if (cub->ea_xpm)
@@ -83,8 +85,10 @@ int	find_max_len(char **map)
 }
 
 /**
- * @brief Program entry point.
- * Parses a .cub file to perform raycasting and displays it in a window.
+ * @brief Entry point of the program.
+ * The program takes one argument, a path to a .cub file.
+ * The program parse the .cub file and make a raycasting of the map.
+ * The program then launch a window with the raycasting of the map.
  * @param argc The number of argument passed to the program.
  * @param argv The argument passed to the program.
  * @return 0 if the program succeed, 127 if there is an error.

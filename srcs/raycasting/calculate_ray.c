@@ -3,21 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_ray.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:01:57 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/30 19:19:03 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/28 16:19:19 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-/**
- * @brief Calculates ray's Y distance and step direction in the map grid.
- * @param cub The game structure containing player information.
- * @param ray The raycasting structure.
- * @return The updated ray structure with calculated side_dist_y and step_y.
- */
+// find the distance that the ray will travell in Y
 t_ray	ray_dist_y(t_cub *cub, t_ray ray)
 {
 	if (ray.ray_dir_y < 0)
@@ -34,12 +29,7 @@ t_ray	ray_dist_y(t_cub *cub, t_ray ray)
 	return (ray);
 }
 
-/**
- * @brief Calculates ray's X distance and step direction in the map grid.
- * @param cub The game structure.
- * @param ray The raycasting structure.
- * @return Updated ray structure with calculated side_dist_x and step_x.
- */
+// find the distance that the ray will travell in X
 t_ray	ray_dist_x(t_cub *cub, t_ray ray)
 {
 	if (ray.ray_dir_x < 0)
@@ -56,12 +46,7 @@ t_ray	ray_dist_x(t_cub *cub, t_ray ray)
 	return (ray);
 }
 
-/**
- * @brief Initializes a ray structure for the given screen pixel.
- * @param cub The game structure containing player information.
- * @param x The screen pixel coordinate (0-799).
- * @return The initialized ray structure.
- */
+// init the value for the calculation of the ray X
 t_ray	init_ray(t_cub *cub, int x)
 {
 	t_ray	ray;

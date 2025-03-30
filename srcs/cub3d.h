@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/30 19:19:16 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/28 23:55:28 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@
 #define MOVE_SPEED 0.1
 #define ROT_SPEED 0.05
 
-#define WIN_HEIGHT 1000
-#define WIN_WIDTH 1800
-
-#define TILE 20
+#define WIN_HEIGHT 800
+#define WIN_WIDTH 1600
 
 #define GRAPH_HEIGHT 1000
 #define GRAPH_WIDTH 1000
@@ -41,6 +39,14 @@ typedef int		t_bool;
 
 #define M_PI 3.14159265358979323846
 #define FOV_ANGLE 90
+
+typedef struct s_mini
+{
+	int			start_x;
+	int			start_y;
+	int			end_x;
+	int			end_y;
+}				t_mini;
 
 typedef struct s_rgb
 {
@@ -114,6 +120,7 @@ typedef struct s_cub
 	mlx_texture_t	*do_xpm;
 	mlx_t			*init_ptr;
 	mlx_image_t		*img_ptr;
+	mlx_image_t		*minimap;
 	char			spawn_view;
 	t_rgb			floor;
 	t_rgb			ceil;
@@ -162,8 +169,7 @@ void			handle_door(mlx_key_data_t key, void *param);
 t_ray			perform_dda(t_cub *cub, t_ray ray, t_bool is_open);
 void			draw_wall(t_cub *cub, int x, t_ray ray);
 void			open_window(t_cub *cub);
-int				minimap(t_cub *cub);
-void			render_minimap(t_cub *cub);
+void			minimap(t_cub *cub);
 t_ray			ray_dist_x(t_cub *cub, t_ray ray);
 t_ray			ray_dist_y(t_cub *cub, t_ray ray);
 t_ray			init_ray(t_cub *cub, int x);
@@ -174,8 +180,6 @@ int32_t			get_texture_color(mlx_texture_t *texture,
 					int texX, int texY);
 void			draw_ceilling(t_cub *cub);
 void			draw_floor(t_cub *cub);
-
-// debug
 
 //UTILS
 

@@ -3,24 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:48:55 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/30 19:37:08 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/28 23:31:59 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-/**
- * @brief Retrieves the color of a pixel from a texture.
- * Returns the pixel color at specified coordinates within a texture as an
- * int32_t in the format 0xAABBGGRR (alpha, blue, green, red).
- * @param texture The texture to get the color from.
- * @param texX The x coordinate of the pixel in the texture.
- * @param texY The y coordinate of the pixel in the texture.
- * @return The color of the pixel as an int32_t.
- */
+// get the color of the pixel inside the texture
 int32_t	get_texture_color(mlx_texture_t *texture, int texX, int texY)
 {
 	uint8_t	*pixels;
@@ -28,8 +20,10 @@ int32_t	get_texture_color(mlx_texture_t *texture, int texX, int texY)
 
 	if (!texture || !texture->pixels)
 		return (0);
+	// Vérification des limites de la texture
 	if ((uint32_t)texX >= texture->width || (uint32_t)texY >= texture->height)
 		return (0);
+	// Calcul de l'index correct (4 canaux par pixel : RGBA)
 	pixel_index = (texY * texture->width + texX) * 4;
 	pixels = texture->pixels;
 	return ((pixels[pixel_index] << 24)
@@ -38,11 +32,7 @@ int32_t	get_texture_color(mlx_texture_t *texture, int texX, int texY)
 		| pixels[pixel_index + 3]);
 }
 
-/**
- * @brief Calculates the boundaries of a ray to be drawn.
- * @param ray The ray structure.
- * @return The ray structure with the updated draw start and end.
- */
+// get the starting point of the drawing and the end point
 static t_ray	get_draw_size(t_ray ray)
 {
 	ray.draw_start = -ray.line_height / 2 + WIN_HEIGHT / 2;
@@ -54,21 +44,18 @@ static t_ray	get_draw_size(t_ray ray)
 	return (ray);
 }
 
-/**
- * @brief Performs the DDA algorithm for a given ray.
- * @param cub The game structure.
- * @param ray The ray structure containing the ray's information.
- * @param is_open A boolean indicating whether or not the door is open.
- * @return Updated ray structure after performing the DDA algorithm.
- * The DDA algorithm is used to calculate which wall is hit by the ray. It is
- * used in the raycasting algorithm for rendering the game's 3D view.
- */
+// performm dda by advdancing  in both direction of the map
+// if a wall is hit , the dda stop and we have the distance of the ray
 t_ray	perform_dda(t_cub *cub, t_ray ray, t_bool is_open)
 {
-	while (1)
+	int	hit;
+
+	hit = 0;
+	while (hit == 0)
 	{
-		if (ray.map_x < 0 || ray.map_x >= cub->player.map_width
-			|| ray.map_y < 0 || ray.map_y >= cub->player.map_height)
+		if (ray.map_x < 0
+			|| ray.map_x >= cub->player.map_width || ray.map_y < 0
+			|| ray.map_y >= cub->player.map_height)
 			break ;
 		if (ray.side_dist_x < ray.side_dist_y)
 		{
@@ -82,20 +69,15 @@ t_ray	perform_dda(t_cub *cub, t_ray ray, t_bool is_open)
 			ray.map_y += ray.step_y;
 			ray.side = 1;
 		}
-		if (cub->map[ray.map_y][ray.map_x] == '1'
-			|| cub->map[ray.map_y][ray.map_x] == 'D'
-			|| (cub->map[ray.map_y][ray.map_x] == '2' && !is_open))
-			break ;
+		if (cub->map[ray.map_y][ray.map_x] == '1' || cub->map[ray.map_y][ray.map_x] == 'D')
+			hit = 1;
+		if (cub->map[ray.map_y][ray.map_x] == '2' && is_open == FALSE)
+			hit = 1;
 	}
 	return (ray);
 }
 
-/**
- * @brief Calculates the height of the wall to be drawn.
- * @param ray The ray structure containing the ray's information.
- * @return Updated ray structure with line height.
- * Calculates wall height for drawing based on perpendicular wall distance.
- */
+// calculate the height of the wall that will be drawn
 static t_ray	calculate_wall_heigh(t_ray ray)
 {
 	if (ray.side == 0 && ray.ray_dir_x != 0)
@@ -106,13 +88,7 @@ static t_ray	calculate_wall_heigh(t_ray ray)
 	return (ray);
 }
 
-/**
- * @brief Renders walls and floor on the screen.
- * Casts rays for each screen column, drawing walls and floor.
- * Rays advance on the map until hitting a wall; distance is calculated
- * for correct wall height rendering.
- * @param cub The game data structure.
- */
+// raycasting algorithm go from 0 to WIN_WIDTH
 void	raycast(t_cub *cub)
 {
 	int		x;
@@ -132,4 +108,5 @@ void	raycast(t_cub *cub)
 		draw_wall(cub, x, ray);
 		x++;
 	}
+	minimap(cub);
 }

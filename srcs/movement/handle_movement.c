@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   handle_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:54:36 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/30 19:22:39 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/28 23:55:10 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
 
 /**
  * Handles all the key press event.
@@ -38,11 +39,6 @@ t_bool	is_valid_move(t_cub *cub)
 	return (move);
 }
 
-/**
- * Handles the MLX loop hook, it calls the is_valid_move function
- * and raycast if a movement is detected.
- * @param param The main struct of the project.
-*/
 void	handle_move(void *param)
 {
 	t_cub	*cub;
@@ -53,6 +49,7 @@ void	handle_move(void *param)
 	if (mlx_is_key_down(cub->init_ptr, MLX_KEY_ESCAPE))
 		free_struct(cub);
 	move |= is_valid_move(cub);
+	
 	if (move)
 		raycast(cub);
 }
