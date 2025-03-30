@@ -51,7 +51,9 @@ static void	draw_minimap(t_cub *cub, t_mini mini)
 			else if (cub->map[i][j] == 'D')
 				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9, 0x0000FFFF);
 			else if (cub->map[i][j] == '2')
-			draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9, 0x00FF00FF);
+				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9, 0x00FF00FF);
+			else
+				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9, 0xFF808080);
 			j++;
 		}
 		i++;
