@@ -44,7 +44,7 @@ static void	draw_minimap(t_cub *cub, t_mini mini)
 		j = mini.start_x;
 		while (j <= mini.end_x)
 		{
-			if (cub->map[i][j] == '1')
+			if (cub->map[i][j] == '1' || cub->map[i][j] == ' ' || cub->map[i][j] == '\0')
 				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9, 0xFF808080);
 			else if (cub->map[i][j] == '0' || cub->map[i][j] == cub->spawn_view)
 				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9, 0xFFFFFFFF);
@@ -52,8 +52,6 @@ static void	draw_minimap(t_cub *cub, t_mini mini)
 				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9, 0x0000FFFF);
 			else if (cub->map[i][j] == '2')
 				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9, 0x00FF00FF);
-			else
-				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9, 0xFF808080);
 			j++;
 		}
 		i++;
