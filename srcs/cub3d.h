@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: throbert <throbert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 23:36:20 by throbert         ###   ########.fr       */
+/*   Updated: 2025/04/01 00:54:59 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,14 @@ typedef struct s_img
 	int				line_len;
 }					t_img;
 
+typedef struct s_sprite
+{
+	mlx_texture_t	*sprite1;
+	mlx_texture_t	*sprite2;
+	mlx_texture_t	*sprite3;
+	mlx_texture_t	*sprite4;
+}					t_sprite;
+
 typedef struct s_cub
 {
 	int				win_height;
@@ -135,8 +143,10 @@ typedef struct s_cub
 	mlx_texture_t	*we_xpm;
 	mlx_texture_t	*ea_xpm;
 	mlx_texture_t	*do_xpm;
+	t_sprite		*sprite;
 	mlx_t			*init_ptr;
 	mlx_image_t		*img_ptr;
+	mlx_image_t		*animate;
 	mlx_image_t		*minimap;
 	char			spawn_view;
 	t_rgb			floor;
@@ -165,24 +175,31 @@ t_cub				*parse_struct(char *map);
 t_player			init_player_struct(t_cub *cub, t_player player);
 
 // movement
+void				rotate_view(t_cub *cub, double angle);
 void				handle_move(void *param);
-t_bool				is_valid_move(t_cub *cub);
 t_bool				move_front(t_cub *cub);
 t_bool				move_back(t_cub *cub);
 t_bool				move_left(t_cub *cub);
 t_bool				move_right(t_cub *cub);
 t_bool				rotate_right(t_cub *cub);
 
-// door
+//door
 t_bool				open_door(t_cub *cub);
-t_bool				is_next_to_door(t_cub *cub);
-void				handle_door(mlx_key_data_t key, void *param);
+
+// bonus
+void				key_press(mlx_key_data_t key, void *param);
+
+// animated sprite
+void				set_default_sprite(t_cub *cub);
+void				animated_sprite(t_cub *cub);
+
+// minimap
+void				minimap(t_cub *cub);
 
 // render
 t_ray				perform_dda(t_cub *cub, t_ray ray, t_bool is_open);
 void				draw_wall(t_cub *cub, int x, t_ray ray);
 void				open_window(t_cub *cub);
-void				minimap(t_cub *cub);
 t_ray				ray_dist_x(t_cub *cub, t_ray ray);
 t_ray				ray_dist_y(t_cub *cub, t_ray ray);
 t_ray				init_ray(t_cub *cub, int x);
@@ -208,4 +225,3 @@ void				print_player_info(t_cub *cub);
 void				print_map_info(t_cub *cub);
 void				print_struct(t_cub *cub);
 
-void				rotate_view(t_cub *cub, double angle);

@@ -3,29 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:49:51 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 22:12:18 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/04/01 00:53:21 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	handle_door(mlx_key_data_t key, void *param)
-{
-	t_bool	move;
-	t_cub	*cub;
-
-	cub = (t_cub *)param;
-	move = false;
-	if (key.key == MLX_KEY_E && key.action == MLX_PRESS)
-		move = open_door(cub);
-	if (move)
-		raycast(cub);
-}
-
-t_bool	is_next_to_door(t_cub *cub)
+static t_bool	is_next_to_door(t_cub *cub)
 {
 	if (cub->map[(int)cub->player.pos_y + 1][(int)cub->player.pos_x] == 'D'
 		|| cub->map[(int)cub->player.pos_y - 1][(int)cub->player.pos_x] == 'D'
@@ -60,3 +47,4 @@ t_bool	open_door(t_cub *cub)
 	}
 	return (FALSE);
 }
+
