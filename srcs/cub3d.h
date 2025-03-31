@@ -6,7 +6,7 @@
 /*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 20:58:42 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/31 21:52:43 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,9 @@ typedef struct s_cub
 
 // avoid leak
 void			free_struct(void *param);
-
 // parsing
-void			load_png(t_cub *cub);
+
+void			load_png(t_cub *cub, char **tmp);
 t_cub			*init_struct(void);
 char			**copy_and_check_map(t_cub *cub);
 int				find_max_len(char **map);
@@ -143,10 +143,7 @@ t_bool			is_one_player(char **map, int i);
 t_bool			is_valid_map(t_cub *cub);
 t_bool			close_or_not(char **map, int x, int y, t_cub *cub);
 t_bool			is_close_map(char **map, int i, t_cub *cub);
-int				count_line(char *argv);
-char			**loop_copy(int fd, int nb_line);
-char			**copy_map(char *argv);
-t_bool			is_cub(char *map);
+char			**copy_map(char *argv, t_cub *cub);
 t_cub			*parse_struct(char *map);
 t_player		init_player_struct(t_cub *cub, t_player player);
 
@@ -194,3 +191,4 @@ void			print_player_info(t_cub *cub);
 void			print_player_info(t_cub *cub);
 void			print_map_info(t_cub *cub);
 void			print_struct(t_cub *cub);
+
