@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:25:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 22:52:11 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:02:40 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,50 @@ t_bool	check_base(char **tab)
 	return (TRUE);
 }
 
+static char	**copy_map_max_size(char **map, int max_len)
+{
+	char	**new_map;
+	int		i;
+	int		j;
+
+	i = 0;
+	new_map = malloc(sizeof(char *) * (tab_size(map) + 1));
+	if (!new_map)
+		return (NULL);
+	while (map[i])
+	{
+		j = 0;
+		new_map[i] = malloc(sizeof(char) * (max_len + 1));
+		if (!new_map[i])
+			return (NULL);
+		while (map[i][j] != '\n' && j < max_len)
+		{
+			new_map[i][j] = map[i][j];
+			j++;
+		}
+		while (j < max_len)
+		{
+			new_map[i][j] = ' ';
+			j++;
+		}
+		new_map[i][j] = '\0';
+		i++;
+	}
+	new_map[i] = NULL;
+	return (new_map);
+}
+
 // copy the playable part of the map and verify if its conform
 // to the subject
 char	**copy_and_check_map(t_cub *cub)
 {
 	char	**map;
 	int		len;
+	int		has_door;
 
+	has_door = 0;
+	if (cub->has_door == false)
+		has_door = 1;
 	if (!check_base(cub->map + 7))
 	{
 		ft_putstr_fd("Error\nMap is not valid\n", 2);
@@ -85,7 +122,7 @@ char	**copy_and_check_map(t_cub *cub)
 	if (len == 0)
 		return (NULL);
 	len = find_max_len(cub->map + 7);
-	map = copy_tab(cub->map + 7);
+	map = copy_map_max_size(cub->map + 7 - has_door, len);
 	if (!map)
 		return (NULL);
 	free_tab(cub->map);

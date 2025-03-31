@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 02:20:17 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 22:56:02 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:11:22 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	count_line(char *argv, t_cub *cub)
 	return (nbline);
 }
 
-static char	**loop_copy_utils(char **map, int fd, int lim)
+static char	**loop_utils(char **map, int fd, int lim)
 {
 	int		i;
 	char	*line;
@@ -78,8 +78,8 @@ static char	**loop_copy_utils(char **map, int fd, int lim)
 // if the line is empty "\n\0" it is not copied
 static char	**loop_copy(int fd, int nb_line, t_cub *cub)
 {
-	int		lim;
 	char	**map;
+	int		lim;
 
 	lim = 6;
 	map = malloc(sizeof(char *) * (nb_line + 1));
@@ -87,7 +87,7 @@ static char	**loop_copy(int fd, int nb_line, t_cub *cub)
 		return (NULL);
 	if (cub->has_door == TRUE)
 		lim++;
-	map = loop_copy_utils(map, fd, lim);
+	map = loop_utils(map, fd, lim);
 	return (map);
 }
 
