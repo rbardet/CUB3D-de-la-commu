@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 22:34:49 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:38:05 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,11 @@ static char	**sort_arg(char **tab, t_cub *cub)
 	{
 		tmp[i] = ft_strdup(tab[i]);
 		if (!tmp[i])
-		{
-			tmp[i] = NULL;
 			return (free_tab(tmp), NULL);
-		}
 		i++;
 	}
 	tmp[i] = NULL;
-	// printab(tmp);
-	// ft_printf("---------------------\n");
 	sorted = sort_str_tab(tmp);
-	// printab(tmp);
-	// exit(1);
 	free_tab(tmp);
 	return (sorted);
 }
