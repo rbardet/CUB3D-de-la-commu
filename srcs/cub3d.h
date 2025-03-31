@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 17:16:07 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:56:26 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ typedef struct s_cub
 void			free_struct(void *param);
 
 // parsing
+void			load_png(t_cub *cub);
 t_cub			*init_struct(void);
 char			**copy_and_check_map(t_cub *cub);
 int				find_max_len(char **map);

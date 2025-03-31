@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:25:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 20:24:12 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:55:34 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	**copy_map_max_size(char **map, int max_len)
 	{
 		j = 0;
 		new_map[i] = malloc(sizeof(char) * (max_len + 1));
-		if (!new_map)
+		if (!new_map[i])
 			return (NULL);
 		while (map[i][j] != '\n' && j < max_len)
 		{

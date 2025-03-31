@@ -6,7 +6,7 @@
 #    By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/28 17:17:36 by rbardet-          #+#    #+#              #
-#    Updated: 2025/03/28 23:55:41 by rbardet-         ###   ########.fr        #
+#    Updated: 2025/03/31 17:53:16 by rbardet-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ $(LIBFT):
 
 $(MLX):
 	@echo "$(BLUE)Téléchargement de la minilibx...$(RESET)"
-	@git clone https://github.com/codam-coding-college/MLX42.git $(MLX_DIR) 2>/dev/null || (cd $(MLX_DIR) && git pull)
+	@git clone https://github.com/kodokaii/MLX42.git $(MLX_DIR) 2>/dev/null || (cd $(MLX_DIR) && git pull)
 	@echo "$(BLUE)Compilation de la minilibx...$(RESET)"
 	@cd $(MLX_DIR) && cmake -B build
 	@cd $(MLX_DIR) && cmake --build build -j4
