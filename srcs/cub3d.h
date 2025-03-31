@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 00:54:59 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 01:00:54 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
-
-#define MOUSE_EDGE_OFFSET 50
-#define MAX_PITCH WIN_HEIGHT
 
 #define MOVE_SPEED 0.1
 #define ROT_SPEED 0.1
