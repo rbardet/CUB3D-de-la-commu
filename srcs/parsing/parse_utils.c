@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:25:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 23:02:40 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:18:34 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,28 @@ t_bool	check_base(char **tab)
 	return (TRUE);
 }
 
+static void	copy_line(int max_len, int i, char **map, char **new_map)
+{
+	int	j;
+
+	j = 0;
+	while (map[i][j] != '\n' && j < max_len)
+	{
+		new_map[i][j] = map[i][j];
+		j++;
+	}
+	while (j < max_len)
+	{
+		new_map[i][j] = ' ';
+		j++;
+	}
+	new_map[i][j] = '\0';
+}
+
 static char	**copy_map_max_size(char **map, int max_len)
 {
 	char	**new_map;
 	int		i;
-	int		j;
 
 	i = 0;
 	new_map = malloc(sizeof(char *) * (tab_size(map) + 1));
@@ -81,21 +98,10 @@ static char	**copy_map_max_size(char **map, int max_len)
 		return (NULL);
 	while (map[i])
 	{
-		j = 0;
 		new_map[i] = malloc(sizeof(char) * (max_len + 1));
 		if (!new_map[i])
 			return (NULL);
-		while (map[i][j] != '\n' && j < max_len)
-		{
-			new_map[i][j] = map[i][j];
-			j++;
-		}
-		while (j < max_len)
-		{
-			new_map[i][j] = ' ';
-			j++;
-		}
-		new_map[i][j] = '\0';
+		copy_line(max_len, i, map, new_map);
 		i++;
 	}
 	new_map[i] = NULL;
@@ -127,32 +133,4 @@ char	**copy_and_check_map(t_cub *cub)
 		return (NULL);
 	free_tab(cub->map);
 	return (map);
-}
-
-// put all the pointer inside the struct at NULL
-t_cub	*init_struct(void)
-{
-	t_cub	*cub;
-
-	cub = malloc(sizeof(t_cub));
-	if (!cub)
-	{
-		ft_putstr_fd("Error\nFailed to init struct\n", 2);
-		return (NULL);
-	}
-	cub->has_door = FALSE;
-	cub->g_height = GRAPH_HEIGHT;
-	cub->g_width = GRAPH_WIDTH;
-	cub->win_height = WIN_HEIGHT;
-	cub->win_width = WIN_WIDTH;
-	cub->minimap = NULL;
-	cub->no_xpm = NULL;
-	cub->so_xpm = NULL;
-	cub->we_xpm = NULL;
-	cub->ea_xpm = NULL;
-	cub->do_xpm = NULL;
-	cub->init_ptr = NULL;
-	cub->img_ptr = NULL;
-	cub->map = NULL;
-	return (cub);
 }

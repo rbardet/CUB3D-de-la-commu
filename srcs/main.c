@@ -3,14 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: throbert <throbert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:50:07 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/29 00:22:18 by throbert         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:18:25 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+// put all the pointer inside the struct at NULL
+t_cub	*init_struct(void)
+{
+	t_cub	*cub;
+
+	cub = malloc(sizeof(t_cub));
+	if (!cub)
+	{
+		ft_putstr_fd("Error\nFailed to init struct\n", 2);
+		return (NULL);
+	}
+	cub->has_door = FALSE;
+	cub->g_height = GRAPH_HEIGHT;
+	cub->g_width = GRAPH_WIDTH;
+	cub->win_height = WIN_HEIGHT;
+	cub->win_width = WIN_WIDTH;
+	cub->minimap = NULL;
+	cub->no_xpm = NULL;
+	cub->so_xpm = NULL;
+	cub->we_xpm = NULL;
+	cub->ea_xpm = NULL;
+	cub->do_xpm = NULL;
+	cub->init_ptr = NULL;
+	cub->img_ptr = NULL;
+	cub->map = NULL;
+	return (cub);
+}
 
 /**
  * @brief Free all mlx structs and exit the program.
