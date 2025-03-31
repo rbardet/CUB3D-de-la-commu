@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 22:14:48 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:22:34 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,21 @@ static t_rgb	get_rgb(char **rgb_tmp)
 	return (rgb);
 }
 
-static char	**sort_arg(char **tab)
+static char	**sort_arg(char **tab, t_cub *cub)
 {
 	int		i;
 	char	**tmp;
 	char	**sorted;
+	int		has_door;
 
 	i = 0;
+	has_door = 0;
+	if (cub->has_door == TRUE)
+		has_door = 1;
 	tmp = malloc(sizeof(char *) * (8));
 	if (!tmp)
 		return (NULL);
-	while (tab[i] && i != 7)
+	while (tab[i] && i != 6 + has_door)
 	{
 		tmp[i] = ft_strdup(tab[i]);
 		if (!tmp[i])
@@ -64,7 +68,11 @@ static char	**sort_arg(char **tab)
 		i++;
 	}
 	tmp[i] = NULL;
+	// printab(tmp);
+	// ft_printf("---------------------\n");
 	sorted = sort_str_tab(tmp);
+	// printab(tmp);
+	// exit(1);
 	free_tab(tmp);
 	return (sorted);
 }
@@ -81,13 +89,11 @@ static t_cub	*fill_struct(t_cub *cub)
 	has_door = 0;
 	if (cub->has_door == TRUE)
 		has_door += 1;
-	tmp = sort_arg(cub->map);
-	if ((tab_size(tmp) != 6 && cub->has_door == FALSE)
-		|| (tab_size(tmp) != 7 && cub->has_door == TRUE))
+	tmp = sort_arg(cub->map, cub);
+	if ((tab_size(tmp) != 6 && cub->has_door == FALSE) || (tab_size(tmp) != 7 && cub->has_door == TRUE))
 		return (free_struct(cub), free_tab(tmp), NULL);
 	load_png(cub, tmp);
-	if (!cub->no_xpm || !cub->so_xpm
-		|| !cub->ea_xpm || !cub->we_xpm || !cub->do_xpm)
+	if (!cub->no_xpm || !cub->so_xpm || !cub->ea_xpm || !cub->we_xpm || (!cub->do_xpm && cub->has_door == TRUE))
 		return (free_struct(cub), free_tab(tmp), NULL);
 	rgb_tmp = ft_split(tmp[0], ',');
 	if (!rgb_tmp || tab_size(rgb_tmp) != 3)

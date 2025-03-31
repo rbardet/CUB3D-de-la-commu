@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 02:20:17 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 21:32:54 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:04:31 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static char	**loop_copy(int fd, int nb_line, t_cub *cub)
 
 	i = 0;
 	lim = 6;
-	(void)cub;
 	map = malloc(sizeof(char *) * (nb_line + 1));
 	if (!map)
 		return (NULL);
