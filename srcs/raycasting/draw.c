@@ -6,7 +6,7 @@
 /*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:08:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 21:06:26 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:08:05 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static mlx_texture_t	*get_wall_text(t_ray ray, t_cub *cub)
 		return (cub->we_xpm);
 }
 
-static void	calculate_texture_params(t_cub *cub, t_ray ray,
-	t_draw *draw, mlx_texture_t *texture)
+static void	calculate_texture_params(t_cub *cub, t_ray ray, t_draw *draw,
+		mlx_texture_t *texture)
 {
 	int	tex_width;
 
@@ -37,34 +37,31 @@ static void	calculate_texture_params(t_cub *cub, t_ray ray,
 		draw->wall_x = cub->player.pos_y + ray.perp_wall_dist * ray.ray_dir_y;
 	else
 		draw->wall_x = cub->player.pos_x + ray.perp_wall_dist * ray.ray_dir_x;
-
 	// Fractionner la position pour obtenir la partie décimale
 	draw->wall_x -= floor(draw->wall_x);
-
 	// Calculer la coordonnée X de la texture
 	tex_width = texture->width;
 	draw->tex_x = (int)(draw->wall_x * tex_width);
-
 	// Si on regarde un mur à droite ou en haut, on inverse la coordonnée X
-	if ((ray.side == 0 && ray.ray_dir_x > 0) || (ray.side == 1 && ray.ray_dir_y < 0))
+	if ((ray.side == 0 && ray.ray_dir_x > 0) || (ray.side == 1
+			&& ray.ray_dir_y < 0))
 		draw->tex_x = tex_width - draw->tex_x - 1;
-
 	// Calculer la quantité à incrémenter pour chaque pixel de l'écran
 	if (ray.draw_end - ray.draw_start != 0)
 		draw->step = 1.0 * texture->height / (ray.draw_end - ray.draw_start);
 	else
-		draw->step = 0; // Eviter la division par 0 si draw_end == draw_start (précaution)
-
+		draw->step = 0;
+			// Eviter la division par 0 si draw_end == draw_start (précaution)
 	// Initialiser tex_pos pour le premier pixel de l'écran
-	draw->tex_pos = (ray.draw_start - cub->win_height / 2
-		+ (ray.draw_end - ray.draw_start) / 2) * draw->step;
+	draw->tex_pos = (ray.draw_start - cub->win_height / 2 + (ray.draw_end
+				- ray.draw_start) / 2) * draw->step;
 }
 
-void draw_wall(t_cub *cub, int x, t_ray ray)
+void	draw_wall(t_cub *cub, int x, t_ray ray)
 {
-	t_draw draw;
-	mlx_texture_t *texture;
-	int y;
+	t_draw			draw;
+	mlx_texture_t	*texture;
+	int				y;
 
 	texture = get_wall_text(ray, cub);
 	calculate_texture_params(cub, ray, &draw, texture);
@@ -77,14 +74,11 @@ void draw_wall(t_cub *cub, int x, t_ray ray)
 			draw.tex_y = (int)texture->height - 1;
 		else if (draw.tex_y < 0)
 			draw.tex_y = 0;
-
 		if (draw.tex_x >= (int)texture->width)
 			draw.tex_x = (int)texture->width - 1;
 		else if (draw.tex_x < 0)
 			draw.tex_x = 0;
-
 		draw.tex_pos += draw.step;
-
 		// Récupérer la couleur de la texture
 		draw.color = get_texture_color(texture, draw.tex_x, draw.tex_y);
 		mlx_put_pixel(cub->img_ptr, x, y, draw.color);
@@ -92,16 +86,15 @@ void draw_wall(t_cub *cub, int x, t_ray ray)
 	}
 }
 
-
 // draw the ceilling in the first half of the screen using :
 // cub->ceilling.red;
 // cub->ceilling.green;
 // cub->ceilling.blue;
 void	draw_ceilling(t_cub *cub)
 {
-	int			y;
-	int			x;
-	int32_t		color;
+	int		y;
+	int		x;
+	int32_t	color;
 
 	color = (cub->ceil.red << 16) | (cub->ceil.green << 8) | cub->ceil.blue;
 	y = 0;
@@ -123,9 +116,9 @@ void	draw_ceilling(t_cub *cub)
 // cub->floor.blue;
 void	draw_floor(t_cub *cub)
 {
-	int			y;
-	int			x;
-	int32_t		color;
+	int		y;
+	int		x;
+	int32_t	color;
 
 	color = (cub->floor.red << 16) | (cub->floor.green << 8) | cub->floor.blue;
 	y = WIN_HEIGHT / 2;

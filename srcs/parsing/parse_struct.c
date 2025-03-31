@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 20:42:51 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:14:48 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,12 @@ static t_cub	*fill_struct(t_cub *cub)
 	if (cub->has_door == TRUE)
 		has_door += 1;
 	tmp = sort_arg(cub->map);
-	if ((tab_size(tmp) != 6 && cub->has_door == FALSE) || (tab_size(tmp) != 7 && cub->has_door == TRUE))
+	if ((tab_size(tmp) != 6 && cub->has_door == FALSE)
+		|| (tab_size(tmp) != 7 && cub->has_door == TRUE))
 		return (free_struct(cub), free_tab(tmp), NULL);
 	load_png(cub, tmp);
-	if (!cub->no_xpm || !cub->so_xpm || !cub->ea_xpm || !cub->we_xpm || !cub->do_xpm)
+	if (!cub->no_xpm || !cub->so_xpm
+		|| !cub->ea_xpm || !cub->we_xpm || !cub->do_xpm)
 		return (free_struct(cub), free_tab(tmp), NULL);
 	rgb_tmp = ft_split(tmp[0], ',');
 	if (!rgb_tmp || tab_size(rgb_tmp) != 3)

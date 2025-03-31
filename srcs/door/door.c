@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:49:51 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 23:50:47 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:12:18 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ t_bool	open_door(t_cub *cub)
 	ray = ray_dist_x(cub, ray);
 	ray = ray_dist_y(cub, ray);
 	ray = perform_dda(cub, ray, FALSE);
-	if ((cub->map[ray.map_y][ray.map_x] == 'D' || cub->map[ray.map_y][ray.map_x] == '2') && is_next_to_door(cub))
+	if ((cub->map[ray.map_y][ray.map_x] == 'D'
+		|| cub->map[ray.map_y][ray.map_x] == '2') && is_next_to_door(cub))
 	{
 		if (cub->map[ray.map_y][ray.map_x] == 'D')
 			cub->map[ray.map_y][ray.map_x] = '2';
 		else
 			cub->map[ray.map_y][ray.map_x] = 'D';
-
 		return (TRUE);
 	}
 	return (FALSE);

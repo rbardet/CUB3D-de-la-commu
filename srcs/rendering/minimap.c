@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:10:20 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 20:22:39 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:04:07 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,22 @@ static void	draw_minimap(t_cub *cub, t_mini mini)
 	i = mini.start_y;
 	while (i <= mini.end_y)
 	{
-		j = mini.start_x;
-		while (j <= mini.end_x)
+		j = mini.start_x -1;
+		while (++j <= mini.end_x)
 		{
-			if (cub->map[i][j] == '1' || cub->map[i][j] == ' ' || cub->map[i][j] == '\0')
-				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9, 0xFF808080);
+			if (cub->map[i][j] == '1' || cub->map[i][j] == ' '
+				|| cub->map[i][j] == '\0')
+				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9,
+					0xFF808080);
 			else if (cub->map[i][j] == '0' || cub->map[i][j] == cub->spawn_view)
-				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9, 0xFFFFFFFF);
+				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9,
+					0xFFFFFFFF);
 			else if (cub->map[i][j] == 'D')
-				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9, 0x0000FFFF);
+				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9,
+					0x0000FFFF);
 			else if (cub->map[i][j] == '2')
-				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9, 0x00FF00FF);
-			j++;
+				draw_square(cub, (j - mini.start_x) * 9, (i - mini.start_y) * 9,
+					0x00FF00FF);
 		}
 		i++;
 	}

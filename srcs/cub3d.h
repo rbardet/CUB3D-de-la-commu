@@ -6,7 +6,7 @@
 /*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 21:52:43 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:11:52 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,6 @@ void			draw_ceilling(t_cub *cub);
 void			draw_floor(t_cub *cub);
 
 //UTILS
-
 //debug
 void			print_xpm_status(void *xpm, char *name);
 char			*get_direction_name(char c);
@@ -191,4 +190,3 @@ void			print_player_info(t_cub *cub);
 void			print_player_info(t_cub *cub);
 void			print_map_info(t_cub *cub);
 void			print_struct(t_cub *cub);
-

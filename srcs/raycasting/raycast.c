@@ -6,7 +6,7 @@
 /*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:48:55 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 21:08:58 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:06:48 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ int32_t	get_texture_color(mlx_texture_t *texture, int texX, int texY)
 	// Calcul de l'index correct (4 canaux par pixel : RGBA)
 	pixel_index = (texY * texture->width + texX) * 4;
 	pixels = texture->pixels;
-	return ((pixels[pixel_index] << 24) | (pixels[pixel_index
-			+ 1] << 16) | (pixels[pixel_index + 2] << 8) | pixels[pixel_index
-		+ 3]);
+	return ((pixels[pixel_index] << 24)
+		| (pixels[pixel_index + 1] << 16)
+		| (pixels[pixel_index + 2] << 8)
+		| pixels[pixel_index + 3]);
 }
 
 // get the starting point of the drawing and the end point
