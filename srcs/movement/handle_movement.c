@@ -6,7 +6,7 @@
 /*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:54:36 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 21:25:33 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:00:20 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	handle_move(void *param)
 	printf("\033[36m│ \033[1mPlayer Position           \033[0;36m│\033[0m\n");
 	printf("\033[36m├───────────────────────────┤\033[0m\n");
 	printf("\033[36m│ World: \033[33mX=%6.2f \033[33mY=%6.2f  \033[36m│\033[0m\n", cub->player.pos_x, cub->player.pos_y);
-	printf("\033[36m│ Map:   \033[33mX=%3d     \033[33mY=%3d    \033[36m│\033[0m\n", (int)cub->player.pos_x, (int)cub->player.pos_y);
+	printf("\033[36m│ Map:   \033[33mX=%3d    \033[33mY=%3d     \033[36m│\033[0m\n", (int)cub->player.pos_x, (int)cub->player.pos_y);
 	printf("\033[36m├───────────────────────────┤\033[0m\n");
 	printf("\033[36m│ \033[1mDirection & Plane         \033[0;36m│\033[0m\n");
 	printf("\033[36m├───────────────────────────┤\033[0m\n");
