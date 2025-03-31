@@ -6,11 +6,38 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:25:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 20:59:01 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:39:04 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+char	**sort_arg(char **tab, t_cub *cub)
+{
+	int		i;
+	char	**tmp;
+	char	**sorted;
+	int		has_door;
+
+	i = 0;
+	has_door = 0;
+	if (cub->has_door == TRUE)
+		has_door = 1;
+	tmp = malloc(sizeof(char *) * (8));
+	if (!tmp)
+		return (NULL);
+	while (tab[i] && i != 6 + has_door)
+	{
+		tmp[i] = ft_strdup(tab[i]);
+		if (!tmp[i])
+			return (free_tab(tmp), NULL);
+		i++;
+	}
+	tmp[i] = NULL;
+	sorted = sort_str_tab(tmp);
+	free_tab(tmp);
+	return (sorted);
+}
 
 // go threw the map and check if the character is allowed
 // if not return FALSE else return TRUE

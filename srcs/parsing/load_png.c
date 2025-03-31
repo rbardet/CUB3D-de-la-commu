@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:55:45 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 20:38:47 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:39:56 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*copy_png(char *line)
 }
 
 // extract the png from the map and return it
-static mlx_texture_t *get_png(char **arg, int idx)
+static mlx_texture_t	*get_png(char **arg, int idx)
 {
 	int				i;
 	mlx_texture_t	*text;

@@ -6,7 +6,7 @@
 #    By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/28 17:17:36 by rbardet-          #+#    #+#              #
-#    Updated: 2025/03/31 18:03:38 by rbardet-         ###   ########.fr        #
+#    Updated: 2025/03/31 22:43:55 by rbardet-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ OBJ_DIR = obj
 SRCS = srcs/main.c \
 		srcs/parsing/copy_map.c \
 		srcs/parsing/is_valid_map.c \
+		srcs/parsing/flood_fill.c \
 		srcs/parsing/parse_struct.c \
 		srcs/parsing/parse_utils.c \
 		srcs/parsing/load_png.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 22:11:52 by hdelacou         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:39:16 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,9 @@ typedef struct s_cub
 
 // avoid leak
 void			free_struct(void *param);
-// parsing
 
+// parsing
+char			**sort_arg(char **tab, t_cub *cub);
 void			load_png(t_cub *cub, char **tmp);
 t_cub			*init_struct(void);
 char			**copy_and_check_map(t_cub *cub);
