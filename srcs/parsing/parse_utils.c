@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:25:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 17:55:34 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 20:59:01 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_bool	check_base(char **tab)
 			if (base[b] == '\0')
 				return (FALSE);
 		}
-		i++;
 	}
 	return (TRUE);
 }
@@ -112,10 +111,12 @@ t_cub	*init_struct(void)
 		ft_putstr_fd("Error\nFailed to init struct\n", 2);
 		return (NULL);
 	}
+	cub->has_door = FALSE;
 	cub->g_height = GRAPH_HEIGHT;
 	cub->g_width = GRAPH_WIDTH;
 	cub->win_height = WIN_HEIGHT;
 	cub->win_width = WIN_WIDTH;
+	cub->minimap = NULL;
 	cub->no_xpm = NULL;
 	cub->so_xpm = NULL;
 	cub->we_xpm = NULL;

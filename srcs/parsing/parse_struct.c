@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 17:57:27 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 20:42:51 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,31 @@ static t_rgb	get_rgb(char **rgb_tmp)
 	return (rgb);
 }
 
+static char	**sort_arg(char **tab)
+{
+	int		i;
+	char	**tmp;
+	char	**sorted;
+
+	i = 0;
+	tmp = malloc(sizeof(char *) * (8));
+	if (!tmp)
+		return (NULL);
+	while (tab[i] && i != 7)
+	{
+		tmp[i] = ft_strdup(tab[i]);
+		if (!tmp[i])
+		{
+			tmp[i] = NULL;
+			return (free_tab(tmp), NULL);
+		}
+		i++;
+	}
+	tmp[i] = NULL;
+	sorted = sort_str_tab(tmp);
+	free_tab(tmp);
+	return (sorted);
+}
 
 // fill the struct with all the data for the rendering
 // add in the xpm , rgb code for floor and ceilling
@@ -50,20 +75,29 @@ static t_rgb	get_rgb(char **rgb_tmp)
 static t_cub	*fill_struct(t_cub *cub)
 {
 	char	**rgb_tmp;
+	char	**tmp;
+	int		has_door;
 
-	load_png(cub);
+	has_door = 0;
+	if (cub->has_door == TRUE)
+		has_door += 1;
+	tmp = sort_arg(cub->map);
+	if ((tab_size(tmp) != 6 && cub->has_door == FALSE) || (tab_size(tmp) != 7 && cub->has_door == TRUE))
+		return (free_struct(cub), free_tab(tmp), NULL);
+	load_png(cub, tmp);
 	if (!cub->no_xpm || !cub->so_xpm || !cub->ea_xpm || !cub->we_xpm || !cub->do_xpm)
-		return (free_struct(cub), NULL);
-	rgb_tmp = ft_split(cub->map[5], ',');
+		return (free_struct(cub), free_tab(tmp), NULL);
+	rgb_tmp = ft_split(tmp[0], ',');
 	if (!rgb_tmp || tab_size(rgb_tmp) != 3)
-		return (free_tab(rgb_tmp), free_struct(cub), NULL);
+		return (free_tab(rgb_tmp), free_tab(tmp), free_struct(cub), NULL);
 	cub->floor = get_rgb(rgb_tmp);
 	free_tab(rgb_tmp);
-	rgb_tmp = ft_split(cub->map[6], ',');
+	rgb_tmp = ft_split(tmp[2 + has_door], ',');
 	if (!rgb_tmp || tab_size(rgb_tmp) != 3)
-		return (free_tab(rgb_tmp), free_struct(cub), NULL);
+		return (free_tab(rgb_tmp), free_tab(tmp), free_struct(cub), NULL);
 	cub->ceil = get_rgb(rgb_tmp);
 	free_tab(rgb_tmp);
+	free_tab(tmp);
 	cub->map = copy_and_check_map(cub);
 	if (!cub->map)
 		return (free_struct(cub), NULL);
@@ -115,9 +149,9 @@ t_cub	*parse_struct(char *argv)
 	cub = init_struct();
 	if (!cub)
 		return (NULL);
-	cub->map = copy_map(argv);
+	cub->map = copy_map(argv, cub);
 	if (!cub->map)
-		return (free(cub), NULL);
+		return (free_struct(cub), NULL);
 	if (!is_valid_map(cub))
 	{
 		ft_putstr_fd("Error\nThe map is not valid\n", 2);

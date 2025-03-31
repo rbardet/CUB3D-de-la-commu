@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:55:45 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 18:01:29 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 20:38:47 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ char	*copy_png(char *line)
 }
 
 // extract the png from the map and return it
-static mlx_texture_t *get_png(t_cub *cub, int idx)
+static mlx_texture_t *get_png(char **arg, int idx)
 {
 	int				i;
 	mlx_texture_t	*text;
 	char			*tmp;
 
-	i = skip_space(cub->map[idx], 3);
-	tmp = copy_png(cub->map[idx] + i);
+	i = skip_space(arg[idx], 3);
+	tmp = copy_png(arg[idx] + i);
 	if (!tmp)
 		return (NULL);
 	text = mlx_load_png(tmp);
@@ -50,21 +50,28 @@ static mlx_texture_t *get_png(t_cub *cub, int idx)
 }
 
 // load all the png inside the cub struct
-void	load_png(t_cub *cub)
+void	load_png(t_cub *cub, char **tmp)
 {
-	cub->no_xpm = get_png(cub, 0);
+	int	has_door;
+
+	has_door = 0;
+	if (cub->has_door == TRUE)
+	{
+		cub->do_xpm = get_png(tmp, 1);
+		if (!cub->do_xpm)
+			ft_putstr_fd("Error\nFailed to load Door texture\n", 2);
+		has_door += 1;
+	}
+	cub->no_xpm = get_png(tmp, 3 + has_door);
 	if (!cub->no_xpm)
 		ft_putstr_fd("Error\nFailed to load North texture\n", 2);
-	cub->so_xpm = get_png(cub, 1);
+	cub->so_xpm = get_png(tmp, 4 + has_door);
 	if (!cub->so_xpm)
 		ft_putstr_fd("Error\nFailed to load South texture\n", 2);
-	cub->we_xpm = get_png(cub, 2);
+	cub->we_xpm = get_png(tmp, 5 + has_door);
 	if (!cub->we_xpm)
 		ft_putstr_fd("Error\nFailed to load West texture\n", 2);
-	cub->ea_xpm = get_png(cub, 3);
+	cub->ea_xpm = get_png(tmp, 1 + has_door);
 	if (!cub->ea_xpm)
 		ft_putstr_fd("Error\nFailed to load East texture\n", 2);
-	cub->do_xpm = get_png(cub, 4);
-	if (!cub->do_xpm)
-		ft_putstr_fd("Error\nFailed to load Door texture\n", 2);
 }

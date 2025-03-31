@@ -6,29 +6,40 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:30:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 18:02:36 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 21:01:12 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-// check if the map is conform , return FLALSE if itsn't else return TRUE
+// check if the map is conform , return FALSE if itsn't else return TRUE
 t_bool	is_valid_map(t_cub *cub)
 {
 	int	i;
+	int	has_door;
 
 	i = 0;
-	if (ft_strncmp(cub->map[i], "NO ", 3)
-		|| ft_strncmp(cub->map[i + 1], "SO ", 3)
-		|| ft_strncmp(cub->map[i + 2], "WE ", 3)
-		|| ft_strncmp(cub->map[i + 3], "EA ", 3)
-		|| ft_strncmp(cub->map[i + 4], "DO ", 3))
-		return (FALSE);
-	i += 5;
-	if (ft_strncmp(cub->map[i], "F ", 2)
-		|| ft_strncmp(cub->map[i + 1], "C ", 2))
-		return (FALSE);
-	if (!is_one_player(cub->map, i + 2) || !is_close_map(cub->map, i + 2, cub))
+	has_door = 0;
+	if (cub->has_door == FALSE)
+		has_door = 1;
+	while (cub->map[i] && i < 7 - has_door)
+	{
+		if (ft_strncmp(cub->map[i], "NO ", 3)
+			&& ft_strncmp(cub->map[i], "SO ", 3)
+			&& ft_strncmp(cub->map[i], "WE ", 3)
+			&& ft_strncmp(cub->map[i], "EA ", 3)
+			&& ft_strncmp(cub->map[i], "F ", 2)
+			&& ft_strncmp(cub->map[i], "C ", 2)
+			&& ft_strncmp(cub->map[i], "DO ", 3))
+				return (FALSE);
+		if (!ft_strncmp(cub->map[i], "DO ", 3)
+			&& cub->has_door == FALSE)
+			return (FALSE);
+		i++;
+	}
+	while (cub->map[i] && ft_strcmp(cub->map[i], "\n\0"))
+		i++;
+	if (!is_one_player(cub->map, i) || !is_close_map(cub->map, i, cub))
 		return (FALSE);
 	return (TRUE);
 }
