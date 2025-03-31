@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 22:05:36 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:43:06 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // convert the rgb code in the char ** in a new t_rgb
 // if the rgb is not in range of 0 to 255 or contain a letter
 // set the value to -1 otherwise give it the code
-t_rgb	get_rgb(char **rgb_tmp)
+static t_rgb	get_rgb(char **rgb_tmp)
 {
 	t_rgb	rgb;
 	int		i;
@@ -43,32 +43,73 @@ t_rgb	get_rgb(char **rgb_tmp)
 	return (rgb);
 }
 
-// extract all the xpm of the map inside the struct
-void	get_xpm(t_cub *cub)
+// copy the line to the \n and return it , its a char * to the png
+char	*copy_png(char *line)
 {
+	char	*text;
 	int		i;
 
-	i = skip_space(cub->map[0], 3);
-	cub->no_xpm = mlx_load_png("./graphic/NO.png");
-	i = skip_space(cub->map[1], 3);
-	cub->so_xpm = mlx_load_png("./graphic/SO.png");
-	i = skip_space(cub->map[2], 3);
-	cub->we_xpm = mlx_load_png("./graphic/WE.png");
-	i = skip_space(cub->map[3], 3);
-	cub->ea_xpm = mlx_load_png("./graphic/EA.png");
-	i = skip_space(cub->map[4], 3);
-	cub->do_xpm = mlx_load_png("./graphic/DO.png");
-	(void)i;
+	text = malloc(sizeof(char) * (ft_strlen(line) + 1));
+	if (!text)
+		return (NULL);
+	i = 0;
+	while (line[i] && line[i] != '\n')
+	{
+		text[i] = line[i];
+		i++;
+	}
+	text[i] = '\0';
+	return (text);
+}
+
+// extract the png from the map and return it
+static mlx_texture_t *get_png(t_cub *cub, int idx)
+{
+	int				i;
+	mlx_texture_t	*text;
+	char			*tmp;
+
+	i = skip_space(cub->map[idx], 3);
+	tmp = copy_png(cub->map[idx] + i);
+	if (!tmp)
+		return (NULL);
+	text = mlx_load_png(tmp);
+	if (!text)
+		return (NULL);
+	free(tmp);
+	return (text);
+}
+
+// load all the png inside the cub struct
+static void	load_png(t_cub *cub)
+{
+	cub->no_xpm = get_png(cub, 0);
+	if (!cub->no_xpm)
+		ft_putstr_fd("Error\nFailed to load North texture\n", 2);
+	cub->so_xpm = get_png(cub, 1);
+	if (!cub->so_xpm)
+		ft_putstr_fd("Error\nFailed to load South texture\n", 2);
+	cub->we_xpm = get_png(cub, 2);
+	if (!cub->we_xpm)
+		ft_putstr_fd("Error\nFailed to load West texture\n", 2);
+	cub->ea_xpm = get_png(cub, 3);
+	if (!cub->ea_xpm)
+		ft_putstr_fd("Error\nFailed to load East texture\n", 2);
+	cub->do_xpm = get_png(cub, 4);
+	if (!cub->do_xpm)
+		ft_putstr_fd("Error\nFailed to load Door texture\n", 2);
 }
 
 // fill the struct with all the data for the rendering
 // add in the xpm , rgb code for floor and ceilling
 // and a copy of the map
-t_cub	*fill_struct(t_cub *cub)
+static t_cub	*fill_struct(t_cub *cub)
 {
 	char	**rgb_tmp;
 
-	get_xpm(cub);
+	load_png(cub);
+	if (!cub->no_xpm || !cub->so_xpm || !cub->ea_xpm || !cub->we_xpm || !cub->do_xpm)
+		return (free_struct(cub), NULL);
 	rgb_tmp = ft_split(cub->map[5], ',');
 	if (!rgb_tmp || tab_size(rgb_tmp) != 3)
 		return (free_tab(rgb_tmp), free_struct(cub), NULL);

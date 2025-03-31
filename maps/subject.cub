@@ -1,28 +1,25 @@
 
 
 
-
-NO                            ./graphic/NO.xpm
-
-
-
-SO     ./graphic/SO.xpm
+NO      ./graphic/NO.png
 
 
 
 
-
-WE                             ./graphic/WE.xpm
-
-
-
-
-EA           ./graphic/EA.xpm
+SO ./graphic/SO.png
 
 
 
 
-DO  ./graphic/DO.xpm
+WE ./graphic/WE.png
+
+
+
+EA ./graphic/EA.png
+
+
+
+DO ./graphic/DO.png
 
 
 

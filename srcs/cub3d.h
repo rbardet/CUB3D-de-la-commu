@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 23:55:28 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:16:07 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,6 @@ t_cub			*init_struct(void);
 char			**copy_and_check_map(t_cub *cub);
 int				find_max_len(char **map);
 int				skip_space(char *line, int i);
-t_rgb			get_rgb(char **rgb_tmp);
-void			get_xpm(t_cub *cub);
-t_cub			*fill_struct(t_cub *cub);
 void			flood_fill(int x, int y, char **map, int *ret);
 t_bool			is_one_player(char **map, int i);
 t_bool			is_valid_map(t_cub *cub);

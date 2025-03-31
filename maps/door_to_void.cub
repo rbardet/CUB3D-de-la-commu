@@ -1,11 +1,28 @@
-DO                                             ./graphic/DO.xpm
-NO ./graphic/NO.xpm
-SO ./graphic/SO.xpm
-C 225,30,0
-WE ./graphic/WE.xpm
-EA ./graphic/EA.xpm
+
+
+
+NO      ./graphic/NO.png
+
+
+
+
+SO ./graphic/SO.png
+
+
+
+
+WE ./graphic/WE.png
+
+
+
+EA ./graphic/EA.png
+
+
+
+DO ./graphic/DO.png
 
 F 220,100,0
+C 220,100,0
 
 1111111111111111111111111
 00000000001100000000000011111111011
