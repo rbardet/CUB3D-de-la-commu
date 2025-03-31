@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 02:20:17 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 22:04:31 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:56:02 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,12 @@ static int	count_line(char *argv, t_cub *cub)
 	return (nbline);
 }
 
-// copy the file argv[1] line by line and put it inside **map
-// if the line is empty "\n\0" it is not copied
-static char	**loop_copy(int fd, int nb_line, t_cub *cub)
+static char	**loop_copy_utils(char **map, int fd, int lim)
 {
-	char	*line;
 	int		i;
-	char	**map;
-	int		lim;
+	char	*line;
 
 	i = 0;
-	lim = 6;
-	map = malloc(sizeof(char *) * (nb_line + 1));
-	if (!map)
-		return (NULL);
-	if (cub->has_door == TRUE)
-		lim++;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -81,6 +71,23 @@ static char	**loop_copy(int fd, int nb_line, t_cub *cub)
 		free(line);
 	}
 	map[i] = NULL;
+	return (map);
+}
+
+// copy the file argv[1] line by line and put it inside **map
+// if the line is empty "\n\0" it is not copied
+static char	**loop_copy(int fd, int nb_line, t_cub *cub)
+{
+	int		lim;
+	char	**map;
+
+	lim = 6;
+	map = malloc(sizeof(char *) * (nb_line + 1));
+	if (!map)
+		return (NULL);
+	if (cub->has_door == TRUE)
+		lim++;
+	map = loop_copy_utils(map, fd, lim);
 	return (map);
 }
 

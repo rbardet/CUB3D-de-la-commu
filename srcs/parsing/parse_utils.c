@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:25:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 22:39:04 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:52:11 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,41 +69,6 @@ t_bool	check_base(char **tab)
 	return (TRUE);
 }
 
-static char	**copy_map_max_size(char **map, int max_len)
-{
-	char	**new_map;
-	int		i;
-	int		j;
-
-	i = 0;
-	if (!map)
-		return (NULL);
-	new_map = malloc(sizeof(char *) * (tab_size(map) + 1));
-	if (!new_map)
-		return (NULL);
-	while (map[i])
-	{
-		j = 0;
-		new_map[i] = malloc(sizeof(char) * (max_len + 1));
-		if (!new_map[i])
-			return (NULL);
-		while (map[i][j] != '\n' && j < max_len)
-		{
-			new_map[i][j] = map[i][j];
-			j++;
-		}
-		while (j < max_len)
-		{
-			new_map[i][j] = ' ';
-			j++;
-		}
-		new_map[i][j] = '\0';
-		i++;
-	}
-	new_map[i] = NULL;
-	return (new_map);
-}
-
 // copy the playable part of the map and verify if its conform
 // to the subject
 char	**copy_and_check_map(t_cub *cub)
@@ -120,7 +85,7 @@ char	**copy_and_check_map(t_cub *cub)
 	if (len == 0)
 		return (NULL);
 	len = find_max_len(cub->map + 7);
-	map = copy_map_max_size(cub->map + 7, len);
+	map = copy_tab(cub->map + 7);
 	if (!map)
 		return (NULL);
 	free_tab(cub->map);
