@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 17:56:26 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 18:03:06 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ typedef struct s_cub
 	int				win_width;
 	int				g_height;
 	int				g_width;
+	t_bool			has_door;
 	mlx_texture_t	*no_xpm;
 	mlx_texture_t	*so_xpm;
 	mlx_texture_t	*we_xpm;

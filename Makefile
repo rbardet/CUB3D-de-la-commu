@@ -6,7 +6,7 @@
 #    By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/28 17:17:36 by rbardet-          #+#    #+#              #
-#    Updated: 2025/03/31 17:53:16 by rbardet-         ###   ########.fr        #
+#    Updated: 2025/03/31 18:03:38 by rbardet-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS = srcs/main.c \
 		srcs/parsing/is_valid_map.c \
 		srcs/parsing/parse_struct.c \
 		srcs/parsing/parse_utils.c \
+		srcs/parsing/load_png.c \
 		srcs/rendering/minimap.c \
 		srcs/rendering/window.c \
 		srcs/door/door.c \
