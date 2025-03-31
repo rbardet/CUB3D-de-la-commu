@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: throbert <throbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:54:36 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 22:18:35 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:42:49 by throbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,34 @@ t_bool	is_valid_move(t_cub *cub)
 	return (move);
 }
 
+
+
+
 void	handle_move(void *param)
 {
-	t_cub	*cub;
-	t_bool	move;
+	static int	center_x = WIN_WIDTH / 2;
+	static int	center_y = WIN_HEIGHT / 2;
+	int			mouse_x;
+	int			mouse_y;
+	double		delta_x;
+	t_cub		*cub;
 
-	move = false;
 	cub = (t_cub *)param;
 	if (mlx_is_key_down(cub->init_ptr, MLX_KEY_ESCAPE))
+	{
 		free_struct(cub);
-	move |= is_valid_move(cub);
-	if (move)
+		return ;
+	}
+	mlx_get_mouse_pos(cub->init_ptr, &mouse_x, &mouse_y);
+	delta_x = mouse_x - center_x;
+	if (delta_x)
+	{
+		rotate_view(cub, delta_x * -MOUSE_SENSITIVITY);
+		raycast(cub);
+	}
+	mlx_set_mouse_pos(cub->init_ptr, center_x, center_y);
+	if (is_valid_move(cub))
 		raycast(cub);
 }
+
+

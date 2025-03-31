@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: throbert <throbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:48:34 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 17:12:32 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:53:05 by throbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	open_window(t_cub *cub)
 	mlx_image_to_window(cub->init_ptr, cub->img_ptr, 0, 0);
 	mlx_image_to_window(cub->init_ptr, cub->minimap, 0, 0);
 	raycast(cub);
+	mlx_set_cursor_mode(cub->init_ptr, MLX_MOUSE_HIDDEN);
 	mlx_key_hook(cub->init_ptr, handle_door, cub);
 	mlx_loop_hook(cub->init_ptr, handle_move, cub);
 	mlx_close_hook(cub->init_ptr, free_struct, cub);
