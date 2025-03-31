@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:48:55 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 23:31:59 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 21:08:58 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ int32_t	get_texture_color(mlx_texture_t *texture, int texX, int texY)
 	// Calcul de l'index correct (4 canaux par pixel : RGBA)
 	pixel_index = (texY * texture->width + texX) * 4;
 	pixels = texture->pixels;
-	return ((pixels[pixel_index] << 24)
-		| (pixels[pixel_index + 1] << 16)
-		| (pixels[pixel_index + 2] << 8)
-		| pixels[pixel_index + 3]);
+	return ((pixels[pixel_index] << 24) | (pixels[pixel_index
+			+ 1] << 16) | (pixels[pixel_index + 2] << 8) | pixels[pixel_index
+		+ 3]);
 }
 
 // get the starting point of the drawing and the end point
@@ -53,8 +52,7 @@ t_ray	perform_dda(t_cub *cub, t_ray ray, t_bool is_open)
 	hit = 0;
 	while (hit == 0)
 	{
-		if (ray.map_x < 0
-			|| ray.map_x >= cub->player.map_width || ray.map_y < 0
+		if (ray.map_x < 0 || ray.map_x >= cub->player.map_width || ray.map_y < 0
 			|| ray.map_y >= cub->player.map_height)
 			break ;
 		if (ray.side_dist_x < ray.side_dist_y)
@@ -69,7 +67,8 @@ t_ray	perform_dda(t_cub *cub, t_ray ray, t_bool is_open)
 			ray.map_y += ray.step_y;
 			ray.side = 1;
 		}
-		if (cub->map[ray.map_y][ray.map_x] == '1' || cub->map[ray.map_y][ray.map_x] == 'D')
+		if (cub->map[ray.map_y][ray.map_x] == '1'
+			|| cub->map[ray.map_y][ray.map_x] == 'D')
 			hit = 1;
 		if (cub->map[ray.map_y][ray.map_x] == '2' && is_open == FALSE)
 			hit = 1;
@@ -80,11 +79,15 @@ t_ray	perform_dda(t_cub *cub, t_ray ray, t_bool is_open)
 // calculate the height of the wall that will be drawn
 static t_ray	calculate_wall_heigh(t_ray ray)
 {
-	if (ray.side == 0 && ray.ray_dir_x != 0)
+	if (ray.side == 0)
 		ray.perp_wall_dist = (ray.side_dist_x - ray.delta_dist_x);
-	else if (ray.ray_dir_y != 0)
+	else
 		ray.perp_wall_dist = (ray.side_dist_y - ray.delta_dist_y);
-	ray.line_height = (int)(WIN_HEIGHT / ray.perp_wall_dist);
+	if (ray.perp_wall_dist < 0.01)
+		ray.perp_wall_dist = 0.01;
+	if (ray.perp_wall_dist == 0)
+		ray.perp_wall_dist = 0.000001;
+	ray.line_height = (int)(WIN_HEIGHT / fabs(ray.perp_wall_dist));
 	return (ray);
 }
 

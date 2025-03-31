@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/31 18:03:06 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 20:58:42 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define ROT_SPEED 0.05
 
 #define WIN_HEIGHT 800
-#define WIN_WIDTH 1600
+#define WIN_WIDTH 1200
 
 #define GRAPH_HEIGHT 1000
 #define GRAPH_WIDTH 1000

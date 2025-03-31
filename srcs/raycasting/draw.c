@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hdelacou <hdelacou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:08:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/03/28 22:43:29 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/03/31 21:06:26 by hdelacou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,27 @@ void draw_wall(t_cub *cub, int x, t_ray ray)
 	y = ray.draw_start;
 	while (y < ray.draw_end)
 	{
-		// Calculer la coordonnée Y de la texture
-		draw.tex_y = (int)draw.tex_pos % (texture->height);
+		// Vérification et protection contre les dépassements
+		draw.tex_y = (int)draw.tex_pos;
+		if (draw.tex_y >= (int)texture->height)
+			draw.tex_y = (int)texture->height - 1;
+		else if (draw.tex_y < 0)
+			draw.tex_y = 0;
+
+		if (draw.tex_x >= (int)texture->width)
+			draw.tex_x = (int)texture->width - 1;
+		else if (draw.tex_x < 0)
+			draw.tex_x = 0;
+
 		draw.tex_pos += draw.step;
+
+		// Récupérer la couleur de la texture
 		draw.color = get_texture_color(texture, draw.tex_x, draw.tex_y);
 		mlx_put_pixel(cub->img_ptr, x, y, draw.color);
 		y++;
 	}
 }
+
 
 // draw the ceilling in the first half of the screen using :
 // cub->ceilling.red;
