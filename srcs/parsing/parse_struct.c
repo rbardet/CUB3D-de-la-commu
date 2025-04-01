@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 12:26:20 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 13:29:55 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,23 +101,23 @@ t_player	init_player_struct(t_cub *cub, t_player player)
 {
 	if (cub->spawn_view == 'N')
 	{
-		player.dir_x = 0;
-		player.dir_y = -1;
+		player.dir_x = 0.005;
+		player.dir_y = -1.005;
 	}
 	else if (cub->spawn_view == 'S')
 	{
-		player.dir_x = 0;
-		player.dir_y = 1;
+		player.dir_x = 0.005;
+		player.dir_y = 1.005;
 	}
 	else if (cub->spawn_view == 'W')
 	{
-		player.dir_x = -1;
-		player.dir_y = 0;
+		player.dir_x = -1.005;
+		player.dir_y = 0.005;
 	}
 	else if (cub->spawn_view == 'E')
 	{
-		player.dir_x = 1;
-		player.dir_y = 0;
+		player.dir_x = 1.005;
+		player.dir_y = 0.005;
 	}
 	player.plane_x = player.dir_y * cub->player.plane_factor;
 	player.plane_y = -player.dir_x * cub->player.plane_factor;
