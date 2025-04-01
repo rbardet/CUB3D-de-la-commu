@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 00:04:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 09:34:00 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 09:49:25 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,15 @@ t_cub	*init_sprite(t_cub *cub)
 	return (cub);
 }
 
-void animate_sprites(void *param)
+void	animate_sprites(void *param)
 {
-	t_cub	*cub;
-	static double last_update_time = 0;
+	t_cub			*cub;
+	static double	last_update_time = 0;
 
 	cub = (t_cub *)param;
 	cub->frame_delay = 0.01;
 	if (!cub || !cub->sprite || !cub->sprite[cub->frame] || !cub->is_animating)
-		return;
+		return ;
 	cub->current_time = mlx_get_time();
 	if (cub->current_time - last_update_time >= cub->frame_delay)
 	{
@@ -77,7 +77,7 @@ void animate_sprites(void *param)
 			cub->sprite[cub->frame - 1]->enabled = FALSE;
 		cub->sprite[cub->frame]->enabled = TRUE;
 		mlx_image_to_window(cub->init_ptr, cub->sprite[cub->frame],
-							cub->win_width / 2, cub->win_height * 0.40);
+			cub->win_width / 2, cub->win_height * 0.40);
 		cub->frame++;
 		last_update_time = cub->current_time;
 	}
@@ -90,13 +90,15 @@ void animate_sprites(void *param)
 	}
 }
 
-void animated_sprite(mouse_key_t button, action_t action, modifier_key_t mods, void *param)
+void	animated_sprite(mouse_key_t button, action_t action,
+	modifier_key_t mods, void *param)
 {
-	t_cub *cub = (t_cub *)param;
-	(void)mods;
+	t_cub	*cub;
 
+	(void)mods;
+	cub = (t_cub *)param;
 	if (!cub || !cub->sprite || !cub->sprite[0])
-		return;
+		return ;
 	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
 	{
 		if (!cub->is_animating)
@@ -106,9 +108,3 @@ void animated_sprite(mouse_key_t button, action_t action, modifier_key_t mods, v
 		}
 	}
 }
-
-
-
-
-
-

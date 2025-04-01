@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:48:55 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 09:16:19 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 09:54:36 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ int32_t	get_texture_color(mlx_texture_t *texture, int texX, int texY)
 
 	if (!texture || !texture->pixels)
 		return (0);
-	// Vérification des limites de la texture
 	if ((uint32_t)texX >= texture->width || (uint32_t)texY >= texture->height)
 		return (0);
-	// Calcul de l'index correct (4 canaux par pixel : RGBA)
 	pixel_index = (texY * texture->width + texX) * 4;
 	pixels = texture->pixels;
 	return ((pixels[pixel_index] << 24)
@@ -48,10 +46,7 @@ static t_ray	get_draw_size(t_ray ray)
 // if a wall is hit , the dda stop and we have the distance of the ray
 t_ray	perform_dda(t_cub *cub, t_ray ray, t_bool is_open)
 {
-	int	hit;
-
-	hit = 0;
-	while (hit == 0)
+	while (1)
 	{
 		if (ray.map_x < 0
 			|| ray.map_x >= cub->player.map_width || ray.map_y < 0
@@ -72,7 +67,7 @@ t_ray	perform_dda(t_cub *cub, t_ray ray, t_bool is_open)
 		if (cub->map[ray.map_y][ray.map_x] == '1'
 			|| cub->map[ray.map_y][ray.map_x] == 'D'
 			|| ((cub->map[ray.map_y][ray.map_x] == '2' && is_open == FALSE)))
-			hit = 1;
+			break ;
 	}
 	return (ray);
 }
