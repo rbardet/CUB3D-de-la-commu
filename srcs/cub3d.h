@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 07:00:21 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 09:30:59 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 #include <unistd.h>
 #include <limits.h>
 
-#define SPRITE 49
-#define MOVE_SPEED 0.1
+#define SPRITE 98
+#define MOVE_SPEED 0.2
 #define ROT_SPEED 0.1
 #define MOUSE_SENSITIVITY 0.005
 
@@ -129,7 +129,7 @@ typedef struct s_cub
 	int				g_height;
 	int				g_width;
 	int				frame;
-	int				curr_sprite;
+	int				is_animating;
 	t_bool			has_door;
 	mlx_texture_t	*no_xpm;
 	mlx_texture_t	*so_xpm;

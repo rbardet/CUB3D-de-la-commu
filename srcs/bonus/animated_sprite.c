@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 00:04:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 07:08:11 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 09:30:11 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,56 @@ t_cub	*init_sprite(t_cub *cub)
 	return (cub);
 }
 
-void	animated_sprite(mouse_key_t button,
-	action_t action, modifier_key_t mods, void *param)
+void animate_sprites(void *param)
 {
-	t_cub			*cub;
-	int				i;
+	t_cub	*cub;
+	static double last_update_time = 0;
+	double frame_delay;
+	double current_time;
 
-	(void)mods;
 	cub = (t_cub *)param;
-	i = 0;
-	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
+	frame_delay = 0.01;
+	if (!cub || !cub->sprite || !cub->sprite[cub->frame] || !cub->is_animating)
+		return;
+	current_time = mlx_get_time();
+	if (current_time - last_update_time >= frame_delay)
 	{
-		cub->sprite[0]->enabled = FALSE;
-		while (cub->sprite[i])
-		{
-			mlx_image_to_window(cub->init_ptr, cub->sprite[i],
-				cub->win_width / 2, cub->win_height * 0.73);
-			cub->sprite[i]->enabled = FALSE;
-			i++;
-		}
+		if (cub->frame > 0)
+			cub->sprite[cub->frame - 1]->enabled = FALSE;
+		cub->sprite[cub->frame]->enabled = TRUE;
+		mlx_image_to_window(cub->init_ptr, cub->sprite[cub->frame],
+							cub->win_width / 2, cub->win_height * 0.40);
+		cub->frame++;
+		last_update_time = current_time;
+	}
+	if (!cub->sprite[cub->frame])
+	{
+		cub->sprite[cub->frame - 1]->enabled = FALSE;
 		cub->sprite[0]->enabled = TRUE;
+		cub->frame = 0;
+		cub->is_animating = 0;
 	}
 }
+
+void animated_sprite(mouse_key_t button, action_t action, modifier_key_t mods, void *param)
+{
+	t_cub *cub = (t_cub *)param;
+	(void)mods;
+
+	if (!cub || !cub->sprite || !cub->sprite[0])
+		return;
+	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
+	{
+		if (!cub->is_animating)
+		{
+			cub->is_animating = 1;
+			mlx_loop_hook(cub->init_ptr, animate_sprites, cub);
+		}
+	}
+}
+
+
+
+
+
+
