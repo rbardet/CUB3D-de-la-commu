@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 00:04:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 11:33:13 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:51:13 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	animate_sprites(void *param)
 	static double	last_update_time = 0;
 
 	cub = (t_cub *)param;
-	cub->frame_delay = 0.01;
+	cub->frame_delay = 0.001;
 	if (!cub || !cub->sprite || !cub->sprite[cub->frame] || !cub->is_animating)
 		return ;
 	cub->current_time = mlx_get_time();
