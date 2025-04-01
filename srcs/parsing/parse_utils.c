@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:25:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 09:36:15 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 09:40:51 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ char	**copy_and_check_map(t_cub *cub)
 		has_door = 1;
 	if (!check_base(cub->map + 7))
 	{
+		free_tab(cub->map);
 		ft_putstr_fd("Error\nMap is not valid\n", 2);
 		return (NULL);
 	}
