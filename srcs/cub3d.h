@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 09:32:47 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:33:36 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,8 +182,8 @@ t_bool				rotate_right(t_cub *cub);
 void				key_press(mlx_key_data_t key, void *param);
 
 // animated sprite
-void				animated_sprite(mouse_key_t button, action_t action,
-						modifier_key_t mods, void *param);
+void				animate_sprites(void *param);
+
 
 // minimap
 void				minimap(t_cub *cub);

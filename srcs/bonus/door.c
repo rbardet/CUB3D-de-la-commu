@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:49:51 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 06:50:07 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:34:01 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,16 @@ void	key_press(mlx_key_data_t key, void *param)
 
 	cub = (t_cub *)param;
 	move = false;
+	if (!cub || !cub->sprite || !cub->sprite[0])
+		return ;
+	if (key.key == MLX_KEY_F && key.action == MLX_PRESS)
+	{
+		if (!cub->is_animating)
+		{
+			cub->is_animating = 1;
+			mlx_loop_hook(cub->init_ptr, animate_sprites, cub);
+		}
+	}
 	if (key.key == MLX_KEY_E && key.action == MLX_PRESS)
 		move = open_door(cub);
 	if (move)

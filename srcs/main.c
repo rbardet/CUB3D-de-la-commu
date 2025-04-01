@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:50:07 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 07:04:19 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:33:17 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	open_window(t_cub *cub)
 		cub->win_height * 0.40);
 	raycast(cub);
 	mlx_set_cursor_mode(cub->init_ptr, MLX_MOUSE_HIDDEN);
-	mlx_mouse_hook(cub->init_ptr, animated_sprite, cub);
 	mlx_key_hook(cub->init_ptr, key_press, cub);
 	mlx_loop_hook(cub->init_ptr, handle_move, cub);
 	mlx_close_hook(cub->init_ptr, free_struct, cub);

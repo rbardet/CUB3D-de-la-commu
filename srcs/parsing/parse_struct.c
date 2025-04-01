@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 09:44:09 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:43:40 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ t_cub	*parse_struct(char *argv)
 	init_sprite(cub);
 	if (!cub)
 		return (NULL);
-	cub->player.plane_factor = (((FOV_ANGLE * M_PI / 180) / 2));
+	cub->player.plane_factor = ((FOV_ANGLE * M_PI / 180) / 2);
 	cub->player = init_player_struct(cub, cub->player);
 	return (cub);
 }

@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 00:04:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 09:49:25 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:33:13 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,24 +87,5 @@ void	animate_sprites(void *param)
 		cub->sprite[0]->enabled = TRUE;
 		cub->frame = 0;
 		cub->is_animating = 0;
-	}
-}
-
-void	animated_sprite(mouse_key_t button, action_t action,
-	modifier_key_t mods, void *param)
-{
-	t_cub	*cub;
-
-	(void)mods;
-	cub = (t_cub *)param;
-	if (!cub || !cub->sprite || !cub->sprite[0])
-		return ;
-	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
-	{
-		if (!cub->is_animating)
-		{
-			cub->is_animating = 1;
-			mlx_loop_hook(cub->init_ptr, animate_sprites, cub);
-		}
 	}
 }
