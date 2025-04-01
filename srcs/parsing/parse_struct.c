@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 11:43:40 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:26:20 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,8 @@ t_cub	*parse_struct(char *argv)
 	if (!cub->init_ptr)
 		return (free_struct(cub), NULL);
 	cub = fill_struct(cub);
-	if (!cub)
-		return (NULL);
+	if (!cub || (cub->do_xpm && !ft_tabchr(cub->map, 'D')))
+		return (free_struct(cub), NULL);
 	init_sprite(cub);
 	if (!cub)
 		return (NULL);
