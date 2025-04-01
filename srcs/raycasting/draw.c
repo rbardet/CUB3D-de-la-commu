@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:08:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 09:51:04 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 10:44:04 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,12 @@ void	draw_wall(t_cub *cub, int x, t_ray ray)
 // cub->ceilling.blue;
 void	draw_ceilling(t_cub *cub)
 {
-	int		y;
-	int		x;
-	int32_t	color;
+	int			y;
+	int			x;
+	uint32_t	color;
 
-	color = (cub->ceil.red << 16) | (cub->ceil.green << 8) | cub->ceil.blue;
+	color = (cub->ceil.red << 24) | (cub->ceil.green << 16)
+		| cub->ceil.blue << 8 | 255;
 	y = 0;
 	while (y < WIN_HEIGHT / 2)
 	{
@@ -99,11 +100,12 @@ void	draw_ceilling(t_cub *cub)
 // cub->floor.blue;
 void	draw_floor(t_cub *cub)
 {
-	int		y;
-	int		x;
-	int32_t	color;
+	int				y;
+	int				x;
+	uint32_t		color;
 
-	color = (cub->floor.red << 16) | (cub->floor.green << 8) | cub->floor.blue;
+	color = (cub->floor.red << 24) | (cub->floor.green << 16)
+		| cub->floor.blue << 8 | 255;
 	y = WIN_HEIGHT / 2;
 	while (y < WIN_HEIGHT)
 	{
