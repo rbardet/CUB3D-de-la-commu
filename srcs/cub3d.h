@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 11:33:36 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:50:00 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,6 @@ void				key_press(mlx_key_data_t key, void *param);
 
 // animated sprite
 void				animate_sprites(void *param);
-
 
 // minimap
 void				minimap(t_cub *cub);
