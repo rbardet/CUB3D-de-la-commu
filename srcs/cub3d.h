@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 05:51:17 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 06:18:49 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include <unistd.h>
 #include <limits.h>
 
+#define SPRITE 49
 #define MOVE_SPEED 0.1
 #define ROT_SPEED 0.1
 #define MOUSE_SENSITIVITY 0.005

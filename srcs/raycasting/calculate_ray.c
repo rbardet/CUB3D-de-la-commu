@@ -6,11 +6,10 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:01:57 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 05:51:30 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 06:26:18 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
 #include "../cub3d.h"
 
 // find the distance that the ray will travell in Y

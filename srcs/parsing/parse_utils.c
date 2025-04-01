@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:25:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 05:08:04 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 06:26:09 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	copy_line(int max_len, int i, char **map, char **new_map)
 	}
 	while (j < max_len)
 	{
-		new_map[i][j] = ' ';
+		new_map[i][j] = '\0';
 		j++;
 	}
 	new_map[i][j] = '\0';

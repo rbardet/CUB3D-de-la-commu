@@ -6,41 +6,11 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 00:21:44 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 05:50:49 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 06:17:38 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-t_cub	*init_sprite(t_cub *cub)
-{
-	mlx_texture_t	**text;
-
-	text = malloc(sizeof(mlx_texture_t *) * (4));
-	if (!text)
-		return (NULL);
-	text[0] = mlx_load_png("./graphic/sprite1.png");
-	text[1] = mlx_load_png("./graphic/sprite2.png");
-	text[2] = mlx_load_png("./graphic/sprite3.png");
-	text[3] = mlx_load_png("./graphic/sprite4.png");
-	cub->sprite = malloc(sizeof(mlx_image_t *) * (5));
-	if (!cub->sprite)
-		return (NULL);
-	cub->sprite[0] = mlx_texture_to_image(cub->init_ptr, text[0]);
-	cub->sprite[1] = mlx_texture_to_image(cub->init_ptr, text[1]);
-	cub->sprite[2] = mlx_texture_to_image(cub->init_ptr, text[2]);
-	cub->sprite[3] = mlx_texture_to_image(cub->init_ptr, text[3]);
-	cub->sprite[4] = NULL;
-	mlx_delete_texture(text[0]);
-	mlx_delete_texture(text[1]);
-	mlx_delete_texture(text[2]);
-	mlx_delete_texture(text[3]);
-	free(text);
-	if (!cub->sprite || !cub->sprite[0] || !cub->sprite[1]
-		|| !cub->sprite[2] || !cub->sprite[3])
-		return (free_struct(cub), NULL);
-	return (cub);
-}
 
 // put all the pointer inside the struct at NULL
 t_cub	*init_struct(void)

@@ -6,11 +6,60 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 00:04:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 05:50:10 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 06:45:57 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+static mlx_texture_t	**init_sprite_png(void)
+{
+	mlx_texture_t	**text;
+	char			*tmp;
+	char			*tmp2;
+	char			*tmp3;
+	int				i;
+
+	text = malloc(sizeof(mlx_texture_t *) * (SPRITE + 1));
+	if (!text)
+		return (NULL);
+	i = 0;
+	while (i < SPRITE)
+	{
+		tmp = "./graphic/anim/frame-";
+		tmp2 = ft_itoa(i + 1);
+		tmp3 = ft_strjoin(tmp, tmp2);
+		free(tmp2);
+		tmp2 = ft_strjoin(tmp3, ".png");
+		free(tmp3);
+		text[i] = mlx_load_png(tmp2);
+		free(tmp2);
+		i++;
+	}
+	text[i] = NULL;
+	return (text);
+}
+
+t_cub	*init_sprite(t_cub *cub)
+{
+	mlx_texture_t	**text;
+	int				i;
+
+	i = 0;
+	text = init_sprite_png();
+	cub->sprite = malloc(sizeof(mlx_image_t *) * (SPRITE + 1));
+	if (!cub->sprite)
+		return (free_struct(cub), NULL);
+	while (text[i] && i < SPRITE)
+	{
+		cub->sprite[i] = mlx_texture_to_image(cub->init_ptr, text[i]);
+		free(text[i]);
+		i++;
+	}
+	cub->sprite[i] = NULL;
+	free(text);
+	return (cub);
+}
 
 void	animated_sprite(mouse_key_t button,
 	action_t action, modifier_key_t mods, void *param)
