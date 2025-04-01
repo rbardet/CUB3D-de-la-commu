@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 09:30:59 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 09:32:47 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ typedef struct s_cub
 	int				g_height;
 	int				g_width;
 	int				frame;
+	double			frame_delay;
+	double			current_time;
 	int				is_animating;
 	t_bool			has_door;
 	mlx_texture_t	*no_xpm;

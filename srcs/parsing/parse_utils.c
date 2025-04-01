@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:25:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 06:26:09 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 09:34:44 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ char	**copy_and_check_map(t_cub *cub)
 	if (!check_base(cub->map + 7))
 	{
 		ft_putstr_fd("Error\nMap is not valid\n", 2);
-		return (NULL);
+		return (free_struct(cub), NULL);
 	}
 	len = find_max_len(cub->map + 7);
 	if (len == 0)
