@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:48:55 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 09:54:36 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 10:58:21 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,10 @@ t_ray	perform_dda(t_cub *cub, t_ray ray, t_bool is_open)
 // calculate the height of the wall that will be drawn
 static t_ray	calculate_wall_heigh(t_ray ray)
 {
-	if (ray.side == 0 && ray.ray_dir_x != 0)
+	if (ray.side == 0)
 		ray.perp_wall_dist = (ray.side_dist_x - ray.delta_dist_x);
-	else if (ray.ray_dir_y != 0)
+	else
 		ray.perp_wall_dist = (ray.side_dist_y - ray.delta_dist_y);
-	if (ray.perp_wall_dist == 0)
-		ray.perp_wall_dist = 0.001;
 	ray.line_height = (int)(WIN_HEIGHT / ray.perp_wall_dist);
 	return (ray);
 }

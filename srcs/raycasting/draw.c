@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:08:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 10:44:04 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:31:01 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,9 @@ static void	calculate_texture_params(t_cub *cub, t_ray ray, t_draw *draw,
 	if ((ray.side == 0 && ray.ray_dir_x > 0) || (ray.side == 1
 			&& ray.ray_dir_y < 0))
 		draw->tex_x = tex_width - draw->tex_x - 1;
-	if (ray.draw_end - ray.draw_start != 0)
-		draw->step = 1.0 * texture->height / (ray.draw_end - ray.draw_start);
-	else
-		draw->step = 0;
-	draw->tex_pos = (ray.draw_start - cub->win_height / 2 + (ray.draw_end
-				- ray.draw_start) / 2) * draw->step;
+	draw->step = (double)texture->height / (double)ray.line_height;
+	draw->tex_pos = (ray.draw_start - WIN_HEIGHT / 2 + ray.line_height / 2)
+		* draw->step;
 }
 
 void	draw_wall(t_cub *cub, int x, t_ray ray)
