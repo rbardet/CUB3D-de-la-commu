@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 00:21:44 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 06:17:38 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 09:38:37 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_cub	*init_struct(void)
 	cub->minimap = NULL;
 	cub->init_ptr = NULL;
 	cub->img_ptr = NULL;
+	cub->sprite = NULL;
 	cub->map = NULL;
 	cub->no_xpm = NULL;
 	cub->so_xpm = NULL;
@@ -45,6 +46,8 @@ static void	free_sprite(t_cub *cub)
 	int	i;
 
 	i = 0;
+	if (!cub->sprite)
+		return ;
 	while (cub->sprite[i])
 	{
 		mlx_delete_image(cub->init_ptr, cub->sprite[i]);
