@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pthuilli <pthuilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 12:53:27 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:59:51 by pthuilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 #define ROT_SPEED 0.1
 #define MOUSE_SENSITIVITY 0.005
 
-#define WIN_HEIGHT 800
+#define WIN_HEIGHT 801
 #define WIN_WIDTH 1200
 
 #define GRAPH_HEIGHT 1000
