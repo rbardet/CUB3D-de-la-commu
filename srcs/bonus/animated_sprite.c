@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 00:04:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 06:45:57 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 07:08:11 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_cub	*init_sprite(t_cub *cub)
 	while (text[i] && i < SPRITE)
 	{
 		cub->sprite[i] = mlx_texture_to_image(cub->init_ptr, text[i]);
-		free(text[i]);
+		mlx_delete_texture(text[i]);
 		i++;
 	}
 	cub->sprite[i] = NULL;
