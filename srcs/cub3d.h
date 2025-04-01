@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 01:00:54 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 05:51:17 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <limits.h>
 
 #define MOVE_SPEED 0.1
 #define ROT_SPEED 0.1
@@ -110,7 +111,7 @@ typedef struct s_ray
 	int				line_height;
 	int				draw_start;
 	int				draw_end;
-	int				color;
+	uint32_t		color;
 }					t_ray;
 
 typedef struct s_img
@@ -119,14 +120,6 @@ typedef struct s_img
 	int				bpp;
 	int				line_len;
 }					t_img;
-
-typedef struct s_sprite
-{
-	mlx_texture_t	*sprite1;
-	mlx_texture_t	*sprite2;
-	mlx_texture_t	*sprite3;
-	mlx_texture_t	*sprite4;
-}					t_sprite;
 
 typedef struct s_cub
 {
@@ -140,10 +133,9 @@ typedef struct s_cub
 	mlx_texture_t	*we_xpm;
 	mlx_texture_t	*ea_xpm;
 	mlx_texture_t	*do_xpm;
-	t_sprite		*sprite;
+	mlx_image_t		**sprite;
 	mlx_t			*init_ptr;
 	mlx_image_t		*img_ptr;
-	mlx_image_t		*animate;
 	mlx_image_t		*minimap;
 	char			spawn_view;
 	t_rgb			floor;
@@ -156,6 +148,7 @@ typedef struct s_cub
 void				free_struct(void *param);
 
 // parsing
+t_cub				*init_sprite(t_cub *cub);
 char				**sort_arg(char **tab, t_cub *cub);
 void				load_png(t_cub *cub, char **tmp);
 t_cub				*init_struct(void);
@@ -180,15 +173,12 @@ t_bool				move_left(t_cub *cub);
 t_bool				move_right(t_cub *cub);
 t_bool				rotate_right(t_cub *cub);
 
-//door
-t_bool				open_door(t_cub *cub);
-
 // bonus
 void				key_press(mlx_key_data_t key, void *param);
 
 // animated sprite
-void				set_default_sprite(t_cub *cub);
-void				animated_sprite(t_cub *cub);
+void				animated_sprite(mouse_key_t button, action_t action,
+						modifier_key_t mods, void *param);
 
 // minimap
 void				minimap(t_cub *cub);
@@ -221,4 +211,3 @@ void				print_player_info(t_cub *cub);
 void				print_player_info(t_cub *cub);
 void				print_map_info(t_cub *cub);
 void				print_struct(t_cub *cub);
-

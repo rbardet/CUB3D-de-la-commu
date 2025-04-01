@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:54:36 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 00:57:37 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 05:51:22 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,3 @@ void	handle_move(void *param)
 	if (is_valid_move(cub))
 		raycast(cub);
 }
-
-

@@ -6,13 +6,13 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:30:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 00:59:35 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 04:24:52 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static	t_bool	is_valid_param(char *line)
+static t_bool	is_valid_param(char *line)
 {
 	if (ft_strncmp(line, "NO ", 3)
 		&& ft_strncmp(line, "SO ", 3)

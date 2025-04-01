@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:25:32 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 00:59:38 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 05:08:04 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_bool	check_base(char **tab)
 	int		j;
 	int		b;
 
-	base = "01NSWED \n";
+	base = "01NSWED2 \n";
 	i = -1;
 	while (tab[++i])
 	{

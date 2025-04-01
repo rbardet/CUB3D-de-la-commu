@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:50:07 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 00:55:15 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 05:51:08 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,18 @@ void	open_window(t_cub *cub)
 			cub->win_width, cub->win_height);
 	cub->minimap = mlx_new_image(cub->init_ptr,
 			cub->win_width, cub->win_height);
-	cub->animate = mlx_new_image(cub->init_ptr,
-			cub->win_width, cub->win_height);
-	if (!cub->img_ptr || !cub->minimap || !cub->animate)
+	if (!cub->img_ptr || !cub->minimap)
 	{
 		free_struct(cub);
 		return ;
 	}
 	mlx_image_to_window(cub->init_ptr, cub->img_ptr, 0, 0);
 	mlx_image_to_window(cub->init_ptr, cub->minimap, 0, 0);
-	mlx_image_to_window(cub->init_ptr, cub->animate, cub->win_width / 2, cub->win_height - 1);
+	mlx_image_to_window(cub->init_ptr, cub->sprite[0], cub->win_width / 2,
+		cub->win_height * 0.73);
 	raycast(cub);
-	set_default_sprite(cub);
 	mlx_set_cursor_mode(cub->init_ptr, MLX_MOUSE_HIDDEN);
+	mlx_mouse_hook(cub->init_ptr, animated_sprite, cub);
 	mlx_key_hook(cub->init_ptr, key_press, cub);
 	mlx_loop_hook(cub->init_ptr, handle_move, cub);
 	mlx_close_hook(cub->init_ptr, free_struct, cub);

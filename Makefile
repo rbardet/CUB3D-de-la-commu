@@ -6,7 +6,7 @@
 #    By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/28 17:17:36 by rbardet-          #+#    #+#              #
-#    Updated: 2025/04/01 00:56:01 by rbardet-         ###   ########.fr        #
+#    Updated: 2025/04/01 01:12:21 by rbardet-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ SRCS = srcs/main.c \
 		srcs/parsing/parse_struct.c \
 		srcs/parsing/parse_utils.c \
 		srcs/parsing/load_png.c \
-		srcs/bonus/handle_key_press.c \
 		srcs/bonus/minimap.c \
 		srcs/bonus/animated_sprite.c \
 		srcs/bonus/door.c \

@@ -6,21 +6,40 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 00:21:44 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 00:55:01 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 05:50:49 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	init_sprite(t_cub *cub)
+t_cub	*init_sprite(t_cub *cub)
 {
-	cub->sprite = malloc(sizeof(t_sprite));
+	mlx_texture_t	**text;
+
+	text = malloc(sizeof(mlx_texture_t *) * (4));
+	if (!text)
+		return (NULL);
+	text[0] = mlx_load_png("./graphic/sprite1.png");
+	text[1] = mlx_load_png("./graphic/sprite2.png");
+	text[2] = mlx_load_png("./graphic/sprite3.png");
+	text[3] = mlx_load_png("./graphic/sprite4.png");
+	cub->sprite = malloc(sizeof(mlx_image_t *) * (5));
 	if (!cub->sprite)
-		return ;
-	cub->sprite->sprite1 = mlx_load_png("./graphic/Amaterasu/sprite1");
-	cub->sprite->sprite2 = mlx_load_png("./graphic/Amaterasu/sprite2");
-	cub->sprite->sprite3 = mlx_load_png("./graphic/Amaterasu/sprite3");
-	cub->sprite->sprite4 = mlx_load_png("./graphic/Amaterasu/sprite4");
+		return (NULL);
+	cub->sprite[0] = mlx_texture_to_image(cub->init_ptr, text[0]);
+	cub->sprite[1] = mlx_texture_to_image(cub->init_ptr, text[1]);
+	cub->sprite[2] = mlx_texture_to_image(cub->init_ptr, text[2]);
+	cub->sprite[3] = mlx_texture_to_image(cub->init_ptr, text[3]);
+	cub->sprite[4] = NULL;
+	mlx_delete_texture(text[0]);
+	mlx_delete_texture(text[1]);
+	mlx_delete_texture(text[2]);
+	mlx_delete_texture(text[3]);
+	free(text);
+	if (!cub->sprite || !cub->sprite[0] || !cub->sprite[1]
+		|| !cub->sprite[2] || !cub->sprite[3])
+		return (free_struct(cub), NULL);
+	return (cub);
 }
 
 // put all the pointer inside the struct at NULL
@@ -39,31 +58,28 @@ t_cub	*init_struct(void)
 	cub->g_width = GRAPH_WIDTH;
 	cub->win_height = WIN_HEIGHT;
 	cub->win_width = WIN_WIDTH;
-	init_sprite(cub);
 	cub->minimap = NULL;
+	cub->init_ptr = NULL;
+	cub->img_ptr = NULL;
+	cub->map = NULL;
 	cub->no_xpm = NULL;
 	cub->so_xpm = NULL;
 	cub->we_xpm = NULL;
 	cub->ea_xpm = NULL;
 	cub->do_xpm = NULL;
-	cub->init_ptr = NULL;
-	cub->img_ptr = NULL;
-	cub->map = NULL;
 	return (cub);
 }
 
 static void	free_sprite(t_cub *cub)
 {
-	if (cub->animate)
-		mlx_delete_image(cub->init_ptr, cub->animate);
-	if (cub->sprite->sprite1)
-		mlx_delete_texture(cub->sprite->sprite1);
-	if (cub->sprite->sprite2)
-		mlx_delete_texture(cub->sprite->sprite2);
-	if (cub->sprite->sprite3)
-		mlx_delete_texture(cub->sprite->sprite3);
-	if (cub->sprite->sprite4)
-		mlx_delete_texture(cub->sprite->sprite4);
+	int	i;
+
+	i = 0;
+	while (cub->sprite[i])
+	{
+		mlx_delete_image(cub->init_ptr, cub->sprite[i]);
+		i++;
+	}
 	free(cub->sprite);
 }
 

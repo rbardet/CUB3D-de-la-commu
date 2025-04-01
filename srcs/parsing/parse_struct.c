@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 00:59:33 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 05:50:30 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ static t_cub	*fill_struct_utils(t_cub *cub, int has_door, char **tmp)
 	rgb_tmp = ft_split(tmp[0], ',');
 	if (!rgb_tmp || tab_size(rgb_tmp) != 3)
 		return (free_tab(rgb_tmp), free_tab(tmp), free_struct(cub), NULL);
-	cub->floor = get_rgb(rgb_tmp);
+	cub->ceil = get_rgb(rgb_tmp);
 	free_tab(rgb_tmp);
 	rgb_tmp = ft_split(tmp[2 + has_door], ',');
 	if (!rgb_tmp || tab_size(rgb_tmp) != 3)
 		return (free_tab(rgb_tmp), free_tab(tmp), free_struct(cub), NULL);
-	cub->ceil = get_rgb(rgb_tmp);
+	cub->floor = get_rgb(rgb_tmp);
 	free_tab(rgb_tmp);
 	free_tab(tmp);
 	cub->map = copy_and_check_map(cub);
@@ -144,11 +144,11 @@ t_cub	*parse_struct(char *argv)
 	}
 	cub->init_ptr = mlx_init(cub->win_width, cub->win_height, "CUB3D", FALSE);
 	if (!cub->init_ptr)
-	{
-		ft_putstr_fd("Error\nmlx_init failed\n", 2);
 		return (free_struct(cub), NULL);
-	}
 	cub = fill_struct(cub);
+	if (!cub)
+		return (NULL);
+	init_sprite(cub);
 	if (!cub)
 		return (NULL);
 	cub->player.plane_factor = (tan((FOV_ANGLE * M_PI / 180) / 2));
