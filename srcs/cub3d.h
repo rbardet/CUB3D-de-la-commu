@@ -30,7 +30,7 @@
 #define ROT_SPEED 0.1
 #define MOUSE_SENSITIVITY 0.005
 
-#define WIN_HEIGHT 800
+#define WIN_HEIGHT 801
 #define WIN_WIDTH 1200
 
 #define GRAPH_HEIGHT 1000
