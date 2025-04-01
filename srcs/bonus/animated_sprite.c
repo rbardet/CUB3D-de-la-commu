@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 00:04:53 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 11:51:13 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:57:05 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ t_cub	*init_sprite(t_cub *cub)
 
 	i = 0;
 	text = init_sprite_png();
+	cub->is_animating = 0;
+	cub->frame = 0;
+	cub->frame_delay = 0;
 	cub->sprite = malloc(sizeof(mlx_image_t *) * (SPRITE + 1));
 	if (!cub->sprite)
 		return (free_struct(cub), NULL);
