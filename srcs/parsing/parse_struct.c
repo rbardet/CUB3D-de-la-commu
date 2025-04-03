@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/03 10:27:42 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:40:06 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,23 +101,23 @@ t_player	init_player_struct(t_cub *cub, t_player player)
 {
 	if (cub->spawn_view == 'N')
 	{
-		player.dir_x = 0.000;
-		player.dir_y = -1.000;
+		player.dir_x = 0.005;
+		player.dir_y = -1.005;
 	}
 	else if (cub->spawn_view == 'S')
 	{
-		player.dir_x = 0.000;
-		player.dir_y = 1.000;
+		player.dir_x = 0.005;
+		player.dir_y = 1.005;
 	}
 	else if (cub->spawn_view == 'W')
 	{
-		player.dir_x = -1.000;
-		player.dir_y = 0.000;
+		player.dir_x = -1.005;
+		player.dir_y = 0.005;
 	}
 	else if (cub->spawn_view == 'E')
 	{
-		player.dir_x = 1.000;
-		player.dir_y = 0.000;
+		player.dir_x = 1.005;
+		player.dir_y = 0.005;
 	}
 	player.plane_x = player.dir_y * cub->player.plane_factor;
 	player.plane_y = -player.dir_x * cub->player.plane_factor;
