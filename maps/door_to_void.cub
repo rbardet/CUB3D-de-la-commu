@@ -1,25 +1,24 @@
 
 
 
-NO      ./graphic/pack_cr7/NO.png
+NO      ./graphic/pack_wolfenstein/bluestone.png
 
 
 
 
-SO ./graphic/pack_cr7/SO.png
+SO ./graphic/pack_wolfenstein/colorstone.png
 
 
 
 
-WE ./graphic/pack_cr7/WE.png
+WE ./graphic/pack_wolfenstein/greystone.png
 
 
 
-EA ./graphic/pack_cr7/EA.png
+EA ./graphic/pack_wolfenstein/mossy.png
 
 
-
-DO ./graphic/pack_cr7/DO.png
+DO ./graphic/pack_wolfenstein/barrel.png
 
 F 220,100,0
 C 220,100,0
