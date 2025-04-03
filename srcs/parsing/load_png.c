@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:55:45 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/03 10:34:48 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/03 12:15:38 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static mlx_texture_t	*get_png(char **arg, int idx)
 	if (!tmp)
 		return (NULL);
 	text = mlx_load_png(tmp);
+	free(tmp);
 	if (!text)
 		return (NULL);
-	free(tmp);
 	return (text);
 }
 

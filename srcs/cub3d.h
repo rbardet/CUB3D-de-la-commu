@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pthuilli <pthuilli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 23:51:13 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/01 12:59:51 by pthuilli         ###   ########.fr       */
+/*   Updated: 2025/04/03 12:52:33 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ typedef struct s_cub
 void				free_struct(void *param);
 
 // parsing
+t_rgb				get_rgb(char **rgb_tmp);
 t_cub				*init_sprite(t_cub *cub);
 char				**sort_arg(char **tab, t_cub *cub);
 void				load_png(t_cub *cub, char **tmp);

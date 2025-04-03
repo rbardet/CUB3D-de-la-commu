@@ -6,41 +6,22 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 00:30:31 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/03 10:40:06 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/03 12:54:27 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-// convert the rgb code in the char ** in a new t_rgb
-// if the rgb is not in range of 0 to 255 or contain a letter
-// set the value to -1 otherwise give it the code
-static t_rgb	get_rgb(char **rgb_tmp)
+static t_cub	*handle_rgb_error(t_cub *cub)
 {
-	t_rgb	rgb;
-	int		i;
-	int32_t	tmp;
-	char	*trim;
-
-	i = skip_space(rgb_tmp[0], 2);
-	tmp = (int32_t)ft_atoi(rgb_tmp[0] + i);
-	trim = ft_strtrim(rgb_tmp[2], "\n");
-	if (tmp < 0 || tmp > 255 || !ft_isdigital(rgb_tmp[0] + i))
-		rgb.red = -1;
-	else
-		rgb.red = tmp;
-	tmp = (int32_t)ft_atoi(rgb_tmp[1]);
-	if (tmp < 0 || tmp > 255 || !ft_isdigital(rgb_tmp[1]))
-		rgb.green = -1;
-	else
-		rgb.green = tmp;
-	tmp = (int32_t)ft_atoi(rgb_tmp[2]);
-	if (tmp < 0 || tmp > 255 || !ft_isdigital(trim))
-		rgb.blue = -1;
-	else
-		rgb.blue = tmp;
-	free(trim);
-	return (rgb);
+	if (cub->floor.red == -1 || cub->floor.green == -1
+		|| cub->floor.blue == -1 || cub->ceil.red == -1
+		|| cub->ceil.green == -1 || cub->ceil.blue == -1)
+	{
+		ft_putstr_fd("Error\nOne rgb code is not valid\n", 2);
+		return (free_struct(cub), NULL);
+	}
+	return (cub);
 }
 
 static t_cub	*fill_struct_utils(t_cub *cub, int has_door, char **tmp)
@@ -82,18 +63,16 @@ static t_cub	*fill_struct(t_cub *cub)
 	load_png(cub, tmp);
 	if (!cub->no_xpm || !cub->so_xpm || !cub->ea_xpm
 		|| !cub->we_xpm || (!cub->do_xpm && cub->has_door == TRUE))
-		return (free_struct(cub), free_tab(tmp), NULL);
+		return (free_tab(tmp), free_struct(cub), NULL);
 	cub = fill_struct_utils(cub, has_door, tmp);
 	if (!cub)
 		return (NULL);
-	if (cub->floor.red == -1 || cub->floor.green == -1
-		|| cub->floor.blue == -1 || cub->ceil.red == -1
-		|| cub->ceil.green == -1 || cub->ceil.blue == -1)
+	if (cub->do_xpm && !ft_tabchr(cub->map, 'D'))
 	{
-		ft_putstr_fd("Error\nOne rgb code is not valid\n", 2);
+		ft_putstr_fd("Error\nDoor texture detected but no door on map\n", 2);
 		return (free_struct(cub), NULL);
 	}
-	return (cub);
+	return (handle_rgb_error(cub));
 }
 
 // init the player viewpoint at the start of the rendering
@@ -146,8 +125,8 @@ t_cub	*parse_struct(char *argv)
 	if (!cub->init_ptr)
 		return (free_struct(cub), NULL);
 	cub = fill_struct(cub);
-	if (!cub || (cub->do_xpm && !ft_tabchr(cub->map, 'D')))
-		return (free_struct(cub), NULL);
+	if (!cub)
+		return (NULL);
 	init_sprite(cub);
 	if (!cub)
 		return (NULL);
