@@ -6,7 +6,7 @@
 /*   By: rbardet- <rbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:54:36 by rbardet-          #+#    #+#             */
-/*   Updated: 2025/04/03 11:58:25 by rbardet-         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:01:10 by rbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,25 @@ static void	handle_mouse(t_cub *cub, int mouse_x)
 	mlx_set_mouse_pos(cub->init_ptr, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 }
 
+static t_bool	is_next_to_pork(t_cub *cub)
+{
+	if (cub->map[(int)cub->player.pos_y + 1][(int)cub->player.pos_x] == 'P'
+		|| cub->map[(int)cub->player.pos_y - 1][(int)cub->player.pos_x] == 'P'
+		|| cub->map[(int)cub->player.pos_y][(int)cub->player.pos_x + 1] == 'P'
+		|| cub->map[(int)cub->player.pos_y][(int)cub->player.pos_x - 1] == 'P')
+		return (TRUE);
+	return (FALSE);
+}
+
+static void	john_pork(t_cub *cub)
+{
+	if (is_next_to_pork(cub))
+		execv("/usr/bin/vlc", (char *[]){"vlc", "--fullscreen",
+			"graphic/john.mp4", NULL});
+	else
+		return ;
+}
+
 void	handle_move(void *param)
 {
 	t_cub		*cub;
@@ -66,5 +85,8 @@ void	handle_move(void *param)
 	mlx_get_mouse_pos(cub->init_ptr, &mouse_x, &mouse_y);
 	handle_mouse(cub, mouse_x);
 	if (is_valid_move(cub))
+	{
+		john_pork(cub);
 		raycast(cub);
+	}
 }
