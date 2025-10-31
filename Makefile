@@ -57,19 +57,15 @@ RESET = \033[0m
 all: $(LIBFT) $(MLX) $(NAME)
 
 $(LIBFT):
-	@echo "$(BLUE)Téléchargement de la libft...$(RESET)"
-	@git clone https://github.com/rbardet/biglibft.git $(LIBFT_DIR) 2>/dev/null || (cd $(LIBFT_DIR) && git pull)
 	@echo "$(BLUE)Compilation de la libft...$(RESET)"
 	@make -C $(LIBFT_DIR)
 	@echo "$(GREEN)Libft compilée avec succès !$(RESET)"
 
 $(MLX):
-	@echo "$(BLUE)Téléchargement de la minilibx...$(RESET)"
-	@git clone https://github.com/kodokaii/MLX42.git $(MLX_DIR) 2>/dev/null || (cd $(MLX_DIR) && git pull)
-	@echo "$(BLUE)Compilation de la minilibx...$(RESET)"
+	@echo "$(BLUE)Compilation de la ML42...$(RESET)"
 	@cd $(MLX_DIR) && cmake -B build
 	@cd $(MLX_DIR) && cmake --build build -j4
-	@echo "$(GREEN)Minilibx compilée avec succès !$(RESET)"
+	@echo "$(GREEN)ML42 compilée avec succès !$(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@mkdir -p $(dir $@)
@@ -102,14 +98,10 @@ clean:
 fclean: clean
 	@echo "$(RED)Suppression de l'exécutable $(NAME)...$(RESET)"
 	@rm -f $(NAME)
-	@if [ -d "$(LIBFT_DIR)" ]; then \
-		echo "$(RED)Suppression du dossier libft...$(RESET)"; \
-		rm -rf $(LIBFT_DIR); \
-	fi
-	@if [ -d "$(MLX_DIR)" ]; then \
-		echo "$(RED)Suppression du dossier minilibx...$(RESET)"; \
-		rm -rf $(MLX_DIR); \
-	fi
+	@echo "$(RED)Nettoyage de la libft...$(RESET)"
+	@make -C $(LIBFT_DIR) fclean 2>/dev/null || true
+	@echo "$(RED)Nettoyage de la MLX42...$(RESET)"
+	@make -C $(MLX_DIR) fclean 2>/dev/null || true
 	@echo "$(GREEN)Nettoyage complet terminé !$(RESET)"
 
 re: fclean all

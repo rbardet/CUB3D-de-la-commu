@@ -12,6 +12,22 @@
 
 #include "../cub3d.h"
 
+static bool ft_isdigital(char *c)
+{
+    int    i;
+
+    i = 0;
+    if (!c)
+        return (0);
+    while (c[i])
+    {
+        if (!ft_isdigit(c[i]))
+            return (false);
+        i++;
+    }
+    return (true);
+}
+
 // convert the rgb code in the char ** in a new t_rgb
 // if the rgb is not in range of 0 to 255 or contain a letter
 // set the value to -1 otherwise give it the code

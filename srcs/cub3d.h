@@ -13,7 +13,7 @@
 #pragma once
 
 #include "../MLX42/include/MLX42/MLX42.h"
-#include "../libft/libft.h"
+#include "../libft/src/libft.h"
 #include <X11/X.h>
 #include <X11/keysym.h>
 #include <fcntl.h>
