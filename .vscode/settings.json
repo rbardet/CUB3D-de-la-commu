@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"cub3d.h": "c",
-		"types.h": "c",
-		"__node_handle": "c",
-		"__locale": "c",
-		"climits": "c"
-	}
-}
